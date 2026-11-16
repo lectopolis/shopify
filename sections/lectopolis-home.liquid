@@ -1,0 +1,54 @@
+<script src="{{ 'lectopolis.js' | asset_url }}" defer></script>
+{%- liquid
+  assign featured_collection = section.settings.collection
+  if featured_collection == blank
+    assign featured_collection = collections.all
+  endif
+-%}
+<div class="lp-home" data-lp-home>
+  <section class="lp-hero" aria-labelledby="lp-hero-title">
+    <div class="lp-hero-copy">
+      <p class="lp-eyebrow"><span class="lp-dot"></span> TU PRÓXIMA GRAN HISTORIA EMPIEZA AQUÍ</p>
+      <h1 id="lp-hero-title">Hay libros.<br>Y hay <em>encuentros.</em></h1>
+      <p class="lp-lead">Ese que llega justo a tiempo. Ese que no puedes soltar. Ese que te cambia un poquito. Vamos a encontrar el tuyo.</p>
+      <a class="lp-button" href="{{ routes.all_products_collection_url }}">Encuentra tu próxima lectura {% render 'lectopolis-icon' %}</a>
+      <a class="lp-text-link" href="#lp-historia">Conoce nuestra historia <span aria-hidden="true">↗</span></a>
+      <div class="lp-hero-note"><span class="lp-note-lines" aria-hidden="true">≋</span><span>Más de <strong>15 años</strong> compartiendo<br>el amor por los libros.</span></div>
+    </div>
+    <div class="lp-book-scene" data-lp-scene aria-label="Libros en perspectiva tridimensional">
+      <div class="lp-orbit lp-orbit--one" aria-hidden="true"></div><div class="lp-orbit lp-orbit--two" aria-hidden="true"></div>
+      <span class="lp-scene-label">EL COMIENZO DE ALGO BUENO</span>
+      <div class="lp-floating-book lp-floating-book--one" data-lp-book="-1">{% render 'lectopolis-book', style: 'sage', title: 'El arte<br>de volver<br>a ti', book_product: featured_collection.products[1] %}</div>
+      <div class="lp-floating-book lp-floating-book--two" data-lp-book="1">{% render 'lectopolis-book', style: 'clay', title: 'Todo un<br>mundo<br>por leer', book_product: featured_collection.products[0] %}</div>
+      <div class="lp-floating-book lp-floating-book--three" data-lp-book="0.6">{% render 'lectopolis-book', style: 'cream', title: 'Las cosas<br>que nos<br>hacen bien', book_product: featured_collection.products[2] %}</div>
+      <div class="lp-round-stamp"><span>UN LIBRO</span><strong>infinitas</strong><span>POSIBILIDADES</span></div>
+      <div class="lp-scene-caption"><span aria-hidden="true">↓</span> Baja un poco. Abre un mundo.</div>
+    </div>
+  </section>
+  <div class="lp-values"><span>Libros elegidos con intención</span><span aria-hidden="true">✳</span><span>Recomendaciones de libreros</span><span aria-hidden="true">✳</span><span>Historias que se quedan contigo</span><span aria-hidden="true">✳</span></div>
+  <section class="lp-section" id="lp-seleccion" aria-labelledby="lp-selection-title">
+    <div class="lp-section-heading"><div><p class="lp-eyebrow">DE NUESTRA ESTANTERÍA A LA TUYA</p><h2 id="lp-selection-title">Tu próximo <em>favorito.</em></h2></div><a class="lp-text-link" href="{{ routes.all_products_collection_url }}">Explorar todos los libros {% render 'lectopolis-icon' %}</a></div>
+    {% if featured_collection.products.size > 0 %}
+      <div class="lp-product-grid">
+        {% for product in featured_collection.products limit: 4 %}
+          <article class="lp-product" data-lp-reveal>
+            <a class="lp-product-image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', widths: '240,400,600', sizes: '(max-width: 600px) 44vw, 22vw' }}{% else %}{{ 'product-1' | placeholder_svg_tag: 'lp-placeholder' }}{% endif %}<span class="lp-product-arrow" aria-hidden="true">↗</span></a>
+            {% if product.vendor != blank %}<p class="lp-product-vendor">{{ product.vendor | escape }}</p>{% endif %}
+            <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3><p class="lp-product-price">{% if product.price_varies %}Desde {% endif %}{{ product.price | money }}</p>
+            {% if product.available %}<a class="lp-text-link" href="{{ product.url }}">Descubrir libro <span aria-hidden="true">→</span></a>{% else %}<span class="lp-product-vendor">Agotado</span>{% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="lp-empty-editorial"><p>Las buenas historias merecen su espacio.</p><p>Estamos preparando nuestra selección en línea. Mientras tanto, descubre nuestras recomendaciones en Instagram.</p><a class="lp-text-link" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Visita @librerialectopolis ↗</a></div>
+    {% endif %}
+  </section>
+  <section class="lp-discover lp-section" aria-labelledby="lp-discover-title"><div class="lp-section-heading"><div><p class="lp-eyebrow">DÉJATE LLEVAR POR LA CURIOSIDAD</p><h2 id="lp-discover-title">¿Qué quieres <em>descubrir?</em></h2></div><p>No todos buscamos lo mismo.<br>Y ahí está la magia.</p></div><div class="lp-category-grid">
+    {% for block in section.blocks %}<a class="lp-category lp-category--{{ forloop.index }}" href="{% if block.settings.collection != blank %}{{ block.settings.collection.url }}{% else %}{{ routes.search_url }}?type=product&amp;q={{ block.settings.title | url_encode }}{% endif %}" {{ block.shopify_attributes }} data-lp-reveal><span class="lp-category-number">0{{ forloop.index }}</span><span class="lp-category-symbol" aria-hidden="true">{% cycle '✳', '◒', '✺', '◷' %}</span><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.description | escape }}</p><span class="lp-category-arrow" aria-hidden="true">↗</span></a>{% endfor %}
+  </div></section>
+  <section class="lp-story" id="lp-historia" aria-labelledby="lp-story-title"><div class="lp-story-art" data-lp-reveal><div class="lp-story-frame"><span>LECTÓPOLIS</span><strong>15<span>+</span></strong><p>AÑOS ENTRE LIBROS<br>Y BUENAS CONVERSACIONES</p><div class="lp-story-rule"></div><em>Siempre hay una historia<br>esperando por ti.</em></div></div><div class="lp-story-copy"><p class="lp-eyebrow">MUCHO MÁS QUE UNA LIBRERÍA</p><h2 id="lp-story-title">Los libros nos reúnen.<br>Las historias nos <em>conectan.</em></h2><p>Llevamos más de 15 años haciendo lo que más nos gusta: conversar sobre libros y ayudar a cada persona a encontrar esa lectura que se vuelve compañía.</p><p>Creemos en las recomendaciones de persona a persona. En leer a tu ritmo. En entrar buscando un título y salir con un nuevo mundo entre las manos.</p><a class="lp-button lp-button--light" href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Acércate a Lectópolis {% render 'lectopolis-icon' %}</a></div></section>
+  <section class="lp-search-section lp-section"><p class="lp-eyebrow">ESA HISTORIA QUE TIENES EN MENTE</p><h2>¿Buscas un libro <em>en particular?</em></h2><form action="{{ routes.search_url }}" method="get" role="search" class="lp-search-form"><input type="hidden" name="type" value="product"><label class="lp-sr-only" for="lp-book-search-{{ section.id }}">Busca por título, autor o palabra clave</label><input id="lp-book-search-{{ section.id }}" type="search" name="q" placeholder="Título, autor o esa palabra que recuerdas…" required><button type="submit" aria-label="Buscar libros">{% render 'lectopolis-icon', icon: 'search' %}</button></form><p>También nos encuentras en <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">@librerialectopolis ↗</a></p></section>
+</div>
+{% schema %}
+{"name":"Lectópolis · Inicio","settings":[{"type":"collection","id":"collection","label":"Selección de libros"},{"type":"url","id":"instagram_url","label":"Instagram","default":"https://www.instagram.com/librerialectopolis/"}],"blocks":[{"type":"category","name":"Universo de lectura","limit":4,"settings":[{"type":"text","id":"title","label":"Título","default":"Literatura"},{"type":"text","id":"description","label":"Descripción","default":"Historias para habitar otros mundos."},{"type":"collection","id":"collection","label":"Colección"}]}],"presets":[{"name":"Lectópolis · Inicio","blocks":[{"type":"category","settings":{"title":"Literatura","description":"Otras vidas. Infinitos mundos."}},{"type":"category","settings":{"title":"Bienestar","description":"Lecturas para volver a ti."}},{"type":"category","settings":{"title":"Infantil y juvenil","description":"Grandes aventuras para crecer."}},{"type":"category","settings":{"title":"Ideas y pensamiento","description":"Una nueva forma de ver las cosas."}}]}]}
+{% endschema %}

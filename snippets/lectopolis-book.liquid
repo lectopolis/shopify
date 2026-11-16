@@ -1,0 +1,9 @@
+<div class="lp-book lp-book--{{ style }}">
+  <div class="lp-book-cover">
+    {% if book_product.featured_image != blank %}
+      {{ book_product.featured_image | image_url: width: 620 | image_tag: loading: 'eager', widths: '240,400,620', sizes: '(max-width: 700px) 40vw, 270px', alt: book_product.title }}
+    {% else %}
+      <span class="lp-cover-imprint">LECTÓPOLIS / EL ARTE DE LEER</span><span class="lp-cover-title">{{ title }}</span><span class="lp-cover-art" aria-hidden="true"></span><span class="lp-cover-bottom">Un mundo entre páginas</span>
+    {% endif %}
+  </div>
+</div>

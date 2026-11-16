@@ -1,80 +1,27 @@
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
-  <head>
-    {%- if current_tags or current_page > 1 -%}<meta name="robots" content="noindex, follow">{%- endif -%}
-    {% render 'json-ld-seo' %}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
-
-    {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
-    {%- endif -%}
-
-    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
-    {%- endunless -%}
-      <link rel="dns-prefetch" href="https://connect.facebook.net">
-        <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-        
-     <title>
-      {%- if template.name == 'product' -%}
-        {%- render 'product-title' -%}
-      {%- elsif template.name == 'article' -%}
-        {%- render 'article-title' -%}
-      {%- elsif template.name == 'collection' -%}
-        {%- if page_title contains 'Ícaro Libros' -%}
-          {{ page_title }}
-        {%- else -%}
-          {{ page_title }} | Ícaro Libros
-        {%- endif -%}
-      {%- elsif template.name == 'index' -%}
-        Ícaro Libros | Distribuidora de libros en Colombia
-      {%- else -%}
-        {%- if page_title contains 'Ícaro Libros' -%}
-          {{ page_title }}
-        {%- else -%}
-          {{ page_title }} | Ícaro Libros
-        {%- endif -%}
-      {%- endif -%}
-    </title>
-
-    {% render 'meta-tags' %}
-
-    <script src="{{ 'icaro-core.js' | asset_url }}" defer="defer"></script>
-
-
-
-
-
-
-    {%- if settings.animations_reveal_on_scroll -%}
-      <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-
-
-    {%- liquid
-      assign body_font_weight = settings.type_body_font.weight | plus: 0
-      assign use_icaro_reading_font = false
-      if settings.type_body_font.family == 'Merriweather' and body_font_weight == 400 and settings.type_body_font.style == 'normal'
-        assign use_icaro_reading_font = true
-      endif
-      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
-      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
-      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
-    %}
-
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#5b23aa">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% if current_tags or current_page > 1 %}<meta name="robots" content="noindex, follow">{% endif %}
+  <title>{% if request.page_type == 'index' %}Lectópolis | Libros, encuentros e historias{% else %}{{ page_title | escape }} | Lectópolis{% endif %}</title>
+  {% render 'lectopolis-seo' %}
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+  {% liquid
+    assign scheme_classes = ''
+    assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+    assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+    assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+  %}
     {% style %}
-      {% if use_icaro_reading_font %}
-        {% render 'icaro-reading-fonts' %}
-      {% else %}
+
         {{ settings.type_body_font | font_face: font_display: 'swap' }}
         {{ body_font_bold | font_face: font_display: 'swap' }}
         {{ body_font_italic | font_face: font_display: 'swap' }}
         {{ body_font_bold_italic | font_face: font_display: 'swap' }}
-      {% endif %}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
       {% for scheme in settings.color_schemes -%}
@@ -277,117 +224,36 @@
         }
       }
     {% endstyle %}
-
-    {% if request.page_type == 'index' and request.design_mode == false %}
-      {% render 'icaro-home-critical' %}
-      <link rel="stylesheet" href="{{ 'base.css' | asset_url }}" media="print" onload="this.onload=null;this.media='all'">
-      <noscript>{{ 'base.css' | asset_url | stylesheet_tag }}</noscript>
-    {% else %}
-      {{ 'base.css' | asset_url | stylesheet_tag }}
-    {% endif %}
-    <script src="{{ 'icaro-editorial.js' | asset_url }}" defer></script>
-    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}" media="print" onload="this.onload=null;this.media='all'">
-  <noscript>{{ 'custom.css' | asset_url | stylesheet_tag }}</noscript>
-    {% if request.page_type == 'index' %}
-      <style>{{ 'icaro-editorial.css' | inline_asset_content }}</style>
-      {%- comment -%}Separado: inline_asset_content rechaza archivos de más de ~15 KB.{%- endcomment -%}
-      <style>{{ 'icaro-hero.css' | inline_asset_content }}</style>
-    {% else %}
-      {{ 'icaro-editorial.css' | asset_url | stylesheet_tag }}
-      {{ 'icaro-hero.css' | asset_url | stylesheet_tag }}
-    {% endif %}
-    {%- comment -%}Keep above-the-fold colors synchronous; shelf details load without blocking the hero.{%- endcomment -%}
-    <style>:root{--icaro-paper:#fff}.icaro-editorial{background:#fff}.icaro-hero__letter{background:#fff}</style>
-    {%- comment -%}Menú: destacar la distribución editorial. Aquí y no en icaro-editorial.css, que debe seguir pequeño para poder insertarse en línea.{%- endcomment -%}
-    <style>.header__inline-menu a[href*="editoriales-de-nuestra-distribucion"],.header__inline-menu a[href*="editoriales-de-nuestra-distribucion"] span{color:var(--icaro-rust)!important;text-decoration:none!important}.header__inline-menu a[href*="editoriales-de-nuestra-distribucion"] span{font-weight:500;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:3px;transition:background-size .3s}.header__inline-menu a[href*="editoriales-de-nuestra-distribucion"]:hover span,.header__inline-menu a[href*="editoriales-de-nuestra-distribucion"][aria-current=page] span{background-size:100% 2px}.menu-drawer a[href*="editoriales-de-nuestra-distribucion"]{color:var(--icaro-rust);font-weight:500}</style>
-    {% if request.page_type == 'index' %}
-      <style>{{ 'icaro-bookshelf.css' | inline_asset_content }}</style>
-    {% else %}
-      <link rel="stylesheet" href="{{ 'icaro-bookshelf.css' | asset_url }}" media="print" onload="this.onload=null;this.media='all'">
-      <noscript>{{ 'icaro-bookshelf.css' | asset_url | stylesheet_tag }}</noscript>
-    {% endif %}
-    {%- comment -%}Experiencia premium: 3D, vitrina, test, carrito y compra fija. Solo se carga donde existen esos elementos (portada, ficha, carrito); el resto del sitio no paga ese peso. Bloquea solo en la ficha, donde hay elementos sobre el pliegue.{%- endcomment -%}
-    {%- assign icaro_premium_pages = 'index,product,cart' | split: ',' -%}
-    {%- if icaro_premium_pages contains request.page_type -%}
-      {% if request.page_type == 'product' %}
-        {{ 'icaro-premium.css' | asset_url | stylesheet_tag }}
-      {% else %}
-        <link rel="stylesheet" href="{{ 'icaro-premium.css' | asset_url }}" media="print" onload="this.onload=null;this.media='all'">
-        <noscript>{{ 'icaro-premium.css' | asset_url | stylesheet_tag }}</noscript>
-      {% endif %}
-      <script src="{{ 'icaro-premium.js' | asset_url }}" defer></script>
-    {%- endif -%}
-
-    {%- comment -%} CSS no crítico: carga diferida para no bloquear el hilo principal (mejora INP) {%- endcomment -%}
-    <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
-
-    {%- if settings.cart_type == 'drawer' -%}
-      <link rel="stylesheet" href="{{ 'component-cart-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
-      <link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
-      <link rel="stylesheet" href="{{ 'component-totals.css' | asset_url }}" media="print" onload="this.media='all'">
-      <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-      <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
-    {%- endif -%}
-
-    {%- unless settings.type_body_font.system? -%}
-      {% comment %}theme-check-disable AssetPreload{% endcomment %}
-      {% if use_icaro_reading_font %}
-        <link rel="preload" as="font" href="{{ 'icaro-reading-n4.woff2' | asset_url }}" type="font/woff2" crossorigin>
-      {% else %}
-        <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
-      {% endif %}
-      {% comment %}theme-check-enable AssetPreload{% endcomment %}
-    {%- endunless -%}
-
-
-    {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
-      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
-      <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-
-    {%- if settings.predictive_search_enabled -%}
-      <link
-        rel="stylesheet"
-        href="{{ 'component-predictive-search.css' | asset_url }}"
-        media="print"
-        onload="this.media='all'"
-      >
-    {%- endif -%}
-
-    {{ content_for_header }}
-
-    <script>
-      if (Shopify.designMode) {
-        document.documentElement.classList.add('shopify-design-mode');
-      }
-    </script>
-  <!--Gem_Page_Header_Script-->
-{% comment %}{% render 'gem-app-header-scripts' %}{% endcomment %}
-<!--End_Gem_Page_Header_Script-->
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'lectopolis.css' | asset_url | stylesheet_tag }}
+  {% if settings.cart_type == 'drawer' %}
+    {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+    {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+    {{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+    {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+    {{ 'component-price.css' | asset_url | stylesheet_tag }}
+    {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  {% if settings.predictive_search_enabled %}
+    {{ 'component-predictive-search.css' | asset_url | stylesheet_tag }}
+    {{ 'component-search.css' | asset_url | stylesheet_tag }}
+  {% endif %}
+  <script src="{{ 'constants.js' | asset_url }}" defer></script>
+  <script src="{{ 'pubsub.js' | asset_url }}" defer></script>
+  <script src="{{ 'global.js' | asset_url }}" defer></script>
+  <script src="{{ 'details-disclosure.js' | asset_url }}" defer></script>
+  <script src="{{ 'details-modal.js' | asset_url }}" defer></script>
+  <script src="{{ 'search-form.js' | asset_url }}" defer></script>
+  {% if settings.animations_reveal_on_scroll %}<script src="{{ 'animations.js' | asset_url }}" defer></script>{% endif %}
+  {{ content_for_header }}
 </head>
-
-  <body class="icaro-editorial gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-      {{ 'accessibility.skip_to_text' | t }}
-    </a>
-
-    {%- if settings.cart_type == 'drawer' -%}
-      {%- render 'cart-drawer' -%}
-    {%- endif -%}
-
-    {% sections 'header-group' %}
-
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-      {{ content_for_layout }}
-    </main>
-
-    {% sections 'footer-group' %}
-
-    <ul hidden>
-      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
-      <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
-    </ul>
-
+<body class="lp-store gradient">
+  <a class="skip-to-content-link button visually-hidden" href="#MainContent">{{ 'accessibility.skip_to_text' | t }}</a>
+  {% if settings.cart_type == 'drawer' %}{% render 'cart-drawer' %}{% endif %}
+  {% section 'lectopolis-header' %}
+  <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">{{ content_for_layout }}</main>
+  {% section 'lectopolis-footer' %}
+  <ul hidden><li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li><li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li></ul>
     <script>
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
@@ -432,78 +298,7 @@
         countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
       };
     </script>
-
-    {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-
-    {%- if settings.cart_type == 'drawer' -%}
-      <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-  <!--Gem_Page_Footer_Script-->
-  {%- liquid
-    assign gpTemplateSuffix = template.suffix
-    assign arrSplitSuffix = gpTemplateSuffix | split: '-'
-    if gpTemplateSuffix contains 'gem-' and gpTemplateSuffix contains '-template' and arrSplitSuffix.size == 3
-      assign isV6GpTemplate = true
-    endif
-    assign gpShopMeta = shop.metafields.gempages
-    if gpShopMeta
-      if gpShopMeta['productV6-default'] == 'true' and request.page_type == 'product'
-        assign isProductDefault = true
-      endif
-      if gpShopMeta['collectionV6-default'] == 'true' and request.page_type == 'collection'
-        assign isCollectionDefault = true
-      endif
-      if gpShopMeta['indexV6-default'] == 'true' and request.page_type == 'index'
-        assign isIndexDefault = true
-      endif
-      if isProductDefault or isCollectionDefault or isIndexDefault or isPreviewV6
-        assign isV6GpTemplate = true
-      endif
-    endif
-  %}
-  {% if isV6GpTemplate %}
-    {% comment %}{% render 'gem-app-footer-scripts', GEM_FOOTER_SCRIPT: GEM_FOOTER_SCRIPT %}{% endcomment %}
-    {% comment %}{% render 'gem-app-footer-scripts' %}{% endcomment %}
-  {% endif %}
-<!--End_Gem_Page_Footer_Script-->
-{% comment %}{% render 'revie-reviews' %}{% endcomment %}
-{% comment %}
-<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
-{% endcomment %}
-
-<!-- Google Customer Reviews Badge -->
-<script src="{{ 'icaro-merchant-widget.js' | asset_url }}" defer></script>
-<!-- Botón flotante de WhatsApp - Ícaro Libros -->
-<a href="https://wa.me/573164810958?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20un%20libro." id="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contáctanos por WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-    </a>
-    <style>
-      #whatsapp-float {
-          position: fixed;
-              bottom: 24px;
-                  right: 24px;
-                      z-index: 9999;
-                          background-color: #25D366;
-                              border-radius: 50%;
-                                  width: 56px;
-                                      height: 56px;
-                                          display: flex;
-                                              align-items: center;
-                                                  justify-content: center;
-                                                      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-                                                          transition: transform 0.2s ease, box-shadow 0.2s ease;
-                                                              text-decoration: none;
-                                                                }
-                                                                  #whatsapp-float:hover {
-                                                                      transform: scale(1.1);
-                                                                          box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-                                                                          }
-                                                                            @media (max-width: 768px) {
-                                                                                #whatsapp-float { bottom: 16px; right: 16px; width: 50px; height: 50px; }
-                                                                                }
-                                                                                </style>}}
-
+  {% if settings.predictive_search_enabled %}<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>{% endif %}
+  {% if settings.cart_type == 'drawer' %}<script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>{% endif %}
 </body>
 </html>

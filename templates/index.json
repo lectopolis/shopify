@@ -1,377 +1,49 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "icaro_hero": {
-      "type": "icaro-editorial-hero",
+    "lectopolis": {
+      "type": "lectopolis-home",
       "settings": {
-        "eyebrow": "ÍCARO LIBROS · DISTRIBUIDORA EN COLOMBIA",
-        "heading": "Distribuidora de libros en Colombia: lecturas que se quedan contigo",
-        "text": "Filosofía, literatura, poesía y ciencias humanas de editoriales de España y Argentina, ahora en Colombia.",
-        "label": "Comprar libros",
-        "link": "shopify://collections/all",
-        "secondary_label": "Conocer nuestras editoriales →",
-        "secondary_link": "/pages/editoriales-de-nuestra-distribucion",
-        "whatsapp": "573164810958",
-        "collection": "libreria-online-1",
-        "image": "shopify://shop_images/9786316743152.jpg",
-        "caption": "Distribución editorial · España y Argentina → Colombia"
-      }
-    },
-    "icaro_logos": {
-      "type": "icaro-publisher-logos",
-      "settings": {
-        "heading": "Editoriales que distribuimos en Colombia",
-        "link": "/pages/editoriales-de-nuestra-distribucion"
-      }
-    },
-    "image_banner_mNeMdK": {
-      "type": "image-banner",
-      "disabled": true,
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/Sin_titulo.png",
-        "image_overlay_opacity": 0,
-        "image_height": "adapt",
-        "desktop_content_position": "top-left",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "enable_separator": true,
-        "separator_width": 160,
-        "separator_thickness": 1,
-        "separator_spacing": 20,
-        "title": "Novedades",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "libreria-online-1",
-        "products_to_show": 24,
-        "columns_desktop": 6,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "background-1",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 72,
-        "padding_bottom": 60
-      }
-    },
-    "icaro_publisher_logos_XXjUXF": {
-      "type": "icaro-publisher-logos",
-      "settings": {
-        "heading": "Editoriales que distribuimos en Colombia",
-        "link": "/pages/editoriales-de-nuestra-distribucion"
-      }
-    },
-    "icaro_flow": {
-      "type": "icaro-publisher-flow",
+        "instagram_url": "https://www.instagram.com/librerialectopolis/"
+      },
       "blocks": {
-        "editorial_3": {
-          "type": "collection",
+        "literatura": {
+          "type": "category",
           "settings": {
-            "collection": "editorial-alba",
-            "label": "Alba"
+            "title": "Literatura",
+            "description": "Otras vidas. Infinitos mundos."
           }
         },
-        "editorial_8": {
-          "type": "collection",
+        "bienestar": {
+          "type": "category",
           "settings": {
-            "collection": "arpa-editores",
-            "label": "Arpa"
+            "title": "Bienestar",
+            "description": "Lecturas para volver a ti."
           }
         },
-        "editorial_4": {
-          "type": "collection",
+        "juvenil": {
+          "type": "category",
           "settings": {
-            "collection": "editorial-alianza",
-            "label": "Alianza"
+            "title": "Infantil y juvenil",
+            "description": "Grandes aventuras para crecer."
           }
         },
-        "editorial_1": {
-          "type": "collection",
+        "ideas": {
+          "type": "category",
           "settings": {
-            "collection": "editorial-catedra",
-            "label": "Cátedra"
-          }
-        },
-        "editorial_2": {
-          "type": "collection",
-          "settings": {
-            "collection": "editorial-siruela",
-            "label": "Siruela"
-          }
-        },
-        "editorial_5": {
-          "type": "collection",
-          "settings": {
-            "collection": "editorial-visor",
-            "label": "Visor"
-          }
-        },
-        "editorial_6": {
-          "type": "collection",
-          "settings": {
-            "collection": "editorial-el-cuenco-de-plata",
-            "label": "El Cuenco de Plata"
-          }
-        },
-        "editorial_7": {
-          "type": "collection",
-          "settings": {
-            "collection": "editorial-valdemar",
-            "label": "Valdemar"
+            "title": "Ideas y pensamiento",
+            "description": "Una nueva forma de ver las cosas."
           }
         }
       },
       "block_order": [
-        "editorial_3",
-        "editorial_8",
-        "editorial_4",
-        "editorial_1",
-        "editorial_2",
-        "editorial_5",
-        "editorial_6",
-        "editorial_7"
-      ],
-      "settings": {
-        "eyebrow": "CATÁLOGOS QUE DISTRIBUIMOS",
-        "heading": "Compra por editorial",
-        "text": "Los catálogos que traemos de España y Argentina. Elige un sello y recorre sus libros.",
-        "limit": 14
-      }
-    },
-    "icaro_discover": {
-      "type": "icaro-discover",
-      "blocks": {
-        "interest_1": {
-          "type": "interest",
-          "settings": {
-            "collection": "libros-filosofia",
-            "label": "Filosofía"
-          }
-        },
-        "interest_2": {
-          "type": "interest",
-          "settings": {
-            "collection": "libros-literatura",
-            "label": "Literatura"
-          }
-        },
-        "interest_3": {
-          "type": "interest",
-          "settings": {
-            "collection": "poesia",
-            "label": "Poesía"
-          }
-        }
-      },
-      "block_order": [
-        "interest_1",
-        "interest_2",
-        "interest_3"
-      ],
-      "settings": {
-        "heading": "Encuentra tu próxima lectura",
-        "subheading": "Tres preguntas y te recomendamos libros disponibles hoy."
-      }
-    },
-    "icaro_shelf": {
-      "type": "icaro-bookshelf",
-      "settings": {
-        "heading": "En nuestra mesa de lectura",
-        "limit": 12,
-        "collection": "mostrador"
-      }
-    },
-    "cf041c51-04b0-4692-a755-688469da084e": {
-      "type": "featured-blog",
-      "settings": {
-        "heading": "Blog posts",
-        "heading_size": "h1",
-        "blog": "noticias-sobre-libros",
-        "post_limit": 4,
-        "columns_desktop": 4,
-        "color_scheme": "",
-        "show_image": true,
-        "show_date": true,
-        "show_author": false,
-        "show_view_all": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "icaro_care": {
-      "type": "icaro-care",
-      "settings": {
-        "heading": "¿Buscas libros para tu librería o institución?",
-        "whatsapp": "573164810958"
-      }
-    },
-    "1766420446d652ec64": {
-      "type": "apps",
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "1773159858be925cff": {
-      "type": "apps",
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "icaro_authors": {
-      "type": "icaro-authors",
-      "blocks": {
-        "author_1": {
-          "type": "author",
-          "settings": {
-            "collection": "philipp-mainlander",
-            "label": "Philipp Mainländer",
-            "note": "Filósofo alemán, discípulo de Schopenhauer"
-          }
-        },
-        "author_2": {
-          "type": "author",
-          "settings": {
-            "collection": "walter-mignolo",
-            "label": "Walter Mignolo",
-            "note": "Pensamiento decolonial"
-          }
-        },
-        "author_3": {
-          "type": "author",
-          "settings": {
-            "collection": "pascal-quignard",
-            "label": "Pascal Quignard",
-            "note": "Escritor francés"
-          }
-        },
-        "author_4": {
-          "type": "author",
-          "settings": {
-            "collection": "camus",
-            "label": "Albert Camus",
-            "note": "Premio Nobel de Literatura 1957"
-          }
-        },
-        "author_5": {
-          "type": "author",
-          "settings": {
-            "collection": "yukio-mishima",
-            "label": "Yukio Mishima",
-            "note": "Novelista japonés"
-          }
-        },
-        "author_6": {
-          "type": "author",
-          "settings": {
-            "collection": "dostoyevski-fiodor",
-            "label": "Fiódor Dostoyevski",
-            "note": "Novelista ruso"
-          }
-        },
-        "author_7": {
-          "type": "author",
-          "settings": {
-            "collection": "lewis-mumford",
-            "label": "Lewis Mumford",
-            "note": "Historiador de la técnica y la ciudad"
-          }
-        },
-        "author_8": {
-          "type": "author",
-          "settings": {
-            "collection": "friedrich-nietzsche",
-            "label": "Friedrich Nietzsche",
-            "note": "Filósofo alemán"
-          }
-        },
-        "author_9": {
-          "type": "author",
-          "settings": {
-            "collection": "baruch-spinoza",
-            "label": "Baruch Spinoza",
-            "note": "Filósofo holandés"
-          }
-        },
-        "author_10": {
-          "type": "author",
-          "settings": {
-            "collection": "franz-kafka",
-            "label": "Franz Kafka",
-            "note": "Escritor nacido en Praga"
-          }
-        },
-        "author_11": {
-          "type": "author",
-          "settings": {
-            "collection": "arthur-schopenhauer",
-            "label": "Arthur Schopenhauer",
-            "note": "Filósofo alemán"
-          }
-        },
-        "author_12": {
-          "type": "author",
-          "settings": {
-            "collection": "carl-gustav-jung",
-            "label": "Carl Gustav Jung",
-            "note": "Psiquiatra suizo"
-          }
-        }
-      },
-      "block_order": [
-        "author_1",
-        "author_2",
-        "author_3",
-        "author_4",
-        "author_5",
-        "author_6",
-        "author_7",
-        "author_8",
-        "author_9",
-        "author_10",
-        "author_11",
-        "author_12"
-      ],
-      "settings": {
-        "eyebrow": "AUTORES",
-        "heading": "Autores que buscan nuestros lectores",
-        "subheading": "Entra a la colección de cada uno y mira todos sus libros disponibles."
-      }
+        "literatura",
+        "bienestar",
+        "juvenil",
+        "ideas"
+      ]
     }
   },
   "order": [
-    "icaro_hero",
-    "icaro_logos",
-    "image_banner_mNeMdK",
-    "featured_collection",
-    "icaro_publisher_logos_XXjUXF",
-    "icaro_flow",
-    "icaro_discover",
-    "icaro_shelf",
-    "icaro_authors",
-    "cf041c51-04b0-4692-a755-688469da084e",
-    "icaro_care",
-    "1766420446d652ec64",
-    "1773159858be925cff"
+    "lectopolis"
   ]
 }

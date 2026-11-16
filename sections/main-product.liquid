@@ -237,7 +237,6 @@
     {% render 'breadcrumbs' %}
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
-        {% render 'icaro-book-viewer', product: product %}
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -1198,7 +1197,7 @@
       "name": "Ícaro · Confianza",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "whatsapp", "label": "WhatsApp con código de país", "default": "573164810958" }
+        { "type": "text", "id": "whatsapp", "label": "WhatsApp con código de país" }
       ]
     },
     {

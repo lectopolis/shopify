@@ -1,0 +1,9 @@
+<div class="lp-announcement">Más de 15 años encontrando un libro para cada lector <span aria-hidden="true">✳</span> Librería Lectópolis</div>
+<header class="lp-site-header">
+  <a class="lp-brand" href="{{ routes.root_url }}" aria-label="Lectópolis, inicio"><svg viewBox="0 0 40 40" width="38" height="38" aria-hidden="true"><path d="M20 10C13 4 5 6 3 7v25c7-3 12-1 17 3 5-4 10-6 17-3V7c-7-3-12-1-17 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 10v25M9 13l5 1m-5 5 5 1m12-6 5-1m-5 7 5-1" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>lectópolis<small>LIBROS · ENCUENTROS · HISTORIAS</small></span></a>
+  <nav class="lp-navigation" aria-label="Navegación principal"><a href="{{ routes.all_products_collection_url }}">La librería</a><a href="{{ routes.root_url }}#lp-seleccion">Descubrimientos</a><a href="{{ routes.root_url }}#lp-historia">Nuestra historia</a></nav>
+  <div class="lp-header-actions"><a href="{{ routes.search_url }}" aria-label="Buscar libros">{% render 'lectopolis-icon', icon: 'search' %}</a><a id="cart-icon-bubble" class="lp-cart-link" href="{{ routes.cart_url }}" aria-label="Carrito">{% render 'lectopolis-icon', icon: 'bag' %}<span aria-hidden="true">{{ cart.item_count }}</span><span class="lp-sr-only">{{ cart.item_count }} artículos</span></a></div>
+</header>
+{% schema %}
+{"name":"Lectópolis · Cabecera","settings":[]}
+{% endschema %}
