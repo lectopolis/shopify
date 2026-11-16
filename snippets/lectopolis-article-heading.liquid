@@ -1,0 +1,10 @@
+{%- assign reading_minutes = article.content | strip_html | split: ' ' | size | divided_by: 200 | at_least: 1 -%}
+<div class="lectopolis-premium-content">
+  <header class="lectopolis-reading__header">
+    <nav class="lectopolis-reading__breadcrumb" aria-label="Ruta de navegación"><a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true"> / </span><a href="{{ blog.url }}">{{ blog.title | escape }}</a></nav>
+    <div class="lectopolis-reading__meta">{{ article.published_at | date: '%d/%m/%Y' }} · {{ reading_minutes }} min de lectura</div>
+    <h1 class="lectopolis-reading__title">{{ article.title | escape }}</h1>
+    {%- if article.excerpt != blank -%}<div class="lectopolis-reading__excerpt">{{ article.excerpt }}</div>{%- endif -%}
+    <div class="lectopolis-reading__byline">Por <strong>{{ article.author | escape }}</strong></div>
+  </header>
+</div>

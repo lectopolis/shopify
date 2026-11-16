@@ -118,10 +118,6 @@
     "show_vendor": true,
     "show_cart_note": false,
     "cart_drawer_collection": "",
-    "icaro_free_shipping_threshold": 0,
-    "google_rating": "4.9",
-    "google_review_count": 22,
-    "google_reviews_url": "https://g.page/r/CZTiWON-xT23EAI/review",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",

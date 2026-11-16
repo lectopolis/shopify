@@ -35,3 +35,7 @@ Se corrigieron tres incompatibilidades heredadas de Liquid/esquema/imágenes, se
 - Las capturas de desarrollo usan productos ficticios exclusivamente en el entorno temporal de pruebas. No se incluyen esos productos ni sus precios en el tema.
 
 El render local no sustituye la verificación en la tienda: comprobar la sincronización de GitHub, las imágenes y colecciones reales, una variante disponible, agregar al carrito y el acceso al checkout antes de publicar. No se ha realizado ninguna compra ni se ha cambiado el tema publicado desde el administrador de Shopify.
+
+## Identidad de la librería
+
+Se retiraron las plantillas y recursos de marca heredados que no se utilizan. Los componentes funcionales conservados ahora usan el prefijo `lectopolis`. Las páginas, los metadatos y la información para buscadores presentan a Lectópolis como librería de libros nuevos y leídos, con más de 15 años de trayectoria y envíos nacionales. El contacto confirmado es +57 313 6118658. No se publican direcciones, horarios, reseñas ni servicios comerciales de la empresa anterior.

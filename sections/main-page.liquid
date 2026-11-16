@@ -1,7 +1,5 @@
-{% if page.handle == 'editoriales-de-nuestra-distribucion' %}
-  {% render 'icaro-publishers', section: section %}
-{% elsif page.handle == 'quienes-somos' %}
-  {% render 'icaro-about', section: section %}
+{% if page.handle == 'quienes-somos' %}
+  {% render 'lectopolis-about', section: section %}
 {% else %}
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
 

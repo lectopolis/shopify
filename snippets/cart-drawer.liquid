@@ -82,23 +82,23 @@
         </button>
       </div>
       {%- liquid
-        assign icaro_threshold = settings.icaro_free_shipping_threshold | times: 100
-        if icaro_threshold > 0 and cart != empty
-          assign icaro_remaining = icaro_threshold | minus: cart.total_price
-          assign icaro_pct = cart.total_price | times: 100 | divided_by: icaro_threshold | at_most: 100
+        assign lectopolis_threshold = settings.lectopolis_free_shipping_threshold | times: 100
+        if lectopolis_threshold > 0 and cart != empty
+          assign lectopolis_remaining = lectopolis_threshold | minus: cart.total_price
+          assign lectopolis_pct = cart.total_price | times: 100 | divided_by: lectopolis_threshold | at_most: 100
         endif
       -%}
-      {%- if icaro_threshold > 0 and cart != empty -%}
-        <icaro-ship-bar class="icaro-ship" style="--p:{{ icaro_pct }}%;">
-          <p class="icaro-ship__text" role="status">
-            {%- if icaro_remaining > 0 -%}
-              Te faltan <strong>{{ icaro_remaining | money_without_trailing_zeros }}</strong> para el <strong>envío gratis</strong>
+      {%- if lectopolis_threshold > 0 and cart != empty -%}
+        <lectopolis-ship-bar class="lectopolis-ship" style="--p:{{ lectopolis_pct }}%;">
+          <p class="lectopolis-ship__text" role="status">
+            {%- if lectopolis_remaining > 0 -%}
+              Te faltan <strong>{{ lectopolis_remaining | money_without_trailing_zeros }}</strong> para el <strong>envío gratis</strong>
             {%- else -%}
               <strong>¡Tienes envío gratis!</strong> Tu pedido viaja sin costo.
             {%- endif -%}
           </p>
-          <span class="icaro-ship__track" aria-hidden="true"><span></span></span>
-        </icaro-ship-bar>
+          <span class="lectopolis-ship__track" aria-hidden="true"><span></span></span>
+        </lectopolis-ship-bar>
       {%- endif -%}
       <cart-drawer-items
         {% if cart == empty %}
@@ -480,11 +480,11 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
         {%- if cart != empty -%}
-          {%- assign icaro_first = cart.items.first -%}
-          <icaro-cart-recs class="icaro-cart-recs" hidden data-exclude="{{ cart.items | map: 'product_id' | join: ',' }}" data-url="{{ routes.product_recommendations_url }}?product_id={{ icaro_first.product_id }}&amp;limit=6&amp;section_id=icaro-cart-recs">
-            <p class="icaro-cart-recs__title">Completa tu lectura</p>
-            <div class="icaro-cart-recs__items" data-recs-list></div>
-          </icaro-cart-recs>
+          {%- assign lectopolis_first = cart.items.first -%}
+          <lectopolis-cart-recs class="lectopolis-cart-recs" hidden data-exclude="{{ cart.items | map: 'product_id' | join: ',' }}" data-url="{{ routes.product_recommendations_url }}?product_id={{ lectopolis_first.product_id }}&amp;limit=6&amp;section_id=lectopolis-cart-recs">
+            <p class="lectopolis-cart-recs__title">Completa tu lectura</p>
+            <div class="lectopolis-cart-recs__items" data-recs-list></div>
+          </lectopolis-cart-recs>
         {%- endif -%}
       </cart-drawer-items>
       <div class="drawer__footer">

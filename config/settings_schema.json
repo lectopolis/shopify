@@ -1465,46 +1465,5 @@
         "default": "scheme-1"
       }
     ]
-  },
-  {
-    "name": "Ícaro · Conversión",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Ajustes de la barra de envío gratis del carrito, la portada y la ficha del libro."
-      },
-      {
-        "type": "number",
-        "id": "icaro_free_shipping_threshold",
-        "label": "Monto para envío gratis (COP)",
-        "info": "Debe coincidir con tu tarifa de envío en Shopify. Deja 0 para ocultar los mensajes.",
-        "default": 169900
-      },
-      {
-        "type": "header",
-        "content": "Calificación de Google"
-      },
-      {
-        "type": "paragraph",
-        "content": "Actualiza estos valores desde tu ficha de Google Negocio cada tanto. Deja la calificación vacía para ocultar el bloque."
-      },
-      {
-        "type": "text",
-        "id": "google_rating",
-        "label": "Calificación",
-        "info": "Ejemplo: 4.9",
-        "default": "4.9"
-      },
-      {
-        "type": "number",
-        "id": "google_review_count",
-        "label": "Número de reseñas en Google"
-      },
-      {
-        "type": "url",
-        "id": "google_reviews_url",
-        "label": "Enlace a tu ficha de Google"
-      }
-    ]
   }
 ]

@@ -1,7 +1,7 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
-{{ 'icaro-blog.css' | asset_url | stylesheet_tag }}
+{{ 'lectopolis-blog.css' | asset_url | stylesheet_tag }}
 
-<article class="article-template icaro-article">
+<article class="article-template lectopolis-article">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when '@app' -%}
@@ -47,7 +47,7 @@
           class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           {{ block.shopify_attributes }}
         >
-          <p class="icaro-eyebrow"><a href="{{ blog.url }}">{{ blog.title | escape }}</a> · ÍCARO LIBROS</p>
+          <p class="lectopolis-eyebrow"><a href="{{ blog.url }}">{{ blog.title | escape }}</a> · LIBRERÍA LECTÓPOLIS</p>
           <h1
             class="article-template__title"
           >

@@ -1,5 +1,5 @@
 /* =============================================================
-   custom.css — Ícaro Libros
+   custom.css — Librería Lectópolis
    CSS personalizado separado de base.css para sobrevivir
    actualizaciones del tema Dawn.
    ============================================================= */
@@ -194,13 +194,13 @@
     transform: scale(0.94) !important;
   }
 
-  /* Libro 3D: la portada gira siguiendo el cursor (variables desde icaro-premium.js). */
+  /* Libro 3D: la portada gira siguiendo el cursor (variables desde lectopolis-premium.js). */
   body .product-card-wrapper:hover .card__media img {
-    transform: perspective(900px) rotateY(var(--icaro-ry, -10deg)) rotateX(var(--icaro-rx, 2deg)) scale(0.9) !important;
+    transform: perspective(900px) rotateY(var(--lectopolis-ry, -10deg)) rotateX(var(--lectopolis-rx, 2deg)) scale(0.9) !important;
     filter: drop-shadow(12px 16px 14px rgba(37, 43, 39, 0.28));
   }
 
-  body .icaro-shelf__cover:hover .icaro-shelf__volume {
+  body .lectopolis-shelf__cover:hover .lectopolis-shelf__volume {
     transform: rotateY(-13deg) scale(0.94);
   }
 }

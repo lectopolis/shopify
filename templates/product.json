@@ -40,8 +40,8 @@
           "type": "description",
           "settings": {}
         },
-        "icaro_excerpt": {
-          "type": "icaro_excerpt",
+        "lectopolis_excerpt": {
+          "type": "lectopolis_excerpt",
           "settings": {
             "heading": "Lee las primeras líneas",
             "metafield_key": "extracto"
@@ -55,7 +55,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "icaro_excerpt",
+        "lectopolis_excerpt",
         "description"
       ],
       "settings": {

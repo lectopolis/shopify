@@ -4,7 +4,7 @@
     con autor duplicado, ISBN y "Comprar en Colombia" (hasta 150 caracteres). Se arma con el titulo
     limpio (sin "Libro ") y el autor (segundo tramo de "Titulo - Autor - Editorial"), en <= 62 caracteres.
   endcomment
-  assign t_tail = ' | Ícaro Libros'
+  assign t_tail = ' | Librería Lectópolis'
   assign t_parts = product.title | split: ' - '
   assign t_name = t_parts[0] | strip
   for t_i in (1..2)

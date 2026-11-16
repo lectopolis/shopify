@@ -7,9 +7,9 @@
   assign tags = card_product.tags | join: ',' | downcase
 -%}
 {%- if tags contains 'preventa' -%}
-  <span id="{{ badge_id }}" class="badge badge--bottom-left icaro-badge icaro-badge--pre">Preventa</span>
+  <span id="{{ badge_id }}" class="badge badge--bottom-left lectopolis-badge lectopolis-badge--pre">Preventa</span>
 {%- elsif badge_variant.inventory_management == 'shopify' and badge_variant.inventory_policy == 'deny' and badge_variant.inventory_quantity > 0 and badge_variant.inventory_quantity <= 3 -%}
-  <span id="{{ badge_id }}" class="badge badge--bottom-left icaro-badge icaro-badge--low">Últimas unidades</span>
+  <span id="{{ badge_id }}" class="badge badge--bottom-left lectopolis-badge lectopolis-badge--low">Últimas unidades</span>
 {%- elsif published_s > 0 and age < 3888000 -%}
-  <span id="{{ badge_id }}" class="badge badge--bottom-left icaro-badge icaro-badge--new">Novedad</span>
+  <span id="{{ badge_id }}" class="badge badge--bottom-left lectopolis-badge lectopolis-badge--new">Novedad</span>
 {%- endif -%}

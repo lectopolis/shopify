@@ -2,7 +2,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-article-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-featured-blog.css' | asset_url | stylesheet_tag }}
-{{ 'icaro-blog.css' | asset_url | stylesheet_tag }}
+{{ 'lectopolis-blog.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -69,7 +69,7 @@
                 style="--animation-order: {{ forloop.index }};"
               {% endif %}
             >
-              {% render 'icaro-blog-card',
+              {% render 'lectopolis-blog-card',
                 article: article,
                 show_image: section.settings.show_image,
                 show_date: section.settings.show_date,

@@ -1,6 +1,6 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
-{{ 'icaro-collections.css' | asset_url | stylesheet_tag }}
+{{ 'lectopolis-collections.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   @media screen and (max-width: 749px) {
@@ -10,11 +10,11 @@
   }
 {%- endstyle -%}
 
-<div class="collection-hero icaro-collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
+<div class="collection-hero lectopolis-collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
       {% render 'breadcrumbs' %}
-      <p class="icaro-eyebrow">CATÁLOGO · ÍCARO LIBROS</p>
+      <p class="lectopolis-eyebrow">CATÁLOGO · LIBRERÍA LECTÓPOLIS</p>
       <h1 class="collection-hero__title">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
@@ -25,7 +25,7 @@
       {%- if section.settings.show_collection_description and description_text != blank and description_text != collection_name -%}
         <div class="collection-hero__description rte">{{ collection.description }}</div>
       {%- endif -%}
-      <p class="icaro-collection-hero__note">Explora los títulos de esta colección. Consulta disponibilidad y encuentra tu próxima lectura.</p>
+      <p class="lectopolis-collection-hero__note">Explora los títulos de esta colección. Consulta disponibilidad y encuentra tu próxima lectura.</p>
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}

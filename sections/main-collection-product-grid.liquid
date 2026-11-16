@@ -78,9 +78,9 @@
   </script>
 {%- endif -%}
 
-{{ 'icaro-collections.css' | asset_url | stylesheet_tag }}
-<div class="icaro-collection-grid section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
-  <p class="icaro-collection-grid__scope page-width">Los filtros se aplican a esta colección. <a href="{{ routes.all_products_collection_url }}">Explorar todo el catálogo ↗</a></p>
+{{ 'lectopolis-collections.css' | asset_url | stylesheet_tag }}
+<div class="lectopolis-collection-grid section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  <p class="lectopolis-collection-grid__scope page-width">Los filtros se aplican a esta colección. <a href="{{ routes.all_products_collection_url }}">Explorar todo el catálogo ↗</a></p>
   {%- paginate collection.products by section.settings.products_per_page -%}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">

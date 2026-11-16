@@ -116,7 +116,7 @@
                   "
                   src="{{ card_product.media[1] | image_url: width: 533 }}"
                   sizes="{{ image_sizes | default: default_image_sizes }}"
-                  alt="{% render 'icaro-book-title', book: card_product %}"
+                  alt="{% render 'lectopolis-book-title', book: card_product %}"
                   class="motion-reduce"
                   loading="lazy"
                   width="{{ card_product.media[1].width }}"
@@ -140,7 +140,7 @@
                 class="full-unstyled-link"
                 aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
               >
-                {% render 'icaro-book-title', book: card_product %}
+                {% render 'lectopolis-book-title', book: card_product %}
               </a>
             </h3>
           </div>
@@ -177,7 +177,7 @@
               class="full-unstyled-link"
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
             >
-              {% render 'icaro-book-title', book: card_product %}
+              {% render 'lectopolis-book-title', book: card_product %}
             </a>
           </h3>
           <div class="card-information">
@@ -536,7 +536,7 @@
                       </div>
                       <div class="quick-add-modal__content-info--bulk-details large-up-hide">
                         <a href="{{ card_product.url }}" class="full-unstyled-link">
-                          <h3>{% render 'icaro-book-title', book: card_product %}</h3>
+                          <h3>{% render 'lectopolis-book-title', book: card_product %}</h3>
                         </a>
                         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
                         {%- if card_product.quantity_price_breaks_configured? -%}
@@ -549,7 +549,7 @@
                     <div>
                       <div class="quick-add-modal__content-info--bulk-details small-hide medium-hide">
                         <a href="{{ card_product.url }}" class="full-unstyled-link">
-                          <h3 class="h2">{% render 'icaro-book-title', book: card_product %}</h3>
+                          <h3 class="h2">{% render 'lectopolis-book-title', book: card_product %}</h3>
                         </a>
                         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
                         {%- if card_product.quantity_price_breaks_configured? -%}
@@ -588,8 +588,8 @@
               {{- 'products.product.on_sale' | t -}}
             </span>
           {%- else -%}
-            {%- assign icaro_badge_id = 'Badge-' | append: section_id | append: '-' | append: card_product.id -%}
-            {%- render 'icaro-card-badge', card_product: card_product, badge_id: icaro_badge_id -%}
+            {%- assign lectopolis_badge_id = 'Badge-' | append: section_id | append: '-' | append: card_product.id -%}
+            {%- render 'lectopolis-card-badge', card_product: card_product, badge_id: lectopolis_badge_id -%}
           {%- endif -%}
         </div>
       </div>

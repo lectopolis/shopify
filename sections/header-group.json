@@ -1,1 +1,13 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement_QVjyLB":{"type":"announcement","settings":{"text":"Te damos la bienvenida a nuestra tienda","link":""}},"announcement_gfJ4nV":{"type":"announcement","settings":{"text":"¡Algo grande esta por leerse!","link":""}},"announcement-bar-0":{"type":"announcement","settings":{"text":"Envios a Gratis por compras superiores a $169.900","link":""}}},"block_order":["announcement_QVjyLB","announcement_gfJ4nV","announcement-bar-0"],"settings":{"color_scheme":"accent-2","show_line_separator":true,"show_social":false,"auto_rotate":true,"change_slides_speed":3,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","settings":{"logo_position":"middle-left","menu":"main-menu","menu_type_desktop":"dropdown","sticky_header_type":"on-scroll-up","show_line_separator":true,"color_scheme":"background-1","menu_color_scheme":"background-1","enable_country_selector":true,"enable_language_selector":true,"enable_customer_avatar":true,"mobile_logo_position":"center","margin_bottom":0,"padding_top":16,"padding_bottom":16}},"icaro_search":{"type":"icaro-search-bar","settings":{}}},"order":["announcement-bar","header","icaro_search"]}
+{
+  "name": "Cabecera Lectópolis",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "lectopolis-header",
+      "settings": {}
+    }
+  },
+  "order": [
+    "header"
+  ]
+}

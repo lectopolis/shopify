@@ -50,7 +50,7 @@
 }
 
 /* =========================
-   ÍCARO PRO EDITORIAL LAYOUT
+   LECTÓPOLIS · FICHA DEL LIBRO
 ========================= */
 
 @media screen and (min-width: 990px) {
@@ -259,7 +259,7 @@
                 </p>
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
-                  <h1>{% render 'icaro-book-title', book: product %}</h1>
+                  <h1>{% render 'lectopolis-book-title', book: product %}</h1>
                   {%- if product.vendor != blank -%}
                     <p class="product__vendor">
                       Editorial: <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
@@ -274,7 +274,7 @@
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
-                  {% render 'icaro-book-details', book: product %}
+                  {% render 'lectopolis-book-details', book: product %}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -355,7 +355,7 @@
                 </p>
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
-                  <a class="icaro-product-description-link quick-add-hidden" href="#BookDescription-{{ section.id }}">Leer descripción completa ↓</a>
+                  <a class="lectopolis-product-description-link quick-add-hidden" href="#BookDescription-{{ section.id }}">Leer descripción completa ↓</a>
                 {%- endif -%}
               {%- when 'sku' -%}
                 <p
@@ -814,25 +814,25 @@
                     <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
                   {%- endif -%}
                 </product-recommendations>
-              {%- when 'icaro_trust' -%}
-                <ul class="icaro-trust" role="list" {{ block.shopify_attributes }}>
-                  {%- if settings.icaro_free_shipping_threshold > 0 -%}
-                    {%- assign icaro_threshold = settings.icaro_free_shipping_threshold | times: 100 -%}
-                    <li><span class="icaro-trust__icon" aria-hidden="true">✦</span><span>{% if product.price >= icaro_threshold %}<strong>Este libro tiene envío gratis</strong>{% else %}Envío gratis desde {{ icaro_threshold | money_without_trailing_zeros }}{% endif %}<small>Envíos a toda Colombia</small></span></li>
+              {%- when 'lectopolis_trust' -%}
+                <ul class="lectopolis-trust" role="list" {{ block.shopify_attributes }}>
+                  {%- if settings.lectopolis_free_shipping_threshold > 0 -%}
+                    {%- assign lectopolis_threshold = settings.lectopolis_free_shipping_threshold | times: 100 -%}
+                    <li><span class="lectopolis-trust__icon" aria-hidden="true">✦</span><span>{% if product.price >= lectopolis_threshold %}<strong>Este libro tiene envío gratis</strong>{% else %}Envío gratis desde {{ lectopolis_threshold | money_without_trailing_zeros }}{% endif %}<small>Envíos a toda Colombia</small></span></li>
                   {%- endif -%}
-                  <li><span class="icaro-trust__icon" aria-hidden="true">✦</span><span>Pago 100% seguro<small>Checkout protegido de Shopify</small></span></li>
-                  {%- assign icaro_wa = block.settings.whatsapp | remove: ' ' | remove: '+' -%}
-                  {%- if icaro_wa != blank -%}
-                    {%- assign icaro_wa_text = 'Hola, tengo una pregunta sobre el libro: ' | append: product.title | url_encode -%}
-                    <li><span class="icaro-trust__icon" aria-hidden="true">✦</span><span><a href="https://wa.me/{{ icaro_wa | escape }}?text={{ icaro_wa_text }}" target="_blank" rel="noopener">¿Dudas? Escríbenos</a><small>Respuesta por WhatsApp</small></span></li>
+                  <li><span class="lectopolis-trust__icon" aria-hidden="true">✦</span><span>Pago 100% seguro<small>Checkout protegido de Shopify</small></span></li>
+                  {%- assign lectopolis_wa = block.settings.whatsapp | remove: ' ' | remove: '+' -%}
+                  {%- if lectopolis_wa != blank -%}
+                    {%- assign lectopolis_wa_text = 'Hola, tengo una pregunta sobre el libro: ' | append: product.title | url_encode -%}
+                    <li><span class="lectopolis-trust__icon" aria-hidden="true">✦</span><span><a href="https://wa.me/{{ lectopolis_wa | escape }}?text={{ lectopolis_wa_text }}" target="_blank" rel="noopener">¿Dudas? Escríbenos</a><small>Respuesta por WhatsApp</small></span></li>
                   {%- endif -%}
                 </ul>
-              {%- when 'icaro_excerpt' -%}
-                {%- assign icaro_excerpt = product.metafields.custom[block.settings.metafield_key] -%}
-                {%- if icaro_excerpt != blank -%}
-                  <details class="icaro-excerpt" {{ block.shopify_attributes }}>
-                    <summary><span class="icaro-eyebrow">{{ block.settings.heading | escape }}</span><span aria-hidden="true">+</span></summary>
-                    <blockquote>{{ icaro_excerpt | metafield_text | newline_to_br }}</blockquote>
+              {%- when 'lectopolis_excerpt' -%}
+                {%- assign lectopolis_excerpt = product.metafields.custom[block.settings.metafield_key] -%}
+                {%- if lectopolis_excerpt != blank -%}
+                  <details class="lectopolis-excerpt" {{ block.shopify_attributes }}>
+                    <summary><span class="lectopolis-eyebrow">{{ block.settings.heading | escape }}</span><span aria-hidden="true">+</span></summary>
+                    <blockquote>{{ lectopolis_excerpt | metafield_text | newline_to_br }}</blockquote>
                   </details>
                 {%- endif -%}
               {%- when 'icon-with-text' -%}
@@ -850,7 +850,7 @@
 
     {% for block in section.blocks %}
       {% if block.type == 'description' and product.description != blank %}
-        <section id="BookDescription-{{ section.id }}" class="icaro-product-description quick-add-hidden" aria-labelledby="BookDescriptionHeading-{{ section.id }}" {{ block.shopify_attributes }}>
+        <section id="BookDescription-{{ section.id }}" class="lectopolis-product-description quick-add-hidden" aria-labelledby="BookDescriptionHeading-{{ section.id }}" {{ block.shopify_attributes }}>
           <h2 id="BookDescriptionHeading-{{ section.id }}">Descripción del libro</h2>
           {%- liquid
             assign dsc_parts = product.description | split: '<script type="application/ld+json">'
@@ -863,7 +863,7 @@
               endif
             endfor
           -%}
-          <div class="icaro-product-description__body rte">{{ dsc_clean }}</div>
+          <div class="lectopolis-product-description__body rte">{{ dsc_clean }}</div>
         </section>
       {% endif %}
     {% endfor %}
@@ -1193,16 +1193,16 @@
       ]
     },
     {
-      "type": "icaro_trust",
-      "name": "Ícaro · Confianza",
+      "type": "lectopolis_trust",
+      "name": "Lectópolis · Confianza",
       "limit": 1,
       "settings": [
         { "type": "text", "id": "whatsapp", "label": "WhatsApp con código de país" }
       ]
     },
     {
-      "type": "icaro_excerpt",
-      "name": "Ícaro · Primeras líneas",
+      "type": "lectopolis_excerpt",
+      "name": "Lectópolis · Primeras líneas",
       "limit": 1,
       "settings": [
         { "type": "text", "id": "heading", "label": "Título", "default": "Lee las primeras líneas" },
