@@ -39,3 +39,7 @@ El render local no sustituye la verificación en la tienda: comprobar la sincron
 ## Identidad de la librería
 
 Se retiraron las plantillas y recursos de marca heredados que no se utilizan. Los componentes funcionales conservados ahora usan el prefijo `lectopolis`. Las páginas, los metadatos y la información para buscadores presentan a Lectópolis como librería de libros nuevos y leídos, con más de 15 años de trayectoria y envíos nacionales. El contacto confirmado es +57 313 6118658. No se publican direcciones, horarios, reseñas ni servicios comerciales de la empresa anterior.
+
+## Catálogo y fichas de libros
+
+El catálogo y la búsqueda muestran cuatro columnas en escritorio y dos en móvil. Las fichas usan la paleta de Lectópolis, títulos legibles, disponibilidad de la variante seleccionada y consulta por WhatsApp con la edición. Autor, código y políticas solo aparecen cuando existen datos. No se asigna automáticamente el estado nuevo/leído a los productos. Verificado con render local en 320, 375, 768 y 1440 px y con estados disponible/agotado; la actualización de variantes y el checkout requieren verificación en Shopify.

@@ -1,9 +1,17 @@
 <div class="lectopolis-book-details">
-  {% if book.metafields.custom.autor != blank %}<p><strong>Autor:</strong> {{ book.metafields.custom.autor | escape }}</p>{% endif %}
-  {% if book.selected_or_first_available_variant.barcode != blank %}<p><strong>ISBN / código de barras:</strong> {{ book.selected_or_first_available_variant.barcode | escape }}</p>{% endif %}
-  <p>El costo y las opciones de envío se calculan al finalizar la compra.</p>
-  {% if shop.shipping_policy != blank %}<p><a href="{{ shop.shipping_policy.url }}">Condiciones de envío</a></p>{% endif %}
-  {% if shop.refund_policy != blank %}<p><a href="{{ shop.refund_policy.url }}">Condiciones de devolución</a></p>{% endif %}
-  {% capture message %}Hola, Librería Lectópolis. Quisiera consultar el libro {{ book.title }}: {{ shop.url }}{{ book.url }}{% endcapture %}
-  <a href="https://wa.me/573136118658?text={{ message | url_encode }}" target="_blank" rel="noopener">Consulta este libro por WhatsApp ↗</a>
+  {% assign edition = book.selected_or_first_available_variant %}
+  {% if edition.available %}<span class="lp-stock">Disponible para comprar</span>{% else %}<span class="lp-stock lp-stock--unavailable">No disponible en esta selección</span>{% endif %}
+  {% if book.metafields.custom.autor != blank or edition.barcode != blank %}
+    <dl class="lp-book-facts">
+      {% if book.metafields.custom.autor != blank %}<dt>Autor</dt><dd>{{ book.metafields.custom.autor | escape }}</dd>{% endif %}
+      {% if edition.barcode != blank %}<dt>ISBN / código</dt><dd>{{ edition.barcode | escape }}</dd>{% endif %}
+    </dl>
+  {% endif %}
+  <p class="lp-shipping-note"><strong>Envíos nacionales.</strong> El costo y las opciones de envío se calculan al finalizar la compra.</p>
+  <div class="lp-book-policy-links">
+    {% if shop.shipping_policy.body != blank %}<a href="{{ shop.shipping_policy.url }}">Condiciones de envío</a>{% endif %}
+    {% if shop.refund_policy.body != blank %}<a href="{{ shop.refund_policy.url }}">Condiciones de devolución</a>{% endif %}
+  </div>
+  {% capture message %}Hola, Librería Lectópolis. Quisiera consultar el libro {{ book.title }}{% if edition.title != blank and edition.title != 'Default Title' %} ({{ edition.title }}){% endif %}: {{ shop.url }}{{ book.url }}{% endcapture %}
+  <a class="lp-book-whatsapp" href="https://wa.me/573136118658?text={{ message | strip | url_encode }}" target="_blank" rel="noopener">¿Tienes dudas sobre este libro? Escríbenos ↗</a>
 </div>

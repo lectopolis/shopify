@@ -226,6 +226,9 @@
     {% endstyle %}
   {{ 'base.css' | asset_url | stylesheet_tag }}
   {{ 'lectopolis.css' | asset_url | stylesheet_tag }}
+  {% if request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'search' %}
+    {{ 'lectopolis-shopping.css' | asset_url | stylesheet_tag }}
+  {% endif %}
   {% if settings.cart_type == 'drawer' %}
     {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
     {{ 'component-cart.css' | asset_url | stylesheet_tag }}
