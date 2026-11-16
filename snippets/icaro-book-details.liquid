@@ -4,5 +4,6 @@
   <p>El costo y las opciones de envío se calculan al finalizar la compra.</p>
   {% if shop.shipping_policy != blank %}<p><a href="{{ shop.shipping_policy.url }}">Condiciones de envío</a></p>{% endif %}
   {% if shop.refund_policy != blank %}<p><a href="{{ shop.refund_policy.url }}">Condiciones de devolución</a></p>{% endif %}
-  <a href="https://www.instagram.com/librerialectopolis/" target="_blank" rel="noopener">Consulta con Lectópolis en Instagram ↗</a>
+  {% capture message %}Hola, Librería Lectópolis. Quisiera consultar el libro {{ book.title }}: {{ shop.url }}{{ book.url }}{% endcapture %}
+  <a href="https://wa.me/573136118658?text={{ message | url_encode }}" target="_blank" rel="noopener">Consulta este libro por WhatsApp ↗</a>
 </div>

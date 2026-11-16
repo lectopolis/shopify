@@ -1,4 +1,19 @@
-<footer class="lp-footer"><div><a class="lp-footer-brand" href="{{ routes.root_url }}">lectópolis<span>Una librería. Infinitos mundos.</span></a><p>Más de 15 años compartiendo el amor por los libros.</p></div><nav aria-label="Enlaces al pie"><a href="{{ routes.all_products_collection_url }}">Explora la librería</a><a href="{{ routes.root_url }}#lp-historia">Nuestra historia</a><a href="https://www.instagram.com/librerialectopolis/" target="_blank" rel="noopener">Instagram ↗</a>{% for policy in shop.policies %}{% if policy.body != blank %}<a href="{{ policy.url }}">{{ policy.title | escape }}</a>{% endif %}{% endfor %}</nav><div class="lp-footer-bottom"><span>© {{ 'now' | date: '%Y' }} Lectópolis</span><span>Hecho para quienes aman leer.</span></div></footer>
+<footer class="lp-footer">
+  <div>
+    <a class="lp-footer-brand" href="{{ routes.root_url }}">lectópolis<span>Librería Lectópolis · Más de 15 años contigo.</span></a>
+    <p>Creemos que cada libro encuentra a su lector en el momento perfecto. 💫</p>
+    <p>Encuentra tu próxima historia favorita entre nuestros libros nuevos y leídos.<br>Envíos nacionales o visítanos en el punto de venta.</p>
+  </div>
+  <nav aria-label="Enlaces al pie">
+    <a href="https://wa.me/573136118658" target="_blank" rel="noopener">Escríbenos por WhatsApp ↗</a>
+    <a href="tel:+573136118658">Teléfono: +57 313 6118658</a>
+    <a href="{{ routes.all_products_collection_url }}">Explora la librería</a>
+    <a href="{{ routes.root_url }}#lp-historia">Nuestra historia</a>
+    <a href="https://www.instagram.com/librerialectopolis/" target="_blank" rel="noopener">Instagram ↗</a>
+    {% for policy in shop.policies %}{% if policy.body != blank %}<a href="{{ policy.url }}">{{ policy.title | escape }}</a>{% endif %}{% endfor %}
+  </nav>
+  <div class="lp-footer-bottom"><span>© {{ 'now' | date: '%Y' }} Librería Lectópolis</span><span>Hecho para quienes aman leer.</span></div>
+</footer>
 {% schema %}
 {"name":"Lectópolis · Pie","settings":[]}
 {% endschema %}

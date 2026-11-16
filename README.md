@@ -8,7 +8,7 @@ Rediseño sobre el tema exportado el 16 de noviembre de 2026. La referencia visu
 2. **Composición:** titulares grandes, contrastes intensos, collage, formas gráficas y portadas protagonistas. Se trasladan a una portada editorial, tarjetas de color y libros con perspectiva.
 3. **Contenido:** se ven novedades, Coraline, Bridgerton, Isabel Allende, curiosidades y selecciones temáticas. Son referencias al estilo de publicación; no se afirma que estén disponibles para comprar.
 4. **Conversación:** preguntas, descubrimiento y divulgación literaria. La navegación invita a descubrir lecturas, buscar libros y acercarse a la librería por Instagram.
-5. **Confianza y venta:** la trayectoria se destaca junto al catálogo, con títulos, precios, imágenes y disponibilidad obtenidos de Shopify. No se inventan reseñas, descuentos, envíos gratis ni números de contacto.
+5. **Confianza y venta:** la trayectoria se destaca junto al catálogo, con títulos, precios, imágenes y disponibilidad obtenidos de Shopify. No se inventan reseñas, descuentos ni envíos gratis. El teléfono +57 313 6118658 y la oferta de libros nuevos y leídos con envíos nacionales fueron confirmados por el propietario.
 
 ## Diseño y edición
 
