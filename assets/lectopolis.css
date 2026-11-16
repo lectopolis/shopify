@@ -1,4 +1,12 @@
 /* Lectópolis: palette sampled visually from the supplied Instagram reference. */
+.lp-campaign{background:#5b23aa;color:#fff;font:14px/1.5 Arial,Helvetica,sans-serif}
+.lp-campaign-image{display:block;overflow:hidden}.lp-campaign-image img{display:block;width:100%;height:auto}
+.lp-campaign-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px max(5vw,24px);border-top:1px solid #ffffff26}
+.lp-campaign-caption{font-size:12px}.lp-campaign-mobile-copy{display:none}
+.lp-campaign-cta{display:inline-flex;align-items:center;justify-content:center;gap:20px;min-height:48px;padding:12px 20px;background:#ffdf00;color:#30115c;text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap}
+.lp-campaign a:focus-visible{outline:3px solid #ffdf00;outline-offset:-5px}.lp-campaign-cta:focus-visible{outline-color:#fff!important}
+.lp-campaign-cta:hover{background:#fff}
+@media(max-width:700px){.lp-campaign-image img{height:240px;object-fit:cover;object-position:right center}.lp-campaign-bottom{display:block;padding:25px 24px 30px}.lp-campaign-mobile-copy{display:block}.lp-campaign-mobile-copy h2{font:800 32px/1.1 Arial,Helvetica,sans-serif;letter-spacing:-.04em;color:#ffdf00;margin:0 0 15px}.lp-campaign-mobile-copy h2 em{font-family:Georgia,serif;font-weight:400}.lp-campaign-mobile-copy p{font-size:12px;margin:0 0 20px}.lp-campaign-caption{display:none}.lp-campaign-cta{white-space:normal}}
 :root{--lp-purple:#5b23aa;--lp-yellow:#ffdf00;--lp-green:#78d552;--lp-blue:#0755ec;--lp-coral:#ff586b;--lp-mint:#d5f3de;--lp-paper:#faf8f2;--lp-ink:#242122;--lp-border:#dedbd2}
 html{scroll-behavior:smooth;scroll-padding-top:110px}
 body.lp-store{background:var(--lp-paper);color:var(--lp-ink)}
