@@ -1,0 +1,15 @@
+<section class="page-width icaro-distribution" aria-labelledby="Distribution-{{ section.id }}">
+  <div class="icaro-distribution__heading"><p class="icaro-eyebrow">ÍCARO · DISTRIBUCIÓN EDITORIAL</p><h2 id="Distribution-{{ section.id }}">{{ section.settings.heading | escape }}</h2><p>{{ section.settings.text | escape }}</p></div>
+  <div class="icaro-distribution__audiences">
+    <div><h3>Para librerías</h3><p>Consulta catálogos, títulos disponibles y condiciones comerciales para tu librería.</p></div>
+    <div><h3>Para instituciones</h3><p>Conversemos sobre los libros y cantidades que requiere tu biblioteca o proyecto.</p></div>
+    <div><h3>Para lectores</h3><p>Encuentra tu próxima lectura y compra directamente en nuestro catálogo.</p></div>
+  </div>
+  <div class="icaro-distribution__links">
+    {% if pages['editoriales-de-nuestra-distribucion'] != blank %}<a href="{{ pages['editoriales-de-nuestra-distribucion'].url }}">Conoce las editoriales que distribuimos ↗</a>{% endif %}
+    {% if section.settings.whatsapp != blank %}<a href="https://wa.me/{{ section.settings.whatsapp | remove: '+' | remove: ' ' | escape }}?text=Hola%2C%20quisiera%20informaci%C3%B3n%20comercial%20sobre%20los%20libros%20que%20distribuyen.">Contactar al equipo comercial ↗</a>{% endif %}
+  </div>
+</section>
+{% schema %}
+{"name":"Ícaro · Distribución","settings":[{"type":"text","id":"heading","label":"Título","default":"Un puente entre editoriales, librerías y lectores."},{"type":"textarea","id":"text","label":"Descripción","default":"Distribuimos en Colombia un catálogo especializado de editoriales de España y Argentina, con atención directa para cada consulta."},{"type":"text","id":"whatsapp","label":"WhatsApp con código de país","default":"573164810958"}],"presets":[{"name":"Ícaro · Distribución"}]}
+{% endschema %}

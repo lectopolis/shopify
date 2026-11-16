@@ -1,0 +1,283 @@
+{% comment %}
+  Sección: Barra de Anuncios en Movimiento
+  Nombre del archivo: anuncio-bar.liquid
+  Ubicación: sections/anuncio-bar.liquid
+{% endcomment %}
+
+<div class="announcement-ticker-wrapper color-{{ section.settings.color_scheme }}">
+  <div class="announcement-ticker">
+    <div class="announcement-ticker__content">
+      {% for block in section.blocks %}
+        <div class="announcement-ticker__item" {{ block.shopify_attributes }}>
+          {% if block.settings.icon != blank %}
+            <span class="announcement-ticker__icon">{{ block.settings.icon }}</span>
+          {% endif %}
+          <span class="announcement-ticker__text">{{ block.settings.text }}</span>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="announcement-ticker__link">
+              {{ block.settings.link_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+      
+      {% comment %} Duplicar contenido para animación continua {% endcomment %}
+      {% for block in section.blocks %}
+        <div class="announcement-ticker__item" aria-hidden="true">
+          {% if block.settings.icon != blank %}
+            <span class="announcement-ticker__icon">{{ block.settings.icon }}</span>
+          {% endif %}
+          <span class="announcement-ticker__text">{{ block.settings.text }}</span>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="announcement-ticker__link">
+              {{ block.settings.link_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .announcement-ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .announcement-ticker {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .announcement-ticker__content {
+    display: flex;
+    animation: scroll-ticker-{{ section.settings.direction }} {{ section.settings.speed }}s linear infinite;
+    will-change: transform;
+  }
+
+  .announcement-ticker__item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 4rem;
+    font-size: {{ section.settings.font_size }}px;
+    font-weight: {{ section.settings.font_weight }};
+  }
+
+  .announcement-ticker__icon {
+    margin-right: 0.5rem;
+    font-size: 1.2em;
+  }
+
+  .announcement-ticker__text {
+    margin-right: 0.5rem;
+  }
+
+  .announcement-ticker__link {
+    color: inherit;
+    text-decoration: underline;
+    margin-left: 0.5rem;
+  }
+
+  .announcement-ticker__link:hover {
+    opacity: 0.8;
+  }
+
+  {% if section.settings.pause_on_hover %}
+  .announcement-ticker:hover .announcement-ticker__content {
+    animation-play-state: paused;
+  }
+  {% endif %}
+
+  @keyframes scroll-ticker-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes scroll-ticker-right {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .announcement-ticker__item {
+      font-size: {{ section.settings.font_size | times: 0.85 }}px;
+      padding: 0 2rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Barra Anuncios Movimiento",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "background-1"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Dirección",
+      "options": [
+        {
+          "value": "left",
+          "label": "← Izquierda"
+        },
+        {
+          "value": "right",
+          "label": "Derecha →"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "label": "Velocidad",
+      "default": 30,
+      "info": "Menor = más rápido"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tamaño fuente",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Peso fuente",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medio"
+        },
+        {
+          "value": "600",
+          "label": "Semi-negrita"
+        },
+        {
+          "value": "700",
+          "label": "Negrita"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pausar al pasar mouse",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 12
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Anuncio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icono emoji",
+          "default": "🎉",
+          "info": "Usa emojis: 🎉 ⭐ 🔥 ✨ 📦 🚚"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto anuncio",
+          "default": "¡Envío gratis en compras superiores a $50!"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace opcional"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Texto enlace",
+          "default": "Comprar ahora"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra Anuncios",
+      "blocks": [
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "🎉",
+            "text": "¡Envío gratis en compras superiores a $50!",
+            "link_text": "Comprar ahora"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "⭐",
+            "text": "Nuevos productos cada semana",
+            "link_text": "Ver novedades"
+          }
+        },
+        {
+          "type": "announcement",
+          "settings": {
+            "icon": "🔥",
+            "text": "20% descuento primera compra",
+            "link_text": "Obtener descuento"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

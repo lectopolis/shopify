@@ -1,0 +1,81 @@
+/* White shelves, standing books and native accessible product disclosures. */
+:root{--icaro-paper:#fff}
+.icaro-editorial{background:#fff}
+.icaro-hero__letter{background:#fff}
+.icaro-shelf{background:#fff;border:0;padding:36px 0 48px}
+.icaro-shelf__books{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 0;overflow:visible;padding:20px 24px 32px;scroll-snap-type:none;max-width:860px;margin:auto}
+.icaro-shelf__book{position:relative;min-width:0;padding:0 24px;isolation:auto}
+.icaro-shelf__book::after{content:"";position:absolute;inset:auto 0 -15px;height:18px;background:linear-gradient(#b8a68e 0 35%,#78664f 36% 100%);box-shadow:0 17px 18px -8px #252b2730;transform:skewX(-18deg);z-index:0;pointer-events:none}
+.icaro-shelf__book:nth-child(3n+1)::after{left:-20px}
+.icaro-shelf__book:nth-child(3n)::after{right:-20px}
+.icaro-shelf__cover{height:200px;position:relative;border:0;padding:0;cursor:pointer;list-style:none;display:flex;justify-content:center;align-items:end;perspective:1100px;z-index:1}
+.icaro-shelf__cover::-webkit-details-marker{display:none}
+.icaro-shelf__ticket{position:absolute;top:-22px;right:0;width:min(230px,100%);padding:19px 20px 17px 25px;background:#faf5e9;color:#252b27;text-align:left;box-shadow:0 8px 20px #252b2726;clip-path:polygon(12px 0,100% 0,100% 100%,0 100%,0 12px);opacity:0;visibility:hidden;transform:translateY(6px) rotate(-4deg);transition:opacity .18s ease,transform .18s ease,visibility .18s;pointer-events:none;z-index:5}
+.icaro-shelf__ticket::before{content:"";position:absolute;top:13px;left:11px;width:5px;height:5px;border-radius:50%;background:#78664f}
+.icaro-shelf__ticket-title{display:block;font:600 16px/1.35 var(--font-body-family);overflow-wrap:anywhere}
+.icaro-shelf__ticket-vendor{display:block;font:12.5px/1.4 var(--font-body-family);margin:5px 0 10px;letter-spacing:.04em}
+.icaro-shelf__ticket-price{display:block;font:700 18px/1.4 var(--font-body-family);margin-top:8px}
+.icaro-shelf__ticket-price small{font-size:12.5px;font-weight:400}.icaro-shelf__ticket-stock{display:block;font:13.5px/1.5 var(--font-body-family);color:#904631;margin-top:4px}
+.icaro-shelf__cover:focus-visible .icaro-shelf__ticket{opacity:1;visibility:visible;transform:translateY(0) rotate(-4deg)}
+.icaro-shelf__book:focus-within{z-index:11}
+@media(hover:hover) and (pointer:fine){.icaro-shelf__book:hover{z-index:11}.icaro-shelf__cover:hover .icaro-shelf__ticket{opacity:1;visibility:visible;transform:translateY(0) rotate(-4deg)}}
+.icaro-shelf__selection[open] .icaro-shelf__ticket{display:none}
+.icaro-shelf__volume{display:block;position:relative;width:125px;height:175px;transform:rotateY(-13deg);transform-origin:bottom center;transition:transform .3s ease;filter:drop-shadow(8px 10px 6px #252b2726)}
+.icaro-shelf__book:nth-child(3n+2) .icaro-shelf__volume{height:195px;width:138px}
+.icaro-shelf__book:nth-child(3n) .icaro-shelf__volume{height:160px;width:120px}
+.icaro-shelf__volume::after{content:"";position:absolute;top:4px;bottom:3px;right:-9px;width:9px;background:repeating-linear-gradient(0deg,#e2d9c8 0 1px,#faf6eb 1px 3px);transform:skewY(18deg);transform-origin:left;box-shadow:inset -2px 0 3px #252b2720;z-index:-1}
+.icaro-shelf__cover img{width:100%;height:100%;object-fit:contain;object-position:bottom;filter:none;transform:none!important;transition:none}
+.icaro-shelf__cover:hover .icaro-shelf__volume,.icaro-shelf__cover:focus-visible .icaro-shelf__volume,.icaro-shelf__selection[open] .icaro-shelf__volume{transform:translateY(-12px) rotateY(-5deg)}
+.icaro-shelf__selection[open]{position:relative;z-index:10}
+.icaro-shelf__info{position:absolute;top:calc(100% + 22px);left:-12px;right:-12px;padding:22px;background:#fff;border:1px solid #dedbd3;border-radius:6px;box-shadow:0 12px 40px #252b2720;z-index:20}
+.icaro-shelf__info .icaro-eyebrow{color:var(--icaro-rust)}
+.icaro-shelf__info h3{font-size:22px}.icaro-shelf__status:empty{display:none}.icaro-shelf__hint{margin-top:16px}
+.icaro-shelf__missing{width:100%;height:100%;border:1px solid #d7d1c3;background:#fff;font-size:20px}
+@media(min-width:990px){.icaro-shelf .icaro-section-head{max-width:860px;margin-left:auto;margin-right:auto}}
+@media(max-width:749px){.icaro-shelf{padding:24px 0 36px}.icaro-shelf__books{grid-template-columns:repeat(2,minmax(0,1fr));padding:15px 8px 24px;gap:40px 0}.icaro-shelf__book{padding:0 12px}.icaro-shelf__cover{height:165px}.icaro-shelf__volume,.icaro-shelf__book:nth-child(3n+2) .icaro-shelf__volume,.icaro-shelf__book:nth-child(3n) .icaro-shelf__volume{width:min(100px,100%);height:145px}.icaro-shelf__book:nth-child(2n) .icaro-shelf__volume{height:160px}.icaro-shelf__book:nth-child(3n+1)::after{left:0}.icaro-shelf__book:nth-child(3n)::after{right:0}.icaro-shelf__book:nth-child(2n+1)::after{left:-8px}.icaro-shelf__book:nth-child(2n)::after{right:-8px}.icaro-shelf__info{left:0;right:auto;width:min(280px,calc(100vw - 50px));padding:18px}.icaro-shelf__book:nth-child(2n) .icaro-shelf__info{left:auto;right:0}.icaro-shelf__info h3{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.icaro-shelf__volume{transition:none;transform:none!important}}
+/* Compact showcase: fewer rows and a smaller footprint. */
+.icaro-shelf{padding:24px 0 30px}
+.icaro-shelf .icaro-section-head{max-width:760px;margin:0 auto 18px;gap:16px}
+.icaro-shelf .icaro-section-head h2{font-size:30px}
+.icaro-shelf .icaro-section-head>p{font-size:13.5px;margin:0}
+.icaro-shelf .icaro-eyebrow{margin-bottom:8px}
+.icaro-shelf__books{grid-template-columns:repeat(4,minmax(0,1fr));max-width:760px;gap:32px 0;padding:16px 16px 24px}
+.icaro-shelf__book{padding:0 16px}
+.icaro-shelf__cover{height:150px}
+.icaro-shelf__volume,.icaro-shelf__book:nth-child(3n+2) .icaro-shelf__volume,.icaro-shelf__book:nth-child(3n) .icaro-shelf__volume{width:min(95px,100%);height:135px}
+.icaro-shelf__book:nth-child(2n) .icaro-shelf__volume{height:148px}
+.icaro-shelf__book:nth-child(n)::after{left:0;right:0;height:12px;bottom:-10px}
+.icaro-shelf__book:nth-child(4n+1)::after{left:-10px}
+.icaro-shelf__book:nth-child(4n)::after{right:-10px}
+.icaro-shelf__ticket{width:200px;max-width:calc(100vw - 50px);right:0;padding:15px 16px 13px 22px}
+.icaro-shelf__info{left:0;right:auto;width:250px;max-width:calc(100vw - 50px)}
+.icaro-shelf__book:nth-child(4n) .icaro-shelf__info{left:auto;right:0}
+.icaro-shelf__hint{max-width:760px;margin:12px auto 0;font-size:12.5px}
+@media(max-width:749px){
+  .icaro-shelf{padding:20px 0 26px}
+  .icaro-shelf .icaro-section-head h2{font-size:26px}
+  .icaro-shelf .icaro-section-head>p{margin-top:8px}
+  .icaro-shelf__books{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 0;padding:12px 6px 20px}
+  .icaro-shelf__book{padding:0 8px}
+  .icaro-shelf__cover{height:125px}
+  .icaro-shelf__volume,.icaro-shelf__book:nth-child(3n+2) .icaro-shelf__volume,.icaro-shelf__book:nth-child(3n) .icaro-shelf__volume{width:min(76px,100%);height:110px}
+  .icaro-shelf__book:nth-child(2n) .icaro-shelf__volume{height:122px}
+  .icaro-shelf__book:nth-child(n)::after{left:0;right:0}
+  .icaro-shelf__book:nth-child(3n+1)::after{left:-6px}
+  .icaro-shelf__book:nth-child(3n)::after{right:-6px}
+  .icaro-shelf__book:nth-child(n) .icaro-shelf__info{left:0;right:auto;width:250px;transform:none}
+  .icaro-shelf__book:nth-child(3n+2) .icaro-shelf__info{left:50%;right:auto;transform:translateX(-50%)}
+  .icaro-shelf__book:nth-child(3n) .icaro-shelf__info{left:auto;right:0}
+}
+
+/* Eighteen books in three full rows on desktop. */
+@media(min-width:990px){
+  .icaro-shelf .icaro-section-head,.icaro-shelf__hint{max-width:1080px}
+  .icaro-shelf__books{grid-template-columns:repeat(6,minmax(0,1fr));max-width:1080px}
+  .icaro-shelf__book:nth-child(n)::after{left:0;right:0}
+  .icaro-shelf__book:nth-child(6n+1)::after{left:-10px}
+  .icaro-shelf__book:nth-child(6n)::after{right:-10px}
+  .icaro-shelf__book:nth-child(n) .icaro-shelf__info{left:0;right:auto}
+  .icaro-shelf__book:nth-child(6n+5) .icaro-shelf__info,.icaro-shelf__book:nth-child(6n) .icaro-shelf__info{left:auto;right:0}
+}

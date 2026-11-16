@@ -1,14 +1,206 @@
-/*-----------------------------------------------------------------------------/
-/ Custom Theme CSS
-/-----------------------------------------------------------------------------*/
-/*---------------- Global Custom CSS -------------------*//*---------------- Custom CSS for only desktop -------------------*/
-@media (min-width: 1025px) {}
+/* =============================================================
+   custom.css — Ícaro Libros
+   CSS personalizado separado de base.css para sobrevivir
+   actualizaciones del tema Dawn.
+   ============================================================= */
 
-/*---------------- Custom CSS for tablet, mobile -------------------*/
-@media (max-width: 1024px) {}
+/* ── Portadas de libros: proporción y encuadre correcto ─────── */
 
-/*---------------- Custom CSS for only tablet -------------------*/
-@media (min-width: 768px) and (max-width: 1024px) {}
+.card__inner {
+  aspect-ratio: 2 / 3;
+}
 
-/*---------------- Custom CSS for only mobile -------------------*/
-@media (max-width: 767px){}
+.card__media {
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.card__content {
+  position: relative;
+}
+
+/* ── Hover de tarjetas: versión consolidada (GPU-friendly) ───── */
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .card.card--standard {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    will-change: transform;
+  }
+
+  .card.card--standard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.18);
+  }
+
+  .card .card__media {
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .card .media img {
+    transition: transform 0.5s ease;
+  }
+
+  .product-card-wrapper .card.card--standard:hover .media img {
+    transform: scale(0.94);
+  }
+
+  .card__information {
+    transition: transform 0.3s ease;
+  }
+
+  .card.card--standard:hover .card__information {
+    transform: translateY(-3px);
+  }
+}
+
+/* ── Efecto luz en hover de imagen (sin blur para móvil) ─────── */
+
+.product__media,
+.product__media-wrapper,
+.media {
+  position: relative;
+  overflow: hidden;
+}
+
+.product__media::after,
+.product__media-wrapper::after,
+.media::after {
+  content: "";
+  position: absolute;
+  top: -160%;
+  left: -80%;
+  width: 60%;
+  height: 320%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 35%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.6) 65%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  opacity: 0;
+  pointer-events: none;
+  /* Sin filter:blur — demasiado costoso en móvil */
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .product__media:hover::after,
+  .product__media-wrapper:hover::after,
+  .media:hover::after {
+    animation: light-sweep 1.25s ease-in-out;
+  }
+}
+
+@keyframes light-sweep {
+  0% {
+    left: -80%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+/* ── Precios en oferta ───────────────────────────────────────── */
+
+.price--on-sale .price-item--sale {
+  color: #c62828;
+  font-weight: 700;
+}
+
+.badge--sale {
+  background-color: #c62828;
+  color: #ffffff;
+}
+
+.badge.price__badge-sale {
+  background-color: #c62828;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+/* ── Encabezados de sección con líneas decorativas ───────────── */
+
+.section-header {
+  text-align: center;
+}
+
+.section-header__title {
+  position: relative;
+  display: inline-block;
+  padding: 0 40px;
+}
+
+.section-header__title::before,
+.section-header__title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 150px;
+  height: 2px;
+}
+
+.section-header__title::before {
+  right: 100%;
+  background: linear-gradient(to left, #c00, transparent);
+}
+
+.section-header__title::after {
+  left: 100%;
+  background: linear-gradient(to right, #c00, transparent);
+}
+
+/* ── SEO: h1 invisible para buscadores ───────────────────────── */
+
+.seo-h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Zoom out compartido por todas las vitrinas de libros. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body .product-card-wrapper .card__media img,
+  body .carousel-card .card-image,
+  body .product__media img {
+    transform-origin: center;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  body .carousel-card:hover .card-image,
+  body .product__media:hover img {
+    transform: scale(0.94) !important;
+  }
+
+  /* Libro 3D: la portada gira siguiendo el cursor (variables desde icaro-premium.js). */
+  body .product-card-wrapper:hover .card__media img {
+    transform: perspective(900px) rotateY(var(--icaro-ry, -10deg)) rotateX(var(--icaro-rx, 2deg)) scale(0.9) !important;
+    filter: drop-shadow(12px 16px 14px rgba(37, 43, 39, 0.28));
+  }
+
+  body .icaro-shelf__cover:hover .icaro-shelf__volume {
+    transform: rotateY(-13deg) scale(0.94);
+  }
+}

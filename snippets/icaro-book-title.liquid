@@ -1,0 +1,17 @@
+{%- comment -%}Only remove an exact, repeated trailing pair. Preserve ambiguous titles and all catalog data.{%- endcomment -%}
+{%- liquid
+  assign book_title = book.title
+  assign parts = book_title | split: ' - '
+  assign count = parts.size
+  if count >= 5
+    assign last_index = count | minus: 1
+    assign previous_index = count | minus: 2
+    assign earlier_last_index = count | minus: 3
+    assign earlier_previous_index = count | minus: 4
+    if parts[last_index] == parts[earlier_last_index] and parts[previous_index] == parts[earlier_previous_index]
+      assign keep = count | minus: 2
+      assign book_title = parts | slice: 0, keep | join: ' - '
+    endif
+  endif
+-%}
+{{- book_title | escape -}}

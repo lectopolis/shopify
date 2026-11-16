@@ -1,0 +1,97 @@
+/* ── Libro 3D compartido (hero, ficha, visor) ─────────────────── */
+.icaro-book{--h:calc(var(--w) / var(--ar));--d:calc(var(--w) * .12);position:relative;width:var(--w);height:var(--h);transform-style:preserve-3d;transform:rotateX(calc(var(--base-rx,3deg) + var(--tilt-x,0deg))) rotateY(calc(var(--base-ry,-24deg) + var(--tilt-y,0deg)));transition:transform .8s cubic-bezier(.2,.75,.2,1)}
+.icaro-book.is-dragging{transition:none}
+.icaro-book__face{position:absolute;top:0;left:0}
+.icaro-book__front,.icaro-book__back{width:var(--w);height:var(--h);overflow:hidden;background:#efe8da;border-radius:2px 5px 5px 2px;backface-visibility:hidden}
+.icaro-book__front{transform:translateZ(calc(var(--d) / 2))}
+.icaro-book__front:after{content:"";position:absolute;top:0;bottom:0;left:7px;width:4px;background:linear-gradient(90deg,#0000002e,#ffffff40,#0000001a);pointer-events:none}
+.icaro-book__front img,.icaro-book__back img{display:block;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
+.icaro-book__back{transform:rotateY(180deg) translateZ(calc(var(--d) / 2))}
+.icaro-book__spine{width:var(--d);height:var(--h);left:calc((var(--w) - var(--d)) / 2);transform:rotateY(-90deg) translateZ(calc(var(--w) / 2));background:linear-gradient(90deg,#00000059,#ffffff1f 45%,#0000004d),var(--spine,none) left center/auto 100% no-repeat,#5d3b2e;border-radius:3px 0 0 3px}
+.icaro-book__pages{width:var(--d);height:calc(var(--h) - 6px);top:3px;left:calc((var(--w) - var(--d)) / 2);transform:rotateY(90deg) translateZ(calc(var(--w) / 2 - 3px));background:repeating-linear-gradient(90deg,#f8f3e7 0 2px,#e3dac8 2px 3px)}
+.icaro-book__top{width:calc(var(--w) - 4px);height:var(--d);top:calc((var(--h) - var(--d)) / 2);transform:rotateX(90deg) translateZ(calc(var(--h) / 2 - 2px));background:repeating-linear-gradient(0deg,#f8f3e7 0 2px,#e3dac8 2px 3px)}
+.icaro-book__gloss{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff47 50%,transparent 65%);transform:translateX(var(--gloss,-60%));transition:transform .8s ease;pointer-events:none;mix-blend-mode:soft-light}
+.icaro-book__plain{display:flex;flex-direction:column;justify-content:center;gap:14px;height:100%;padding:12%;background:var(--icaro-ink);color:#f8f3e7;font:var(--font-heading-style) var(--font-heading-weight) 22px/1.25 var(--font-heading-family)}
+.icaro-book__plain small{font:12.5px/1.4 var(--font-body-family);letter-spacing:.14em;text-transform:uppercase;color:#d9b9a6}
+.icaro-book__plain em{font:italic 14.5px var(--font-body-family);color:#d9b9a6}
+/* ── Hero premium ─────────────────────────────────────────────── */
+.icaro-hero{grid-template-columns:1.05fr 1fr;padding-top:48px;padding-bottom:40px}
+.icaro-hero h1{margin:16px 0 22px}
+.icaro-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 26px}
+.icaro-hero__actions .icaro-hero__catalog-link{margin:0}
+.icaro-hero__cta{min-width:220px;font-size:16px;transition:transform .25s ease,box-shadow .25s ease}
+.icaro-hero__cta:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px #252b2780}
+.icaro-hero__perks{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin:26px 0 0;padding:0;font-size:14.5px}
+.icaro-hero__perks span{color:var(--icaro-rust)}
+.icaro-hero__note{font-size:14.5px;margin:18px 0 0}.icaro-hero__note a{color:var(--icaro-rust);text-underline-offset:4px}
+.icaro-hero__art{position:relative;display:flex;flex-direction:column;align-items:center}
+.icaro-hero__stage{position:relative;width:100%;height:600px;perspective:1700px;touch-action:pan-y;user-select:none}
+.icaro-hero__halo{position:absolute;left:50%;top:10px;width:min(440px,90%);aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle,#f3e9d8 0,#f7f1e6 45%,#fff0 70%);pointer-events:none}
+.icaro-hero__shadow{position:absolute;left:50%;top:446px;width:230px;height:26px;transform:translateX(-50%);background:radial-gradient(ellipse,#252b2738,#fff0 70%);pointer-events:none}
+.icaro-hero__slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
+.icaro-hero__slide.is-active{opacity:1;visibility:visible;z-index:1}
+.icaro-hero__book{display:flex;align-items:flex-end;justify-content:center;height:450px;perspective:1500px;perspective-origin:50% 40%;padding-bottom:10px;cursor:grab;-webkit-tap-highlight-color:transparent}
+.icaro-hero__stage.is-dragging .icaro-hero__book{cursor:grabbing}
+.icaro-hero__slide .icaro-book{--base-ry:75deg}
+.icaro-hero__slide.is-leaving .icaro-book{--base-ry:-110deg}
+.icaro-hero__slide.is-active .icaro-book{--base-ry:-24deg}
+.icaro-hero__ticket{position:relative;text-align:center;max-width:340px;padding:4px 10px 0;transform:translateY(12px);opacity:0;transition:transform .6s .15s ease,opacity .6s .15s ease}
+.icaro-hero__slide.is-active .icaro-hero__ticket{transform:none;opacity:1}
+.icaro-hero__ticket .icaro-eyebrow{margin:0 0 4px}
+.icaro-hero__book-title{font:var(--font-heading-style) var(--font-heading-weight) 21px/1.3 var(--font-heading-family);margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.icaro-hero__book-title a{color:inherit;text-decoration:none}.icaro-hero__book-title a:hover{text-decoration:underline}
+.icaro-hero__author{font-size:14.5px;margin:2px 0 0}
+.icaro-hero__buy{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px}
+.icaro-hero__price{font-weight:700;font-size:17px}.icaro-hero__price small{font-weight:400;font-size:13.5px}
+.icaro-hero__buy form{margin:0}
+.icaro-hero__add{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 18px;border:1px solid var(--icaro-ink);border-radius:999px;background:var(--icaro-ink);color:#fff;font:600 14.5px var(--font-body-family);text-decoration:none;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.icaro-hero__add:hover{background:var(--icaro-rust);border-color:var(--icaro-rust);transform:translateY(-1px)}
+.icaro-hero__add[aria-busy=true]{opacity:.6}
+.icaro-hero__controls{display:flex;align-items:center;gap:18px;margin-top:6px}
+.icaro-hero__controls[hidden]{display:none}
+.icaro-hero__arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--icaro-line);background:#fff;color:var(--icaro-ink);font-size:16px;cursor:pointer;transition:border-color .2s,transform .2s}
+.icaro-hero__arrow:hover{border-color:var(--icaro-ink);transform:scale(1.06)}
+.icaro-hero__dots{display:flex;gap:8px}
+.icaro-hero__dots button{width:9px;height:9px;padding:0;border-radius:99px;border:0;background:var(--icaro-line);cursor:pointer;transition:width .3s,background .3s}
+.icaro-hero__dots button[aria-current=true]{width:28px;background:var(--icaro-rust)}
+.icaro-hero__caption{width:100%;display:flex;justify-content:space-between;gap:12px;margin-top:14px}
+.icaro-hero__drag{color:var(--icaro-rust)}
+@media(prefers-reduced-motion:no-preference){.icaro-hero__slide.is-active .icaro-hero__book{animation:icaro-float 6s ease-in-out infinite}}
+@keyframes icaro-float{50%{transform:translateY(-10px)}}
+@media(max-width:749px){
+  .icaro-hero{grid-template-columns:1fr;padding-top:28px;padding-bottom:24px;gap:22px}
+  .icaro-hero h1{font-size:40px}
+  .icaro-hero__cta{flex:1 1 100%}
+  .icaro-hero__stage{height:440px}
+  .icaro-hero__book{height:320px}
+  .icaro-hero .icaro-book{--w:190px!important}
+  .icaro-hero__shadow{top:318px;width:170px}
+  .icaro-hero__halo{width:320px}
+  .icaro-hero__caption{flex-direction:column;gap:4px}
+}
+.icaro-book__plain--back{font-size:17px;text-align:center;align-items:center}
+/* Escritorio: el texto arranca a la altura del borde superior del libro. */
+@media(min-width:750px){.icaro-hero{align-items:start}.icaro-hero__copy{padding-top:calc(440px - 270px / .66)}}
+/* ── Franja de logos de editoriales ───────────────────────────── */
+.icaro-logos{padding:26px 0 30px;border-block:1px solid var(--icaro-line);background:#fff}
+.icaro-logos__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:14px}
+.icaro-logos__head .icaro-eyebrow{margin:0}
+.icaro-logos__head a{font-size:14px;color:var(--icaro-rust);text-underline-offset:4px;white-space:nowrap}
+.icaro-logos__viewport{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#0000,#000 8%,#000 92%,#0000);mask-image:linear-gradient(90deg,#0000,#000 8%,#000 92%,#0000)}
+.icaro-logos__track{display:flex;flex:none;align-items:center;gap:10px;margin:0;padding:0 11px;list-style:none}.icaro-logos__viewport.is-animated{overflow:hidden}.icaro-logos__viewport.is-animated .icaro-logos__track{animation:icaro-logos 90s linear infinite}
+.icaro-logos__viewport:hover .icaro-logos__track,.icaro-logos__viewport:focus-within .icaro-logos__track{animation-play-state:paused}
+.icaro-logos__track a{display:block;width:210px;height:120px;overflow:hidden;border-radius:8px;transition:background .25s}
+.icaro-logos__track a:hover{background:#f6f1e7}
+.icaro-logos__track img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;filter:grayscale(1);opacity:.85;transition:filter .3s,opacity .3s,transform .3s}
+.icaro-logos__track a:hover img,.icaro-logos__track a:focus-visible img{filter:none;opacity:1;transform:scale(1.06)}
+@keyframes icaro-logos{to{transform:translateX(-100%)}}
+@media(max-width:749px){.icaro-logos{padding:18px 0 22px}.icaro-logos__head{flex-direction:column;gap:6px}.icaro-logos__track a{width:150px;height:86px}.icaro-logos__track{gap:12px}}
+@media(prefers-reduced-motion:reduce){.icaro-logos__viewport{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.icaro-logos__track{animation:none}.icaro-logos__track[aria-hidden]{display:none}}
+/* ── Calificación de Google (confianza en el hero) ───────────── */
+.icaro-google-rating{display:inline-flex;align-items:center;gap:9px;margin-top:16px;text-decoration:none;color:var(--icaro-ink)}
+.icaro-google-rating__stars{display:inline-flex;gap:2px}
+.icaro-google-rating__stars svg{width:15px;height:15px;fill:#d7d1c3}
+.icaro-google-rating__stars svg.is-full{fill:#e0a526}
+.icaro-google-rating__text{font-size:13px}
+.icaro-google-rating__count{color:#5c6459;font-weight:400}
+.icaro-google-rating:hover .icaro-google-rating__text,.icaro-google-rating:focus-visible .icaro-google-rating__text{text-decoration:underline;text-underline-offset:3px}

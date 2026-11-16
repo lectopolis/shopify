@@ -1,0 +1,7 @@
+{%- comment -%}Se pide desde la vitrina 3D al abrir una pestaña: /collections/<handle>?section_id=icaro-flow-panel{%- endcomment -%}
+<ul class="icaro-flow__track" role="list">
+  {%- render 'icaro-flow-items', books: collection.products, limit: 14 -%}
+</ul>
+{% schema %}
+{"name":"Ícaro · Panel vitrina"}
+{% endschema %}

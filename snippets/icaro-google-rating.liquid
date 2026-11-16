@@ -1,0 +1,28 @@
+{%- comment -%}
+  Bloque de confianza con la calificación de Google Negocio.
+  Se oculta solo si no hay calificación configurada en el tema.
+  Usage: {% render 'icaro-google-rating' %}
+{%- endcomment -%}
+{%- if settings.google_rating != blank -%}
+  {%- assign icaro_stars_full = settings.google_rating | times: 1.0 | round -%}
+  <a
+    class="icaro-google-rating"
+    {% if settings.google_reviews_url != blank %}
+      href="{{ settings.google_reviews_url }}"
+      target="_blank"
+      rel="noopener"
+    {% else %}
+      role="text"
+    {% endif %}
+    aria-label="Calificación {{ settings.google_rating }} de 5 en Google{% if settings.google_review_count > 0 %}, {{ settings.google_review_count }} reseñas{% endif %}"
+  >
+    <span class="icaro-google-rating__stars" aria-hidden="true">
+      {%- for i in (1..5) -%}
+        <svg viewBox="0 0 24 24" class="{% if i <= icaro_stars_full %}is-full{% endif %}"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7-5.4-4.7 7.1-.6z"/></svg>
+      {%- endfor -%}
+    </span>
+    <span class="icaro-google-rating__text">
+      <strong>{{ settings.google_rating }}</strong> en Google{% if settings.google_review_count > 0 %} <span class="icaro-google-rating__count">({{ settings.google_review_count }} reseñas)</span>{% endif %}
+    </span>
+  </a>
+{%- endif -%}

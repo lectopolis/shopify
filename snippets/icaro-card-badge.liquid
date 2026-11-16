@@ -1,0 +1,15 @@
+{%- comment -%}Etiquetas de conversión: Preventa, Últimas unidades o Novedad (publicado hace menos de 45 días).{%- endcomment -%}
+{%- liquid
+  assign badge_variant = card_product.selected_or_first_available_variant
+  assign now_s = 'now' | date: '%s' | plus: 0
+  assign published_s = card_product.published_at | date: '%s' | plus: 0
+  assign age = now_s | minus: published_s
+  assign tags = card_product.tags | join: ',' | downcase
+-%}
+{%- if tags contains 'preventa' -%}
+  <span id="{{ badge_id }}" class="badge badge--bottom-left icaro-badge icaro-badge--pre">Preventa</span>
+{%- elsif badge_variant.inventory_management == 'shopify' and badge_variant.inventory_policy == 'deny' and badge_variant.inventory_quantity > 0 and badge_variant.inventory_quantity <= 3 -%}
+  <span id="{{ badge_id }}" class="badge badge--bottom-left icaro-badge icaro-badge--low">Últimas unidades</span>
+{%- elsif published_s > 0 and age < 3888000 -%}
+  <span id="{{ badge_id }}" class="badge badge--bottom-left icaro-badge icaro-badge--new">Novedad</span>
+{%- endif -%}

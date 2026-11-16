@@ -1,0 +1,37 @@
+{%- liquid
+  comment
+    <title> de articulos. Usa el titulo SEO de Shopify (global.title_tag) si existe y, si no, el titulo del
+    articulo. Agrega " – Ícaro Libros" solo si todo cabe en 65 caracteres; si no, corta a 60 en limite de palabra, sin la marca.
+  endcomment
+  assign a_base = article.metafields.global.title_tag | strip
+  if a_base == blank
+    assign a_base = article.title | strip
+  endif
+  assign a_low = a_base | downcase
+  if a_low contains 'ícaro libros' or a_low contains 'icaro libros'
+    echo a_base | truncate: 70 | escape
+  else
+    assign a_full = a_base | append: ' – Ícaro Libros'
+    if a_full.size <= 65
+      echo a_full | escape
+    elsif a_base.size <= 62
+      echo a_base | escape
+    else
+      assign a_out = ''
+      assign a_words = a_base | split: ' '
+      for a_w in a_words
+        assign a_try = a_out | append: ' ' | append: a_w | strip
+        if a_try.size > 60
+          break
+        endif
+        assign a_out = a_try
+      endfor
+      if a_out == blank
+        assign a_out = a_base | truncate: 60
+      else
+        assign a_out = a_out | append: '…'
+      endif
+      echo a_out | escape
+    endif
+  endif
+-%}

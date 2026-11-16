@@ -1,0 +1,32 @@
+{%- assign variant = book.selected_or_first_available_variant -%}
+<li class="icaro-shelf__book" {% if block %}{{ block.shopify_attributes }}{% endif %}>
+  <details class="icaro-shelf__selection" name="shelf-{{ section_id }}">
+  <summary class="icaro-shelf__cover" aria-label="Mostrar detalles de {{ book.title | escape }}. {% if book.price_varies %}Desde {% endif %}{{ book.price | money_with_currency | strip_html | escape }}">
+    <span class="icaro-shelf__volume">
+    {% if book.featured_image %}
+      {{ book.featured_image | image_url: width: 300 | image_tag: widths: '76, 95, 152, 190, 228, 285, 300', sizes: '(max-width: 749px) 76px, 95px', loading: 'lazy', alt: book.title }}
+    {% else %}<span class="icaro-shelf__missing">{{ book.title | escape }}<small>Portada no disponible</small></span>{% endif %}
+    </span>
+    <span class="icaro-shelf__ticket" aria-hidden="true">
+      <span class="icaro-shelf__ticket-title">{% render 'icaro-book-title', book: book %}</span>
+      {% if book.vendor != blank %}<span class="icaro-shelf__ticket-vendor">{{ book.vendor | escape }}</span>{% endif %}
+      <span class="icaro-shelf__ticket-price">{% if book.price_varies %}<small>Desde </small>{% endif %}{{ book.price | money_with_currency }}</span>
+      {% unless book.available %}<span class="icaro-shelf__ticket-stock">Agotado</span>{% endunless %}
+    </span>
+  </summary>
+  <div class="icaro-shelf__info">
+    {% if book.vendor != blank %}<p class="icaro-eyebrow">{{ book.vendor | escape }}</p>{% endif %}
+    <h3><a href="{{ book.url }}">{% render 'icaro-book-title', book: book %}</a></h3>
+    {% if book.metafields.custom.autor != blank %}<p>{{ book.metafields.custom.autor | escape }}</p>{% endif %}
+    <p class="icaro-shelf__price">{% if book.price_varies %}Desde {% endif %}{{ book.price | money_with_currency }}</p>
+    <p class="icaro-shelf__availability">{% if book.available %}Disponible{% else %}Agotado{% endif %}</p>
+    {% if book.has_only_default_variant and book.available and variant.quantity_rule.min == 1 and variant.quantity_rule.increment == 1 %}
+      <form action="{{ routes.cart_add_url }}" method="post" data-icaro-add>
+        <input type="hidden" name="id" value="{{ variant.id }}"><input type="hidden" name="quantity" value="1">
+        <button class="button button--secondary" type="submit" aria-label="Agregar {{ book.title | escape }} al carrito">Agregar al carrito</button>
+        <p class="icaro-shelf__status" role="status" aria-live="polite"></p>
+      </form>
+    {% else %}<a class="button button--secondary" href="{{ book.url }}">{% if book.available %}Elegir edición{% else %}Ver libro{% endif %}</a>{% endif %}
+  </div>
+  </details>
+</li>

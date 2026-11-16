@@ -1,0 +1,31 @@
+{%- assign variant = book.selected_or_first_available_variant -%}
+<article class="icaro-hero__slide{% if index == 0 %} is-active{% endif %}" data-slide aria-roledescription="diapositiva" aria-label="{{ book.title | escape }}"{% if index != 0 %} aria-hidden="true" inert{% endif %} {% if block %}{{ block.shopify_attributes }}{% endif %}>
+  <a class="icaro-hero__book" href="{{ book.url }}" tabindex="-1" aria-hidden="true">
+    {%- if index == 0 -%}
+      {%- render 'icaro-book-3d', book: book, width: 270, eager: true, sizes: '(max-width: 749px) 190px, 270px' -%}
+    {%- else -%}
+      {%- render 'icaro-book-3d', book: book, width: 270, sizes: '(max-width: 749px) 190px, 270px' -%}
+    {%- endif -%}
+  </a>
+  <div class="icaro-hero__ticket">
+    {%- if block and block.settings.kicker != blank -%}
+      <p class="icaro-eyebrow">{{ block.settings.kicker | escape }}</p>
+    {%- elsif book.vendor != blank -%}
+      <p class="icaro-eyebrow">{{ book.vendor | escape }}</p>
+    {%- endif -%}
+    <h2 class="icaro-hero__book-title"><a href="{{ book.url }}">{% render 'icaro-book-title', book: book %}</a></h2>
+    {%- if book.metafields.custom.autor != blank -%}<p class="icaro-hero__author">{{ book.metafields.custom.autor | escape }}</p>{%- endif -%}
+    <div class="icaro-hero__buy">
+      <span class="icaro-hero__price">{% if book.price_varies %}<small>Desde </small>{% endif %}{{ book.price | money }}</span>
+      {%- if book.has_only_default_variant and book.available and variant.quantity_rule.min == 1 and variant.quantity_rule.increment == 1 -%}
+        <form action="{{ routes.cart_add_url }}" method="post" data-icaro-add>
+          <input type="hidden" name="id" value="{{ variant.id }}"><input type="hidden" name="quantity" value="1">
+          <button class="icaro-hero__add" type="submit" aria-label="Agregar {{ book.title | escape }} al carrito">Agregar <span aria-hidden="true">+</span></button>
+          <p class="icaro-shelf__status visually-hidden" role="status" aria-live="polite"></p>
+        </form>
+      {%- else -%}
+        <a class="icaro-hero__add" href="{{ book.url }}">{% if book.available %}Ver libro{% else %}Agotado{% endif %}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

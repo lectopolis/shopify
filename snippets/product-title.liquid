@@ -1,0 +1,46 @@
+{%- liquid
+  comment
+    <title> de fichas de producto. No se usa el titulo SEO guardado en Shopify: muchas fichas lo traen
+    con autor duplicado, ISBN y "Comprar en Colombia" (hasta 150 caracteres). Se arma con el titulo
+    limpio (sin "Libro ") y el autor (segundo tramo de "Titulo - Autor - Editorial"), en <= 62 caracteres.
+  endcomment
+  assign t_tail = ' | Ícaro Libros'
+  assign t_parts = product.title | split: ' - '
+  assign t_name = t_parts[0] | strip
+  for t_i in (1..2)
+    assign t_prefix = t_name | slice: 0, 6
+    if t_prefix == 'Libro '
+      assign t_name = t_name | slice: 6, 400 | strip
+    endif
+  endfor
+  assign t_name = t_name | replace: '  ', ' '
+
+  assign t_author = ''
+  if t_parts.size == 2 or t_parts.size == 3
+    assign t_author = t_parts[1] | strip | replace: '  ', ' '
+    assign t_author_dn = t_author | downcase
+    assign t_vendor_dn = product.vendor | downcase | strip
+    if t_author_dn contains 'vv.aa' or t_author_dn == t_vendor_dn
+      assign t_author = ''
+    endif
+  endif
+  if t_author != blank
+    assign t_tokens = t_author | split: ' '
+    if t_tokens.size == 2
+      assign t_author = t_tokens[1] | append: ' ' | append: t_tokens[0]
+    endif
+  endif
+
+  if t_name == blank
+    assign t_full = page_title | append: t_tail
+  else
+    assign t_full = t_name | truncate: 47 | append: t_tail
+    if t_author != blank
+      assign t_with_author = t_name | append: ' - ' | append: t_author | append: t_tail
+      if t_with_author.size <= 62
+        assign t_full = t_with_author
+      endif
+    endif
+  endif
+  echo t_full | escape
+-%}

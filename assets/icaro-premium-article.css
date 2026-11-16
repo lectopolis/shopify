@@ -1,0 +1,33 @@
+/* Shared with the premium-icaro article template, including existing saved sections. */
+.icaro-premium-hero.icaro-premium-hero{background:#fff;min-height:0;max-height:none;aspect-ratio:auto;display:flex;justify-content:center;padding:24px clamp(20px,4vw,56px) 0;box-sizing:border-box}
+.icaro-premium-hero.icaro-premium-hero .ic-hero__bg{display:none}
+.icaro-premium-hero.icaro-premium-hero .ic-hero__img{display:block;width:auto;height:auto;max-width:100%;max-height:420px;object-fit:contain;border-radius:0;box-shadow:none}
+.icaro-premium-content.icaro-premium-content{--ic-gold:#904631;--ic-text:#252b27;--ic-muted:#525a53;--ic-bg-dark:#252b27;background:#fff;overflow-wrap:anywhere}
+.icaro-premium-content [class$="__header"]{max-width:960px;padding:40px 24px 28px;margin:0 auto;text-align:left;border-bottom:1px solid #ded8ce}
+.icaro-premium-content [class$="__meta"]{font:13.5px/1.7 var(--font-body-family);letter-spacing:.08em;margin-bottom:18px;color:#904631}
+.icaro-premium-content [class$="__meta"]::after{display:none}
+.icaro-premium-content [class$="__title"]{font:var(--font-heading-style) var(--font-heading-weight) clamp(30px,3.5vw,44px)/1.18 var(--font-heading-family);letter-spacing:-.025em;max-width:900px;margin:0 0 20px;color:#252b27}
+.icaro-premium-content [class$="__excerpt"]{font:400 17px/1.8 var(--font-body-family);max-width:760px;margin:0;color:#525a53}
+.icaro-premium-content [class$="__byline"]{font:14.5px/1.6 var(--font-body-family);letter-spacing:0;margin-top:20px}
+.icaro-premium-content [class$="__body"]{max-width:800px;padding:36px 24px 56px;font:17px/1.9 var(--font-body-family);text-align:left}
+.icaro-premium-content [class$="__body"] p:first-of-type::first-letter{float:none;font:inherit;color:inherit;padding:0}
+.icaro-premium-content [class$="__body"] img{max-width:100%;height:auto}
+.icaro-premium-content [class$="__body"] iframe{max-width:100%}
+.icaro-premium-content [class$="__body"] blockquote{background:#faf8f3;border-left-color:#904631}
+.icaro-premium-content [class$="__body"] a{color:#904631;text-underline-offset:4px}
+.icaro-premium-footer.icaro-premium-footer{--ic-gold:#904631;--ic-muted:#525a53;max-width:800px;padding:28px 24px 48px;border-color:#ded8ce;text-align:left;background:#fff}
+.icaro-premium-footer [class$="__tags"],.icaro-premium-footer [class$="__share"]{justify-content:flex-start;flex-wrap:wrap}
+.icaro-premium-footer [class$="__tag"]{background:#faf8f3;border:1px solid #ded8ce}
+.icaro-premium-footer [class$="__share"]{font:13.5px/1.8 var(--font-body-family);letter-spacing:0;text-transform:none}
+.icaro-premium-content a:focus-visible,.icaro-premium-footer a:focus-visible{outline:2px solid #904631;outline-offset:4px}
+@media(max-width:749px){.icaro-premium-hero.icaro-premium-hero{padding:16px 20px 0}.icaro-premium-hero.icaro-premium-hero .ic-hero__img{max-height:300px}.icaro-premium-content [class$="__header"]{padding:28px 20px 24px}.icaro-premium-content [class$="__excerpt"]{font-size:16px}.icaro-premium-content [class$="__body"]{font-size:16px;padding:28px 20px 40px}.icaro-premium-footer.icaro-premium-footer{padding:24px 20px 40px}}
+
+.icaro-reading__breadcrumb{font:13.5px/1.6 var(--font-body-family);margin-bottom:22px;color:#525a53}.icaro-reading__breadcrumb a{color:inherit;text-decoration:none}.icaro-reading__breadcrumb a:hover{text-decoration:underline}.icaro-premium-content .icaro-reading__header{border-bottom:0;padding-bottom:8px}.icaro-premium-content [class$="__body"] table{display:block;max-width:100%;overflow-x:auto}.icaro-premium-content [class$="__body"] h2{font-size:28px;line-height:1.35}.icaro-premium-content [class$="__body"] h3{font-size:23px;line-height:1.4}
+
+.icaro-article-opening{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:center;gap:48px;max-width:1200px;margin:0 auto;padding:40px 32px;background:#fff;border-bottom:1px solid #ded8ce}
+.icaro-article-opening--text{grid-template-columns:1fr;max-width:960px}
+.icaro-article-opening .icaro-reading__header{padding:0;border:0}
+.icaro-article-opening .icaro-premium-hero{padding:24px;background:#faf8f3;align-self:stretch;align-items:center}
+.icaro-article-opening .icaro-premium-hero .ic-hero__img{max-height:380px}
+.icaro-article-opening .icaro-reading__title{font-size:clamp(28px,2.8vw,40px)}
+@media(max-width:749px){.icaro-article-opening{grid-template-columns:1fr;gap:24px;padding:28px 20px}.icaro-article-opening .icaro-reading__header{padding:0}.icaro-article-opening .icaro-premium-hero{padding:16px}.icaro-article-opening .icaro-premium-hero .ic-hero__img{max-height:300px}}

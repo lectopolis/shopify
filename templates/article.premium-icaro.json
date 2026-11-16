@@ -1,0 +1,56 @@
+{
+  "sections": {
+    "hero": {
+      "type": "article-hero-icaro",
+      "settings": {
+        "bg_color": "#ffffff",
+        "accent_color": "#904631",
+        "show_blur_bg": false,
+        "blur_amount": 40,
+        "vertical_height": 50,
+        "horizontal_ratio": "16 / 9",
+        "editorial_design": true
+      }
+    },
+    "content": {
+      "type": "article-content-icaro",
+      "settings": {
+        "show_header": true,
+        "show_meta": true,
+        "show_excerpt": true,
+        "show_author": true,
+        "dropcap": false,
+        "text_align": "left",
+        "max_width": 760,
+        "padding_top": 40,
+        "title_size": 48,
+        "body_size": 18,
+        "text_color": "#252b27",
+        "muted_color": "#525a53",
+        "accent_color": "#904631",
+        "cta_bg_color": "#252b27",
+        "font_serif": "Georgia, 'Times New Roman', serif",
+        "divider_symbol": "❦",
+        "editorial_design": true
+      }
+    },
+    "footer": {
+      "type": "article-footer-icaro",
+      "settings": {
+        "show_tags": true,
+        "show_share": true,
+        "show_back": true,
+        "back_text": "Volver al blog",
+        "max_width": 720,
+        "muted_color": "#6b6058",
+        "accent_color": "#904631",
+        "editorial_design": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "content",
+    "footer"
+  ]
+}

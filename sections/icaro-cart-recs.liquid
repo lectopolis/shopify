@@ -1,0 +1,31 @@
+{%- comment -%}Se renderiza solo vía Section Rendering API desde el cajón del carrito.{%- endcomment -%}
+<div class="icaro-cart-recs__list">
+  {%- if recommendations.performed? -%}
+    {%- for book in recommendations.products limit: 6 -%}
+      {%- assign variant = book.selected_or_first_available_variant -%}
+      {%- if book.available -%}
+        <div class="icaro-cart-rec" data-product-id="{{ book.id }}">
+          <a href="{{ book.url }}" class="icaro-cart-rec__cover">
+            {%- if book.featured_media -%}{{ book.featured_media | image_url: width: 120 | image_tag: loading: 'lazy', alt: book.title, width: 60 }}{%- endif -%}
+          </a>
+          <div class="icaro-cart-rec__info">
+            <a href="{{ book.url }}" class="icaro-cart-rec__title">{% render 'icaro-book-title', book: book %}</a>
+            <span class="icaro-cart-rec__price">{{ book.price | money }}</span>
+          </div>
+          {%- if book.has_only_default_variant and variant.quantity_rule.min == 1 and variant.quantity_rule.increment == 1 -%}
+            <form action="{{ routes.cart_add_url }}" method="post" data-icaro-add>
+              <input type="hidden" name="id" value="{{ variant.id }}"><input type="hidden" name="quantity" value="1">
+              <button class="icaro-cart-rec__add" type="submit" aria-label="Agregar {{ book.title | escape }} al carrito">+</button>
+              <p class="icaro-shelf__status visually-hidden" role="status" aria-live="polite"></p>
+            </form>
+          {%- else -%}
+            <a class="icaro-cart-rec__add" href="{{ book.url }}" aria-label="Ver {{ book.title | escape }}">→</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+{% schema %}
+{"name":"Ícaro · Recomendaciones"}
+{% endschema %}

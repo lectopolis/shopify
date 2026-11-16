@@ -1,0 +1,23 @@
+{%- if product.featured_media -%}
+<icaro-book-viewer class="icaro-viewer">
+  <button type="button" class="icaro-viewer__open" data-viewer-open>
+    <span aria-hidden="true">⟲</span> Ver el libro en 3D
+  </button>
+  <dialog class="icaro-viewer__dialog" aria-label="Vista 3D de {{ product.title | escape }}">
+    <div class="icaro-viewer__panel">
+      <button type="button" class="icaro-viewer__close" data-viewer-close aria-label="Cerrar vista 3D">✕</button>
+      <p class="icaro-eyebrow">{{ product.vendor | escape }}</p>
+      <p class="icaro-viewer__title">{% render 'icaro-book-title', book: product %}</p>
+      <div class="icaro-viewer__stage" data-viewer-stage>
+        {%- render 'icaro-book-3d', book: product, width: 260, sizes: '(max-width: 749px) 200px, 260px' -%}
+      </div>
+      <div class="icaro-viewer__controls">
+        <button type="button" data-rotate="-45" aria-label="Girar a la izquierda">←</button>
+        <button type="button" data-flip>{% if product.media[1] %}Ver contraportada{% else %}Dar la vuelta{% endif %}</button>
+        <button type="button" data-rotate="45" aria-label="Girar a la derecha">→</button>
+      </div>
+      <p class="icaro-viewer__hint">Arrastra el libro o usa las flechas del teclado para girarlo.</p>
+    </div>
+  </dialog>
+</icaro-book-viewer>
+{%- endif -%}

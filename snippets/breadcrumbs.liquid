@@ -1,0 +1,190 @@
+{% comment %}
+  Renders breadcrumbs with Schema.org BreadcrumbList structured data.
+
+  Usage:
+  {% render 'breadcrumbs' %}
+{% endcomment %}
+
+{%- liquid
+  assign show_breadcrumbs = false
+
+  if request.page_type == 'product'
+    assign show_breadcrumbs = true
+  elsif request.page_type == 'collection'
+    assign show_breadcrumbs = true
+  elsif request.page_type == 'article'
+    assign show_breadcrumbs = true
+  elsif request.page_type == 'page'
+    assign show_breadcrumbs = true
+  endif
+-%}
+
+{%- if show_breadcrumbs -%}
+  {%- liquid
+    assign crumbs = ''
+    assign json_crumbs = ''
+    assign position = 1
+  -%}
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list list-unstyled" itemscope itemtype="https://schema.org/BreadcrumbList">
+
+      {%- comment -%} Inicio: siempre el home {%- endcomment -%}
+      <li
+        class="breadcrumbs__item"
+        itemprop="itemListElement"
+        itemscope
+        itemtype="https://schema.org/ListItem"
+      >
+        <a href="{{ routes.root_url }}" itemprop="item" class="breadcrumbs__link">
+          <span itemprop="name">Inicio</span>
+        </a>
+        <meta itemprop="position" content="{{ position }}">
+      </li>
+
+      {%- comment -%} Producto: Inicio > Editorial > Título {%- endcomment -%}
+      {%- if request.page_type == 'product' -%}
+        {%- if product.collections.size > 0 -%}
+          {%- assign position = position | plus: 1 -%}
+          {%- assign primary_collection = product.collections | first -%}
+          <li class="breadcrumbs__item breadcrumbs__separator" aria-hidden="true">
+            <span>&#8250;</span>
+          </li>
+          <li
+            class="breadcrumbs__item"
+            itemprop="itemListElement"
+            itemscope
+            itemtype="https://schema.org/ListItem"
+          >
+            <a href="{{ primary_collection.url }}" itemprop="item" class="breadcrumbs__link">
+              <span itemprop="name">{{ primary_collection.title | escape }}</span>
+            </a>
+            <meta itemprop="position" content="{{ position }}">
+          </li>
+        {%- endif -%}
+        {%- assign position = position | plus: 1 -%}
+        <li class="breadcrumbs__item breadcrumbs__separator" aria-hidden="true">
+          <span>&#8250;</span>
+        </li>
+        <li
+          class="breadcrumbs__item breadcrumbs__item--current"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <span itemprop="name" aria-current="page">{{ product.title | escape }}</span>
+          <meta itemprop="item" content="{{ request.origin }}{{ product.url }}">
+          <meta itemprop="position" content="{{ position }}">
+        </li>
+
+      {%- comment -%} Colección: Inicio > Nombre de colección {%- endcomment -%}
+      {%- elsif request.page_type == 'collection' -%}
+        {%- assign position = position | plus: 1 -%}
+        <li class="breadcrumbs__item breadcrumbs__separator" aria-hidden="true">
+          <span>&#8250;</span>
+        </li>
+        <li
+          class="breadcrumbs__item breadcrumbs__item--current"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <span itemprop="name" aria-current="page">{{ collection.title | escape }}</span>
+          <meta itemprop="item" content="{{ request.origin }}{{ collection.url }}">
+          <meta itemprop="position" content="{{ position }}">
+        </li>
+
+      {%- comment -%} Artículo de blog: Inicio > Blog > Título {%- endcomment -%}
+      {%- elsif request.page_type == 'article' -%}
+        {%- assign position = position | plus: 1 -%}
+        <li class="breadcrumbs__item breadcrumbs__separator" aria-hidden="true">
+          <span>&#8250;</span>
+        </li>
+        <li
+          class="breadcrumbs__item"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <a href="{{ blog.url }}" itemprop="item" class="breadcrumbs__link">
+            <span itemprop="name">{{ blog.title | escape }}</span>
+          </a>
+          <meta itemprop="position" content="{{ position }}">
+        </li>
+        {%- assign position = position | plus: 1 -%}
+        <li class="breadcrumbs__item breadcrumbs__separator" aria-hidden="true">
+          <span>&#8250;</span>
+        </li>
+        <li
+          class="breadcrumbs__item breadcrumbs__item--current"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <span itemprop="name" aria-current="page">{{ article.title | escape }}</span>
+          <meta itemprop="item" content="{{ request.origin }}{{ article.url }}">
+          <meta itemprop="position" content="{{ position }}">
+        </li>
+
+      {%- comment -%} Página estática: Inicio > Título {%- endcomment -%}
+      {%- elsif request.page_type == 'page' -%}
+        {%- assign position = position | plus: 1 -%}
+        <li class="breadcrumbs__item breadcrumbs__separator" aria-hidden="true">
+          <span>&#8250;</span>
+        </li>
+        <li
+          class="breadcrumbs__item breadcrumbs__item--current"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+        >
+          <span itemprop="name" aria-current="page">{{ page.title | escape }}</span>
+          <meta itemprop="item" content="{{ request.origin }}{{ page.url }}">
+          <meta itemprop="position" content="{{ position }}">
+        </li>
+      {%- endif -%}
+
+    </ol>
+  </nav>
+
+  <style>
+    .breadcrumbs {
+      padding: 0.8rem 0 0.4rem;
+    }
+    .breadcrumbs__list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 1.2rem;
+      color: rgba(var(--color-foreground), 0.6);
+    }
+    .breadcrumbs__item {
+      display: flex;
+      align-items: center;
+    }
+    .breadcrumbs__separator {
+      margin: 0 0.2rem;
+      font-size: 1.4rem;
+      opacity: 0.4;
+    }
+    .breadcrumbs__link {
+      color: rgba(var(--color-foreground), 0.6);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .breadcrumbs__link:hover {
+      color: rgb(var(--color-foreground));
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+    }
+    .breadcrumbs__item--current span {
+      color: rgba(var(--color-foreground), 0.9);
+    }
+    @media screen and (max-width: 749px) {
+      .breadcrumbs__list {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+{%- endif -%}

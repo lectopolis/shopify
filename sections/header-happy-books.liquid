@@ -1,0 +1,961 @@
+{% comment %}
+  Header Happy Books - Standalone Version
+  No dependencies on Dawn snippets
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+
+<noscript>
+  <style>
+    .menu-drawer-container { display: none !important; }
+  </style>
+</noscript>
+
+{%- style -%}
+  .section-header {
+    position: sticky;
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-header {
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="header-wrapper">
+  
+  <!-- Announcement Bar -->
+  {%- if section.settings.show_announcement_bar -%}
+    <div class="announcement-bar" style="background-color: {{ section.settings.announcement_bg_color }}; color: {{ section.settings.announcement_text_color }};">
+      <div class="page-width">
+        <p class="announcement-bar__message">
+          {{ section.settings.announcement_text }}
+          {% if section.settings.announcement_link != blank %}
+            <a href="{{ section.settings.announcement_link }}" class="announcement-bar__link" style="color: {{ section.settings.announcement_text_color }};">
+              {{ section.settings.announcement_link_text }}
+            </a>
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <header class="header-happy-books page-width">
+    
+    <!-- Top Section -->
+    <div class="header-top">
+      
+      <!-- Mobile Menu Toggle -->
+      <button type="button" class="mobile-menu-toggle" aria-label="Abrir menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <div class="header-logo">
+        <a href="{{ routes.root_url }}">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: 300 }}"
+              alt="{{ shop.name }}"
+              width="{{ section.settings.logo_width }}"
+              height="auto"
+              loading="eager"
+            >
+          {%- else -%}
+            <span class="logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Search Bar (Desktop) -->
+      <div class="header-search">
+        <details-modal class="header__search">
+          <details>
+            <summary class="header__icon header__icon--search modal__toggle" aria-haspopup="dialog" aria-label="Buscar">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="9" r="7"></circle>
+                <path d="M14 14l5 5"></path>
+              </svg>
+            </summary>
+            <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="Buscar">
+              <div class="modal-overlay"></div>
+              <div class="search-modal__content" tabindex="-1">
+                {%- if settings.predictive_search_enabled -%}
+                  <predictive-search data-loading-text="Cargando...">
+                {%- endif -%}
+                    <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                      <div class="field">
+                        <input
+                          class="search__input field__input"
+                          type="search"
+                          name="q"
+                          value="{{ search.terms | escape }}"
+                          placeholder="{{ section.settings.search_placeholder }}"
+                          {%- if settings.predictive_search_enabled -%}
+                            role="combobox"
+                            aria-expanded="false"
+                            aria-owns="predictive-search-results"
+                            aria-controls="predictive-search-results"
+                            aria-haspopup="listbox"
+                            aria-autocomplete="list"
+                            autocorrect="off"
+                            autocomplete="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                          {%- endif -%}
+                        >
+                        <label class="field__label" for="Search-In-Modal">Buscar</label>
+                        <input type="hidden" name="options[prefix]" value="last">
+                        <button type="submit" class="search__button field__button" style="background-color: {{ section.settings.button_bg_color }};" aria-label="Buscar">
+                          {{ section.settings.search_button_text }}
+                        </button>
+                      </div>
+
+                      {%- if settings.predictive_search_enabled -%}
+                        <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                          <div class="predictive-search__loading-state">
+                            <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                            </svg>
+                          </div>
+                        </div>
+                        <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                      {%- endif -%}
+                    </form>
+                {%- if settings.predictive_search_enabled -%}
+                  </predictive-search>
+                {%- endif -%}
+                <button type="button" class="search-modal__close-button modal__close-button" aria-label="Cerrar">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="3" x2="17" y2="17"></line>
+                    <line x1="17" y1="3" x2="3" y2="17"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </details>
+        </details-modal>
+        
+        <!-- Inline Search (always visible) -->
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search class="search-inline" data-loading-text="Cargando...">
+        {%- endif -%}
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+              <input
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                placeholder="{{ section.settings.search_placeholder }}"
+                class="search-input"
+                {%- if settings.predictive_search_enabled -%}
+                  role="combobox"
+                  aria-expanded="false"
+                  aria-owns="predictive-search-results-inline"
+                  aria-controls="predictive-search-results-inline"
+                  aria-haspopup="listbox"
+                  aria-autocomplete="list"
+                  autocorrect="off"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                {%- endif -%}
+              >
+              <input type="hidden" name="options[prefix]" value="last">
+              <button type="submit" class="search-button" style="background-color: {{ section.settings.button_bg_color }};">
+                {{ section.settings.search_button_text }}
+              </button>
+              
+              {%- if settings.predictive_search_enabled -%}
+                <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                  <div class="predictive-search__loading-state">
+                    <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                  </div>
+                </div>
+                <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+              {%- endif -%}
+            </form>
+        {%- if settings.predictive_search_enabled -%}
+          </predictive-search>
+        {%- endif -%}
+      </div>
+
+      <!-- Header Icons -->
+      <div class="header-icons">
+        
+        <!-- Account -->
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header-icon" aria-label="Cuenta">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        <!-- Wishlist -->
+        {%- if section.settings.show_wishlist -%}
+          <a href="{{ section.settings.wishlist_url }}" class="header-icon" aria-label="Lista de deseos">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            {%- if section.settings.wishlist_count > 0 -%}
+              <span class="icon-badge" style="background-color: {{ section.settings.button_bg_color }};">{{ section.settings.wishlist_count }}</span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+
+        <!-- Cart -->
+        <a href="{{ routes.cart_url }}" class="header-icon" aria-label="Carrito">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 2L7.17 4M16.83 4L15 2M9 16c0 .53.21 1.04.59 1.41.37.38.88.59 1.41.59s1.04-.21 1.41-.59c.38-.37.59-.88.59-1.41M3 6h18l-2 10H5L3 6z"></path>
+          </svg>
+          {%- if cart.item_count > 0 -%}
+            <span class="icon-badge" style="background-color: {{ section.settings.button_bg_color }};">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigation Menu (Desktop) -->
+    {%- if section.settings.menu != blank -%}
+      <nav class="header-nav desktop-nav">
+        <ul class="nav-list">
+          {%- for link in section.settings.menu.links -%}
+            <li class="nav-item">
+              <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %}">
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+    
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-title">Menú</span>
+      <button type="button" class="mobile-menu-close" aria-label="Cerrar menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Search -->
+    <div class="mobile-search">
+      <predictive-search data-loading-text="Cargando...">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+          <input
+            type="search"
+            name="q"
+            placeholder="{{ section.settings.search_placeholder }}"
+            class="search-input"
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="predictive-search-results-mobile"
+            aria-controls="predictive-search-results-mobile"
+            aria-haspopup="listbox"
+            aria-autocomplete="list"
+            autocorrect="off"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+          >
+          <input type="hidden" name="options[prefix]" value="last">
+          <button type="submit" class="search-button" style="background-color: {{ section.settings.button_bg_color }};">
+            {{ section.settings.search_button_text }}
+          </button>
+          
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            <div class="predictive-search__loading-state">
+              <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </div>
+          
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+        </form>
+      </predictive-search>
+    </div>
+
+    <!-- Mobile Navigation -->
+    {%- if section.settings.menu != blank -%}
+      <nav class="mobile-nav">
+        <ul class="mobile-nav-list">
+          {%- for link in section.settings.menu.links -%}
+            <li class="mobile-nav-item">
+              <a href="{{ link.url }}" class="mobile-nav-link{% if link.active %} active{% endif %}">
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  
+</div>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .page-width {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Announcement Bar */
+  .announcement-bar {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .announcement-bar__message {
+    margin: 0;
+  }
+
+  .announcement-bar__link {
+    text-decoration: underline;
+    margin-left: 5px;
+  }
+
+  /* Header */
+  .header-happy-books {
+    padding: 20px 0;
+    background: #fff;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+    padding: 10px 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #333;
+    order: 1;
+  }
+
+  /* Logo */
+  .header-logo {
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  .header-logo a {
+    display: block;
+    text-decoration: none;
+  }
+
+  .header-logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Search */
+  .header-search {
+    flex: 1;
+    max-width: 600px;
+    order: 3;
+    position: relative;
+  }
+
+  .header__search {
+    display: none;
+  }
+
+  .search-inline {
+    display: block;
+    position: relative;
+  }
+
+  .search-form {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: visible;
+    background: #fff;
+    position: relative;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    font-family: inherit;
+    border-radius: 5px 0 0 5px;
+  }
+
+  .search-input::placeholder {
+    color: #999;
+  }
+
+  .search-button {
+    color: #fff;
+    border: none;
+    padding: 14px 35px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    border-radius: 0 5px 5px 0;
+  }
+
+  .search-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Predictive Search Results */
+  .predictive-search {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+
+  predictive-search[open] .predictive-search,
+  .predictive-search[open] {
+    display: block;
+  }
+
+  .predictive-search__loading-state {
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  /* Search Modal (hidden on desktop, shown on mobile if needed) */
+  .search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+
+  .search-modal__content {
+    position: relative;
+    background: #fff;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+
+  .modal__close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  .field {
+    position: relative;
+  }
+
+  .field__label {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .search__input {
+    width: 100%;
+    padding: 14px 60px 14px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .field__button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+  }
+
+  .spinner {
+    width: 24px;
+    height: 24px;
+    animation: spinner 0.75s linear infinite;
+  }
+
+  .spinner .path {
+    stroke: {{ section.settings.button_bg_color | default: '#ff6b35' }};
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes spinner {
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+  }
+
+  /* Header Icons */
+  .header-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    order: 4;
+    flex-shrink: 0;
+  }
+
+  .header-icon {
+    position: relative;
+    color: #333;
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+
+  .header-icon:hover {
+    color: {{ section.settings.button_bg_color | default: '#ff6b35' }};
+  }
+
+  .icon-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    color: #fff;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0 5px;
+  }
+
+  /* Navigation */
+  .header-nav {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 15px;
+  }
+
+  .nav-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+    padding: 5px 0;
+    display: block;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: {{ section.settings.button_bg_color | default: '#ff6b35' }};
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .mobile-menu.active {
+    left: 0;
+  }
+
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .mobile-menu-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .mobile-menu-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #333;
+  }
+
+  .mobile-search {
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    transition: background 0.2s;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.active {
+    background: #f5f5f5;
+    color: {{ section.settings.button_bg_color | default: '#ff6b35' }};
+  }
+
+  /* Responsive */
+  @media screen and (max-width: 989px) {
+    .mobile-menu-toggle {
+      display: block;
+    }
+
+    .header-top {
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-logo {
+      order: 2;
+      flex: 1;
+    }
+
+    .header-search {
+      order: 4;
+      width: 100%;
+      max-width: 100%;
+      flex-basis: 100%;
+    }
+
+    .header-icons {
+      order: 3;
+    }
+
+    .desktop-nav {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .header-logo img {
+      height: 40px;
+    }
+
+    .header-icons {
+      gap: 15px;
+    }
+
+    .search-button {
+      padding: 12px 20px;
+    }
+  }
+</style>
+
+<script>
+  // Mobile Menu Toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const menuClose = document.querySelector('.mobile-menu-close');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
+
+    function openMenu() {
+      mobileMenu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', openMenu);
+    }
+
+    if (menuClose) {
+      menuClose.addEventListener('click', closeMenu);
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', closeMenu);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header Happy Books",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Barra de Anuncios"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Mostrar barra de anuncios",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Texto del anuncio",
+      "default": "Libros en Medellín Mismo Día."
+    },
+    {
+      "type": "text",
+      "id": "announcement_link",
+      "label": "Enlace del anuncio"
+    },
+    {
+      "type": "text",
+      "id": "announcement_link_text",
+      "label": "Texto del enlace",
+      "default": "Ver más"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bg_color",
+      "label": "Color de fondo",
+      "default": "#3d4c7a"
+    },
+    {
+      "type": "color",
+      "id": "announcement_text_color",
+      "label": "Color del texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Imagen del logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 150,
+      "unit": "px",
+      "label": "Ancho del logo"
+    },
+    {
+      "type": "header",
+      "content": "Búsqueda"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Placeholder de búsqueda",
+      "default": "Buscar por: Título, autor o ISBN"
+    },
+    {
+      "type": "text",
+      "id": "search_button_text",
+      "label": "Texto del botón",
+      "default": "Buscar"
+    },
+    {
+      "type": "header",
+      "content": "Navegación"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Lista de Deseos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Mostrar icono de lista de deseos",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "wishlist_url",
+      "label": "URL de lista de deseos",
+      "default": "/pages/wishlist"
+    },
+    {
+      "type": "number",
+      "id": "wishlist_count",
+      "label": "Contador de lista de deseos",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colores"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Color del botón",
+      "default": "#ff6b35"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margen inferior",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

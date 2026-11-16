@@ -1,0 +1,22 @@
+{%- if product -%}
+<icaro-sticky-buy class="icaro-sticky-buy" inert>
+  <div class="icaro-sticky-buy__inner page-width">
+    {%- if product.featured_media -%}
+      {{ product.featured_media | image_url: width: 96 | image_tag: loading: 'lazy', alt: '', width: 40, class: 'icaro-sticky-buy__img' }}
+    {%- endif -%}
+    <div class="icaro-sticky-buy__text">
+      <p class="icaro-sticky-buy__title">{% render 'icaro-book-title', book: product %}</p>
+      <p class="icaro-sticky-buy__price" data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</p>
+    </div>
+    {%- if settings.icaro_free_shipping_threshold > 0 -%}
+      <p class="icaro-sticky-buy__perk small-hide">Envío gratis desde {{ settings.icaro_free_shipping_threshold | times: 100 | money_without_trailing_zeros }}</p>
+    {%- endif -%}
+    <button type="button" class="button icaro-sticky-buy__button" data-sticky-add{% unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+      {%- if product.selected_or_first_available_variant.available -%}Agregar al carrito{%- else -%}Agotado{%- endif -%}
+    </button>
+  </div>
+</icaro-sticky-buy>
+{%- endif -%}
+{% schema %}
+{"name":"Ícaro · Compra fija","enabled_on":{"templates":["product"]},"presets":[{"name":"Ícaro · Compra fija"}]}
+{% endschema %}

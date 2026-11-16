@@ -1,0 +1,13 @@
+.icaro-visible-search{display:block;position:relative;width:100%}
+.icaro-search-bar .icaro-visible-search__field{position:relative}
+.icaro-search-bar button.icaro-visible-search__reset{position:absolute;right:108px;top:0;bottom:0;background:transparent;color:#525a53;min-height:0;width:40px;padding:0;font-size:22px;border-radius:0}
+.icaro-search-bar .icaro-visible-search input{padding-right:48px}
+.icaro-search-bar form>.icaro-visible-search__results{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;width:100%;max-height:min(65vh,540px);overflow-y:auto;background:#fff;border:1px solid #d7d1c3;border-radius:4px;box-shadow:0 12px 30px #252b2720;z-index:30}
+.icaro-visible-search[open] form>.icaro-visible-search__results{display:block}
+.icaro-visible-search .predictive-search__heading{font:500 12.5px/1.5 var(--font-body-family);letter-spacing:.1em;color:#904631}
+.icaro-visible-search .predictive-search__image{object-fit:contain}
+.icaro-visible-search .predictive-search__item-heading{font:var(--font-heading-style) var(--font-heading-weight) 16px/1.4 var(--font-heading-family)}
+.icaro-visible-search .predictive-search__item-vendor{font-size:12px;color:#904631}
+.icaro-visible-search .price{font-size:14.5px}
+.icaro-visible-search .predictive-search__item{color:#252b27}
+@media(max-width:749px){.icaro-search-bar button.icaro-visible-search__reset{right:96px}.icaro-visible-search .predictive-search__results-groups-wrapper{gap:0}.icaro-visible-search .predictive-search__item-heading{font-size:16px}}

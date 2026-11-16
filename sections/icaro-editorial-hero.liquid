@@ -1,0 +1,92 @@
+{%- liquid
+  assign hero_books = section.blocks | where: 'type', 'book'
+  assign book_count = 0
+  for block in hero_books
+    if block.settings.book != blank
+      assign book_count = book_count | plus: 1
+    endif
+  endfor
+  assign use_collection = false
+  if book_count == 0 and section.settings.collection != blank
+    assign use_collection = true
+  endif
+  assign slide_total = book_count
+  if use_collection
+    assign slide_total = section.settings.collection.products_count | at_most: 5
+  endif
+  assign whatsapp = section.settings.whatsapp | remove: ' ' | remove: '+'
+-%}
+<section class="icaro-hero page-width" aria-labelledby="Hero-{{ section.id }}">
+  <div class="icaro-hero__copy">
+    <p class="icaro-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h1 id="Hero-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+    <p class="icaro-hero__text">{{ section.settings.text | escape }}</p>
+    <div class="icaro-hero__actions">
+      <a class="button icaro-hero__cta" href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.label | escape }} <span aria-hidden="true">→</span></a>
+      {%- if section.settings.secondary_label != blank -%}
+        <a class="icaro-hero__catalog-link" href="{{ section.settings.secondary_link | default: '/pages/editoriales-de-nuestra-distribucion' }}">{{ section.settings.secondary_label | escape }}</a>
+      {%- endif -%}
+    </div>
+    <ul class="icaro-hero__perks" role="list">
+      {%- if settings.icaro_free_shipping_threshold > 0 -%}
+        <li><span aria-hidden="true">✦</span> Envío gratis desde {{ settings.icaro_free_shipping_threshold | times: 100 | money_without_trailing_zeros }}</li>
+      {%- endif -%}
+      <li><span aria-hidden="true">✦</span> Pago seguro</li>
+      <li><span aria-hidden="true">✦</span> Envíos a toda Colombia</li>
+    </ul>
+    {%- render 'icaro-google-rating' -%}
+    {%- if whatsapp != blank -%}
+      <p class="icaro-hero__note">¿Librería o institución? <a href="https://wa.me/{{ whatsapp | escape }}?text=Hola%2C%20quisiera%20consultar%20su%20cat%C3%A1logo%20y%20las%20condiciones%20de%20distribuci%C3%B3n." target="_blank" rel="noopener">Habla con ventas ↗</a></p>
+    {%- endif -%}
+  </div>
+
+  <icaro-hero-stage class="icaro-hero__art" role="region" aria-roledescription="carrusel" aria-label="Libros destacados">
+    <div class="icaro-hero__stage" data-stage>
+      <span class="icaro-hero__halo" aria-hidden="true"></span>
+      {%- assign slide_index = 0 -%}
+      {%- if use_collection -%}
+        {%- for book in section.settings.collection.products limit: 5 -%}
+          {%- render 'icaro-hero-slide', book: book, index: forloop.index0, total: 5 -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in hero_books -%}
+          {%- if block.settings.book != blank -%}
+            {%- render 'icaro-hero-slide', book: block.settings.book, index: slide_index, block: block -%}
+            {%- assign slide_index = slide_index | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- if book_count == 0 and use_collection == false -%}
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: widths: '320, 400, 600, 800, 1000', sizes: '(min-width: 750px) 40vw, calc(100vw - 30px)', loading: 'eager', fetchpriority: 'high', class: 'icaro-hero__image' }}
+        {%- else -%}
+          <div class="icaro-hero__letter" aria-hidden="true">Í<span>Un lugar para<br>las ideas.</span></div>
+        {%- endif -%}
+      {%- endif -%}
+      <span class="icaro-hero__shadow" aria-hidden="true"></span>
+    </div>
+    <div class="icaro-hero__controls"{% if slide_total < 2 %} hidden{% endif %}>
+      <button type="button" class="icaro-hero__arrow" data-prev aria-label="Libro anterior">←</button>
+      <div class="icaro-hero__dots" data-dots></div>
+      <button type="button" class="icaro-hero__arrow" data-next aria-label="Libro siguiente">→</button>
+    </div>
+    <p class="icaro-hero__caption"><span class="icaro-hero__drag" aria-hidden="true">↔ Arrastra el libro para girarlo</span>{{ section.settings.caption | escape }}</p>
+  </icaro-hero-stage>
+</section>
+{% schema %}
+{"name":"Ícaro · Portada editorial","max_blocks":5,"settings":[
+{"type":"text","id":"eyebrow","label":"Antetítulo","default":"ÍCARO LIBROS · DISTRIBUIDORA EN COLOMBIA"},
+{"type":"text","id":"heading","label":"Título","default":"Lecturas que se quedan contigo."},
+{"type":"textarea","id":"text","label":"Descripción","default":"Filosofía, literatura, poesía y ciencias humanas de editoriales de España y Argentina, ahora en Colombia."},
+{"type":"text","id":"label","label":"Botón principal","default":"Comprar libros"},
+{"type":"url","id":"link","label":"Enlace del botón principal"},
+{"type":"text","id":"secondary_label","label":"Enlace secundario","default":"Conocer nuestras editoriales →"},
+{"type":"url","id":"secondary_link","label":"Destino del enlace secundario"},
+{"type":"text","id":"whatsapp","label":"WhatsApp de ventas (B2B)","info":"Solo dígitos con código de país. Vacío para ocultar.","default":"573164810958"},
+{"type":"header","content":"Libros destacados en 3D"},
+{"type":"collection","id":"collection","label":"Colección de respaldo","info":"Se muestran sus primeros 5 libros si no agregas bloques de libro."},
+{"type":"image_picker","id":"image","label":"Imagen alternativa","info":"Solo se usa si no hay libros ni colección."},
+{"type":"text","id":"caption","label":"Pie","default":"Distribución editorial · España y Argentina → Colombia"}],
+"blocks":[{"type":"book","name":"Libro destacado","settings":[{"type":"product","id":"book","label":"Libro"},{"type":"text","id":"kicker","label":"Etiqueta opcional","info":"Ejemplo: Novedad, Recomendado del mes."}]}],
+"presets":[{"name":"Ícaro · Portada editorial"}]}
+{% endschema %}

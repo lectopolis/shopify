@@ -1,0 +1,43 @@
+{{ 'icaro-announcements.css' | asset_url | stylesheet_tag }}
+{% if section.blocks.size > 0 %}
+  <section class="icaro-announcements" aria-label="{{ section.settings.label | escape }}">
+    <div class="page-width">
+      <div class="icaro-announcements__track" tabindex="0" role="region" aria-label="Anuncios de Ícaro Libros. Desplázate para ver todos los mensajes.">
+        {% for block in section.blocks %}
+          {% if block.settings.text != blank %}
+            <div class="icaro-announcements__item" {{ block.shopify_attributes }}>
+              <span class="icaro-announcements__mark" aria-hidden="true">✦</span>
+              <div>
+                {% if block.settings.eyebrow != blank %}<p class="icaro-announcements__eyebrow">{{ block.settings.eyebrow | escape }}</p>{% endif %}
+                <p class="icaro-announcements__text">{{ block.settings.text | escape }}</p>
+                {% if block.settings.link != blank and block.settings.link_text != blank %}<a href="{{ block.settings.link }}">{{ block.settings.link_text | escape }} <span aria-hidden="true">↗</span></a>{% endif %}
+              </div>
+            </div>
+          {% elsif request.design_mode %}
+            <div class="icaro-announcements__item" {{ block.shopify_attributes }}>Escribe el mensaje de este anuncio.</div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% elsif request.design_mode %}
+  <div class="page-width">Agrega un bloque de anuncio para mostrar esta barra.</div>
+{% endif %}
+{% schema %}
+{
+  "name": "Ícaro · Anuncios",
+  "max_blocks": 4,
+  "settings": [{"type":"text","id":"label","label":"Nombre accesible","default":"Lo que encontrarás en Ícaro"}],
+  "blocks": [{"type":"announcement","name":"Anuncio","settings":[
+    {"type":"text","id":"eyebrow","label":"Antetítulo","default":"DE LECTOR A LECTOR"},
+    {"type":"text","id":"text","label":"Mensaje","default":"Te ayudamos a elegir tu próxima lectura."},
+    {"type":"url","id":"link","label":"Enlace opcional"},
+    {"type":"text","id":"link_text","label":"Texto del enlace","default":"Conversemos"}
+  ]}],
+  "presets": [{"name":"Ícaro · Anuncios","blocks":[
+    {"type":"announcement","settings":{"eyebrow":"LECTURAS CON CRITERIO","text":"Filosofía, literatura y pensamiento independiente.","link_text":""}},
+    {"type":"announcement","settings":{"eyebrow":"DE LECTOR A LECTOR","text":"Te ayudamos a elegir tu próxima lectura.","link":"https://wa.me/573164810958","link_text":"Conversemos"}},
+    {"type":"announcement","settings":{"eyebrow":"TU PRÓXIMO LIBRO","text":"Consulta las opciones de envío al pagar.","link_text":""}}
+  ]}]
+}
+{% endschema %}

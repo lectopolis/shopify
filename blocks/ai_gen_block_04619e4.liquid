@@ -1,0 +1,388 @@
+{% doc %}
+  @prompt
+    ⚡ 5. BLOQUE DE CONVERSIÓN
+    
+    Agrega esto:
+    
+    📦 Envíos rápidos a toda Colombia
+    📚 Curaduría especializada
+    🔒 Compra segura
+    📖 Más de 35 años de experiencia
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-conversion-block-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.padding_vertical }}px {{ block.settings.padding_horizontal }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-conversion-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.gap }}px;
+  }
+
+  .ai-conversion-item-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    align-items: {{ block.settings.alignment }};
+    text-align: {{ block.settings.alignment }};
+    gap: {{ block.settings.item_gap }}px;
+  }
+
+  .ai-conversion-icon-{{ ai_gen_id }} {
+    font-size: {{ block.settings.icon_size }}px;
+    line-height: 1;
+  }
+
+  .ai-conversion-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    margin: 0;
+    font-weight: {{ block.settings.text_weight }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-conversion-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+{% endstyle %}
+
+<conversion-block-{{ ai_gen_id }}
+  class="ai-conversion-block-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-conversion-grid-{{ ai_gen_id }}">
+    {% if block.settings.feature_1_enabled %}
+      <div class="ai-conversion-item-{{ ai_gen_id }}">
+        <div class="ai-conversion-icon-{{ ai_gen_id }}">
+          {{ block.settings.feature_1_icon }}
+        </div>
+        <p class="ai-conversion-text-{{ ai_gen_id }}">
+          {{ block.settings.feature_1_text }}
+        </p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.feature_2_enabled %}
+      <div class="ai-conversion-item-{{ ai_gen_id }}">
+        <div class="ai-conversion-icon-{{ ai_gen_id }}">
+          {{ block.settings.feature_2_icon }}
+        </div>
+        <p class="ai-conversion-text-{{ ai_gen_id }}">
+          {{ block.settings.feature_2_text }}
+        </p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.feature_3_enabled %}
+      <div class="ai-conversion-item-{{ ai_gen_id }}">
+        <div class="ai-conversion-icon-{{ ai_gen_id }}">
+          {{ block.settings.feature_3_icon }}
+        </div>
+        <p class="ai-conversion-text-{{ ai_gen_id }}">
+          {{ block.settings.feature_3_text }}
+        </p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.feature_4_enabled %}
+      <div class="ai-conversion-item-{{ ai_gen_id }}">
+        <div class="ai-conversion-icon-{{ ai_gen_id }}">
+          {{ block.settings.feature_4_icon }}
+        </div>
+        <p class="ai-conversion-text-{{ ai_gen_id }}">
+          {{ block.settings.feature_4_text }}
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</conversion-block-{{ ai_gen_id }}>
+
+{% schema %}
+{
+  "name": "Bloque de conversión",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Característica 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_enabled",
+      "label": "Activar característica 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feature_1_icon",
+      "label": "Icono",
+      "default": "📦"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_text",
+      "label": "Texto",
+      "default": "Envíos rápidos a toda Colombia"
+    },
+    {
+      "type": "header",
+      "content": "Característica 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_enabled",
+      "label": "Activar característica 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feature_2_icon",
+      "label": "Icono",
+      "default": "📚"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_text",
+      "label": "Texto",
+      "default": "Curaduría especializada"
+    },
+    {
+      "type": "header",
+      "content": "Característica 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_3_enabled",
+      "label": "Activar característica 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feature_3_icon",
+      "label": "Icono",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "feature_3_text",
+      "label": "Texto",
+      "default": "Compra segura"
+    },
+    {
+      "type": "header",
+      "content": "Característica 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_4_enabled",
+      "label": "Activar característica 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feature_4_icon",
+      "label": "Icono",
+      "default": "📖"
+    },
+    {
+      "type": "text",
+      "id": "feature_4_text",
+      "label": "Texto",
+      "default": "Más de 35 años de experiencia"
+    },
+    {
+      "type": "header",
+      "content": "Diseño"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columnas en escritorio",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columnas en móvil",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alineación",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Izquierda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "flex-end",
+          "label": "Derecha"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Espacio entre elementos",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Espacio icono-texto",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Ancho en escritorio",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Estilo"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Tamaño de icono",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Tamaño de texto",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Peso de texto",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medio"
+        },
+        {
+          "value": "600",
+          "label": "Semi-negrita"
+        },
+        {
+          "value": "700",
+          "label": "Negrita"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Espaciado vertical",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Espaciado horizontal",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Radio de borde",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bloque de conversión"
+    }
+  ]
+}
+{% endschema %}

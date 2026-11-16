@@ -1,0 +1,49 @@
+<section class="icaro-flow-section" aria-labelledby="Flow-{{ section.id }}">
+  <div class="page-width">
+    <div class="icaro-section-head">
+      <div>
+        <p class="icaro-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2 id="Flow-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      </div>
+      <p>{{ section.settings.text | escape }}</p>
+    </div>
+    <icaro-flow class="icaro-flow">
+      <div class="icaro-flow__tabs" role="tablist" aria-label="Editoriales">
+        {%- for block in section.blocks -%}
+          {%- assign flow_collection = block.settings.collection -%}
+          {%- if flow_collection != blank -%}
+            <button type="button" role="tab" id="FlowTab-{{ block.id }}" aria-controls="FlowPanel-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %} {{ block.shopify_attributes }}>{{ block.settings.label | default: flow_collection.title | escape }}</button>
+          {%- elsif request.design_mode -%}
+            <span {{ block.shopify_attributes }}>Selecciona una colección</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- for block in section.blocks -%}
+        {%- assign flow_collection = block.settings.collection -%}
+        {%- if flow_collection != blank -%}
+          <div class="icaro-flow__panel" role="tabpanel" id="FlowPanel-{{ block.id }}" aria-labelledby="FlowTab-{{ block.id }}"{% unless forloop.first %} hidden{% endunless %}>
+            <ul class="icaro-flow__track" data-track role="list"{% unless forloop.first %} data-src="{{ flow_collection.url }}?section_id=icaro-flow-panel"{% endunless %}>
+              {%- if forloop.first -%}
+                {%- render 'icaro-flow-items', books: flow_collection.products, limit: section.settings.limit -%}
+              {%- endif -%}
+            </ul>
+            <div class="icaro-flow__nav">
+              <button type="button" class="icaro-hero__arrow" data-flow-prev aria-label="Libro anterior">←</button>
+              <a class="icaro-flow__all" href="{{ flow_collection.url }}">Ver todo {{ block.settings.label | default: flow_collection.title | escape }} →</a>
+              <button type="button" class="icaro-hero__arrow" data-flow-next aria-label="Libro siguiente">→</button>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </icaro-flow>
+  </div>
+</section>
+{% schema %}
+{"name":"Ícaro · Vitrina 3D","max_blocks":8,"settings":[
+{"type":"text","id":"eyebrow","label":"Antetítulo","default":"CATÁLOGOS QUE DISTRIBUIMOS"},
+{"type":"text","id":"heading","label":"Título","default":"Recorre nuestras editoriales"},
+{"type":"text","id":"text","label":"Texto","default":"Desliza la vitrina o elige una editorial."},
+{"type":"range","id":"limit","label":"Libros por editorial","min":6,"max":18,"step":1,"default":14}],
+"blocks":[{"type":"collection","name":"Editorial","settings":[{"type":"collection","id":"collection","label":"Colección"},{"type":"text","id":"label","label":"Nombre en la pestaña"}]}],
+"presets":[{"name":"Ícaro · Vitrina 3D"}]}
+{% endschema %}
