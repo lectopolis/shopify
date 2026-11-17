@@ -119,12 +119,45 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "editorial_divider_1": {
+      "type": "lectopolis-editorial-divider",
+      "settings": {
+        "collection": "alianza",
+        "heading": "Editorial Alianza",
+        "description": "Encuentra tu próxima lectura entre los libros de esta editorial.",
+        "palette": "purple",
+        "show_button": true
+      }
+    },
+    "editorial_divider_2": {
+      "type": "lectopolis-editorial-divider",
+      "settings": {
+        "collection": "planeta",
+        "heading": "Editorial Planeta",
+        "description": "Encuentra tu próxima lectura entre los libros de esta editorial.",
+        "palette": "blue",
+        "show_button": true
+      }
+    },
+    "editorial_divider_3": {
+      "type": "lectopolis-editorial-divider",
+      "settings": {
+        "collection": "editorial-alba",
+        "heading": "Editorial Alba",
+        "description": "Encuentra tu próxima lectura entre los libros de esta editorial.",
+        "palette": "mint",
+        "show_button": true
+      }
     }
   },
   "order": [
     "lectopolis_banner",
+    "editorial_divider_1",
     "featured_collection",
+    "editorial_divider_2",
     "featured_collection_AFyeht",
+    "editorial_divider_3",
     "featured_collection_rzPdAr",
     "cf041c51-04b0-4692-a755-688469da084e",
     "1766420446d652ec64",

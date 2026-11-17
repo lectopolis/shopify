@@ -1,5 +1,13 @@
 # Banners por colección o editorial
 
+## Separadores en la página de inicio
+
+La portada incluye un **Separador de colección** antes de los grupos de Alianza, Planeta y Alba. Cada uno muestra el nombre de la editorial y su propio color, incluso sin subir una imagen.
+
+Para personalizarlos: **Personalizar → Página de inicio → Separador de colección**. Selecciona la colección, cambia el nombre o los colores y, si quieres, sube un banner propio para escritorio y otro para celular. El botón lleva a la colección seleccionada.
+
+Estos separadores de portada son independientes del banner dentro de la página de cada colección, que se configura a continuación.
+
 La plantilla predeterminada de colección incluye la sección **Banner de editorial**, encima del encabezado y los productos.
 
 ## Asignar un banner
