@@ -15,6 +15,7 @@
     },
     "editorial_divider_1": {
       "type": "lectopolis-editorial-divider",
+      "disabled": true,
       "settings": {
         "collection": "alianza",
         "heading": "Editorial Alianza",
