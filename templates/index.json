@@ -39,6 +39,58 @@
         "padding_bottom": 60
       }
     },
+    "featured_collection_AFyeht": {
+      "type": "featured-collection",
+      "settings": {
+        "enable_separator": true,
+        "separator_width": 160,
+        "separator_thickness": 1,
+        "separator_spacing": 20,
+        "title": "Editorial Catedra",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "catedra",
+        "products_to_show": 24,
+        "columns_desktop": 6,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 60
+      }
+    },
+    "featured_collection_rzPdAr": {
+      "type": "featured-collection",
+      "settings": {
+        "enable_separator": true,
+        "separator_width": 160,
+        "separator_thickness": 1,
+        "separator_spacing": 20,
+        "title": "Novedades",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "alianza",
+        "products_to_show": 24,
+        "columns_desktop": 6,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 72,
+        "padding_bottom": 60
+      }
+    },
     "cf041c51-04b0-4692-a755-688469da084e": {
       "type": "featured-blog",
       "settings": {
@@ -72,6 +124,8 @@
   "order": [
     "lectopolis_banner",
     "featured_collection",
+    "featured_collection_AFyeht",
+    "featured_collection_rzPdAr",
     "cf041c51-04b0-4692-a755-688469da084e",
     "1766420446d652ec64",
     "1773159858be925cff"
