@@ -1,5 +1,6 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'lectopolis-featured-books.css' | asset_url | stylesheet_tag }}
 
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
@@ -43,7 +44,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: {{ section.settings.separator_width }}px;
+  width: min({{ section.settings.separator_width }}px, 12vw);
   height: {{ section.settings.separator_thickness }}px;
   background-color: currentColor;
 }
@@ -84,7 +85,7 @@
 -%}
 
 <div
-  class="color-{{ section.settings.color_scheme }} isolate gradient"
+  class="lp-featured-books color-{{ section.settings.color_scheme }} isolate gradient"
 >
   <div
     class="collection{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
@@ -131,12 +132,7 @@
           {%- liquid
             assign cover_width_factor = 1
             if product.featured_media
-              assign card_ratio = 1
-              if section.settings.image_ratio == 'portrait'
-                assign card_ratio = 0.8
-              elsif section.settings.image_ratio == 'adapt'
-                assign card_ratio = product.featured_media.aspect_ratio
-              endif
+              assign card_ratio = 0.75
               assign cover_width_factor = product.featured_media.aspect_ratio | divided_by: card_ratio | at_most: 1
             endif
           -%}
@@ -154,9 +150,9 @@
             {% render 'card-product',
               card_product: product,
               image_sizes: grid_image_sizes,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
+              media_aspect_ratio: 'portrait',
+              image_shape: 'default',
+              show_secondary_image: false,
               show_vendor: section.settings.show_vendor,
               show_rating: section.settings.show_rating,
               skip_styles: skip_card_product_styles,
