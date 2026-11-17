@@ -1,7 +1,12 @@
 <div class="lp-announcement">Libros nuevos y leídos <span aria-hidden="true">✳</span> Envíos nacionales <span aria-hidden="true">✳</span> Más de 15 años contigo</div>
 <header class="lp-site-header">
   <a class="lp-brand" href="{{ routes.root_url }}" aria-label="Lectópolis, inicio">{% render 'lectopolis-logo' %}</a>
-  <nav class="lp-navigation" aria-label="Navegación principal"><a href="{{ routes.all_products_collection_url }}">La librería</a><a href="{{ routes.root_url }}#lp-seleccion">Descubrimientos</a><a href="{{ routes.root_url }}#lp-historia">Nuestra historia</a></nav>
+  <nav class="lp-navigation" aria-label="Navegación principal">
+    <a href="{{ routes.root_url }}"{% if request.path == routes.root_url %} aria-current="page"{% endif %}>Inicio</a>
+    <a href="{{ routes.all_products_collection_url }}"{% if request.path == routes.all_products_collection_url %} aria-current="page"{% endif %}>Comprar libros</a>
+    <a href="{{ routes.root_url }}#lp-nosotros">Nosotros</a>
+    <a href="{{ routes.root_url }}#lp-contacto">Contacto</a>
+  </nav>
   <div class="lp-header-actions"><a href="{{ routes.search_url }}" aria-label="Buscar libros">{% render 'lectopolis-icon', icon: 'search' %}</a><a id="cart-icon-bubble" class="lp-cart-link" href="{{ routes.cart_url }}" aria-label="Carrito">{% render 'lectopolis-icon', icon: 'bag' %}<span aria-hidden="true">{{ cart.item_count }}</span><span class="lp-sr-only">{{ cart.item_count }} artículos</span></a></div>
 </header>
 {% schema %}

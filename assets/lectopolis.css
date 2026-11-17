@@ -121,3 +121,15 @@ body.lp-store{background:var(--lp-paper);color:var(--lp-ink)}
 @media(max-width:1000px){.lp-brand .lp-logo-window{width:185px}}
 @media(max-width:700px){.lp-brand .lp-logo-window{width:180px}.lp-site-header{padding-top:9px}.lp-header-actions{margin-left:auto}}
 @media(max-width:360px){.lp-brand .lp-logo-window{width:160px}}
+
+/* A single, explicit navigation path; all section targets exist in the shared footer. */
+.lp-site-header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px}
+.lp-navigation{justify-content:center;gap:24px}
+.lp-navigation a{display:flex;align-items:center;justify-content:center;min-height:44px;text-align:center;white-space:nowrap}
+.lp-navigation a[aria-current="page"]{color:var(--lp-purple);border-bottom-color:var(--lp-purple)}
+.lp-header-actions{justify-self:end}
+#lp-nosotros,#lp-contacto{scroll-margin-top:175px}
+.lp-footer h2{font:700 20px/1.3 Arial,Helvetica,sans-serif;letter-spacing:-.025em;color:var(--lp-paper);margin:22px 0 0}
+.lp-footer nav h2{margin:0 0 15px}
+@media(max-width:1000px){.lp-site-header{grid-template-columns:1fr auto;gap:4px 15px}.lp-brand{grid-column:1;grid-row:1}.lp-header-actions{grid-column:2;grid-row:1}.lp-navigation{grid-column:1/-1;grid-row:2;width:100%;justify-content:space-between;gap:8px;font-size:12px}.lp-navigation a{flex:1;padding:8px 4px;min-height:44px}.lp-header-actions{margin-left:0}#lp-nosotros,#lp-contacto{scroll-margin-top:210px}}
+@media(max-width:360px){.lp-navigation{gap:4px;font-size:11px}.lp-navigation a{padding-inline:2px}}
