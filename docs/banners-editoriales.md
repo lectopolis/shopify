@@ -2,9 +2,11 @@
 
 ## Separadores en la página de inicio
 
-La portada incluye un **Separador de colección** antes de los grupos de Alianza, Planeta y Alba. Cada uno muestra el nombre de la editorial y su propio color, incluso sin subir una imagen.
+La portada incluye un **Separador de colección** antes de los grupos de Alianza, Planeta y Alba. El separador muestra únicamente la imagen que selecciones, sin panel de color, títulos ni botones extra. Puede inclinarse suavemente al mover el cursor y al hacer scroll. Se respeta la preferencia de movimiento reducido del visitante.
 
-Para personalizarlos: **Personalizar → Página de inicio → Separador de colección**. Selecciona la colección, cambia el nombre o los colores y, si quieres, sube un banner propio para escritorio y otro para celular. El botón lleva a la colección seleccionada.
+Para personalizarlo: **Personalizar → Página de inicio → Separador de colección**. Selecciona la colección, sube el banner para escritorio y, opcionalmente, otro para celular. La imagen enlaza a la colección. Puedes desactivar el efecto con **Activar movimiento 3D suave**.
+
+Si no hay imagen seleccionada, el separador se oculta para los visitantes. En el editor se muestra una ayuda para subirla. El nombre de accesibilidad describe la imagen para lectores de pantalla; no se imprime visualmente.
 
 Estos separadores de portada son independientes del banner dentro de la página de cada colección, que se configura a continuación.
 
