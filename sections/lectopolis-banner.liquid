@@ -1,14 +1,14 @@
-<section class="lp-campaign" aria-label="Tu próxima historia favorita te está esperando">
+<section class="lp-campaign" aria-label="Cada libro tiene un lector. El próximo eres tú.">
   <a class="lp-campaign-image" href="{{ routes.all_products_collection_url }}" aria-label="Descubre los libros de Librería Lectópolis">
     {% if section.settings.image != blank %}
-      {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '750,1100,1600,2172,2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: 'Lectópolis. Tu próxima historia favorita te está esperando. Libros nuevos y leídos. Envíos nacionales.' }}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '750,1100,1600,2172,2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: 'Lectópolis — Amamos leer. Cada libro tiene un lector. El próximo eres tú. Libros nuevos y leídos. Envíos nacionales.' }}
     {% else %}
-      <img src="{{ 'lectopolis-banner-historias-v1.png' | asset_url }}" width="2172" height="724" loading="eager" fetchpriority="high" alt="Lectópolis. Tu próxima historia favorita te está esperando. Libros nuevos y leídos. Envíos nacionales.">
+      <img src="{{ 'lectopolis-banner-logo-v2.png' | asset_url }}" width="2172" height="724" loading="eager" fetchpriority="high" alt="Lectópolis — Amamos leer. Cada libro tiene un lector. El próximo eres tú. Libros nuevos y leídos. Envíos nacionales.">
     {% endif %}
   </a>
   <div class="lp-campaign-bottom">
-    <div class="lp-campaign-mobile-copy"><h2>Tu próxima <em>historia favorita</em> te está esperando.</h2><p>Libros nuevos y leídos · Envíos nacionales</p></div>
-    <span class="lp-campaign-caption">Más de 15 años conectando libros y lectores.</span>
+    <div class="lp-campaign-mobile-copy"><h2>Cada libro tiene un lector. <em>El próximo eres tú.</em></h2><p>Libros nuevos y leídos · Envíos nacionales</p></div>
+    <span class="lp-campaign-caption">Más de 15 años compartiendo historias.</span>
     <a class="lp-campaign-cta" href="{{ routes.all_products_collection_url }}">Explora nuestros libros {% render 'lectopolis-icon' %}</a>
   </div>
 </section>
