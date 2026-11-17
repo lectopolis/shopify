@@ -43,9 +43,7 @@
         "use_collection_image": false,
         "full_width": true,
         "show_caption": true
-      },
-      "blocks": {},
-      "block_order": []
+      }
     }
   },
   "order": [
