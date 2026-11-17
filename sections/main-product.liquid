@@ -259,7 +259,22 @@
                 </p>
               {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
-                  <h1>{% render 'lectopolis-book-title', book: product %}</h1>
+                  <h1>{% comment %}Product heading is self-contained during theme synchronization.{% endcomment %}{%- liquid
+  assign lp_title_book_title = product.title
+  assign lp_title_parts = lp_title_book_title | split: ' - '
+  assign lp_title_count = lp_title_parts.size
+  if lp_title_count >= 5
+    assign lp_title_last_index = lp_title_count | minus: 1
+    assign lp_title_previous_index = lp_title_count | minus: 2
+    assign lp_title_earlier_last_index = lp_title_count | minus: 3
+    assign lp_title_earlier_previous_index = lp_title_count | minus: 4
+    if lp_title_parts[lp_title_last_index] == lp_title_parts[lp_title_earlier_last_index] and lp_title_parts[lp_title_previous_index] == lp_title_parts[lp_title_earlier_previous_index]
+      assign lp_title_keep = lp_title_count | minus: 2
+      assign lp_title_book_title = lp_title_parts | slice: 0, lp_title_keep | join: ' - '
+    endif
+  endif
+-%}
+{{- lp_title_book_title | escape -}}</h1>
                   {%- if product.vendor != blank -%}
                     <p class="product__vendor">
                       Editorial: <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
@@ -274,7 +289,24 @@
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
-                  {% render 'lectopolis-book-details', book: product %}
+                  {% comment %}Book details remain self-contained when theme files synchronize separately.{% endcomment %}
+<div class="lectopolis-book-details">
+  {% assign lp_book_edition = product.selected_or_first_available_variant %}
+  {% if lp_book_edition.available %}<span class="lp-stock">Disponible para comprar</span>{% else %}<span class="lp-stock lp-stock--unavailable">No disponible en esta selección</span>{% endif %}
+  {% if product.metafields.custom.autor != blank or lp_book_edition.barcode != blank %}
+    <dl class="lp-book-facts">
+      {% if product.metafields.custom.autor != blank %}<dt>Autor</dt><dd>{{ product.metafields.custom.autor | escape }}</dd>{% endif %}
+      {% if lp_book_edition.barcode != blank %}<dt>ISBN / código</dt><dd>{{ lp_book_edition.barcode | escape }}</dd>{% endif %}
+    </dl>
+  {% endif %}
+  <p class="lp-shipping-note"><strong>Envíos nacionales.</strong> El costo y las opciones de envío se calculan al finalizar la compra.</p>
+  <div class="lp-book-policy-links">
+    {% if shop.shipping_policy.body != blank %}<a href="{{ shop.shipping_policy.url }}">Condiciones de envío</a>{% endif %}
+    {% if shop.refund_policy.body != blank %}<a href="{{ shop.refund_policy.url }}">Condiciones de devolución</a>{% endif %}
+  </div>
+  {% capture lp_book_message %}Hola, Librería Lectópolis. Quisiera consultar el libro {{ product.title }}{% if lp_book_edition.title != blank and lp_book_edition.title != 'Default Title' %} ({{ lp_book_edition.title }}){% endif %}: {{ shop.url }}{{ product.url }}{% endcapture %}
+  <a class="lp-book-whatsapp" href="https://wa.me/573136118658?text={{ lp_book_message | strip | url_encode }}" target="_blank" rel="noopener">¿Tienes dudas sobre este libro? Escríbenos ↗</a>
+</div>
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
