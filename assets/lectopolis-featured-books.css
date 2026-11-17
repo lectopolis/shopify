@@ -1,5 +1,6 @@
 /* Portrait covers keep their complete artwork, whatever the source image ratio. */
-.lp-featured-books .product-grid{row-gap:36px;column-gap:24px}
+.lp-featured-books .product-grid{--grid-desktop-horizontal-spacing:24px;--grid-mobile-horizontal-spacing:16px;row-gap:36px;column-gap:24px}
+.lp-featured-books .product-grid:not(.slider--desktop):not(.slider--tablet){justify-content:center;margin-inline:auto}
 .lp-featured-books .card-wrapper{height:100%}
 .lp-featured-books .card__inner.ratio{display:block;aspect-ratio:3/4;--ratio-percent:0%!important;background:#f0ece6;border:0;border-radius:3px;overflow:hidden}
 .lp-featured-books .card__inner.ratio:before{display:none;padding-bottom:0}
