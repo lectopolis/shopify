@@ -1,5 +1,18 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "lectopolis_banner": {
+      "type": "lectopolis-banner",
+      "settings": {}
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -12,7 +25,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "libreria-online-1",
+        "collection": "alianza",
         "products_to_show": 24,
         "columns_desktop": 6,
         "full_width": false,
@@ -54,10 +67,6 @@
       "settings": {
         "include_margins": true
       }
-    },
-    "lectopolis_banner": {
-      "type": "lectopolis-banner",
-      "settings": {}
     }
   },
   "order": [
