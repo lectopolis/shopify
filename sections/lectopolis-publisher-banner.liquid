@@ -1,0 +1,65 @@
+{%- liquid
+  assign publisher_image = nil
+  assign publisher_mobile_image = nil
+  assign publisher_name = collection.title
+  assign publisher_caption = ''
+  assign publisher_block = nil
+  if section.settings.use_collection_image
+    assign publisher_image = collection.image
+  endif
+  for block in section.blocks
+    if block.settings.collection != blank and block.settings.collection.id == collection.id
+      assign publisher_block = block
+      if block.settings.image != blank
+        assign publisher_image = block.settings.image
+      endif
+      assign publisher_mobile_image = block.settings.mobile_image
+      assign publisher_name = block.settings.publisher_name | default: collection.title
+      assign publisher_caption = block.settings.caption
+      break
+    endif
+  endfor
+  assign publisher_alt = publisher_image.alt | default: publisher_name
+-%}
+{% if collection.handle != 'all' and publisher_image and publisher_image != blank %}
+  {{ 'lectopolis-publisher-banner.css' | asset_url | stylesheet_tag }}
+  <section class="lp-publisher-banner{% unless section.settings.full_width %} page-width{% endunless %}" aria-label="{{ publisher_name | escape }}"{% if publisher_block %} {{ publisher_block.shopify_attributes }}{% endif %}>
+    <div class="lp-publisher-banner__art">
+      <picture>
+        {% if publisher_mobile_image and publisher_mobile_image != blank %}
+          <source media="(max-width: 749px)" srcset="{{ publisher_mobile_image | image_url: width: 375 }} 375w, {{ publisher_mobile_image | image_url: width: 750 }} 750w, {{ publisher_mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw" width="{{ publisher_mobile_image.width }}" height="{{ publisher_mobile_image.height }}">
+        {% endif %}
+        {{ publisher_image | image_url: width: 2400 | image_tag: widths: '375,750,1100,1500,2000,2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: publisher_alt }}
+      </picture>
+    </div>
+    {% if section.settings.show_caption %}
+      <div class="lp-publisher-banner__caption"><p>{{ publisher_name | escape }}</p>{% if publisher_caption != blank %}<span>{{ publisher_caption | escape }}</span>{% endif %}</div>
+    {% endif %}
+  </section>
+{% elsif request.design_mode and collection.handle != 'all' %}
+  <div class="page-width lp-publisher-banner__editor-note" style="padding:24px;border:1px dashed #5b23aa;margin-block:20px">
+    <strong>Banner de editorial: {{ collection.title | escape }}</strong>
+    <p>Añade un bloque «Editorial», selecciona esta colección y sube su banner. También puedes usar la imagen de la colección activando esa opción.</p>
+  </div>
+{% endif %}
+{% schema %}
+{
+  "name":"Banner de editorial",
+  "enabled_on":{"templates":["collection"]},
+  "max_blocks":50,
+  "settings":[
+    {"type":"paragraph","content":"Cada bloque corresponde a una colección. Selecciona la colección y su banner; solo se mostrará en esa colección. Recomendado: banner horizontal de 2000 × 650 px. No se recortan logos ni textos."},
+    {"type":"checkbox","id":"use_collection_image","label":"Usar la imagen de cada colección si no tiene banner asignado","default":false},
+    {"type":"checkbox","id":"full_width","label":"Ocupar todo el ancho","default":true},
+    {"type":"checkbox","id":"show_caption","label":"Mostrar el nombre de la editorial debajo del banner","default":true}
+  ],
+  "blocks":[{"type":"publisher","name":"Editorial","settings":[
+    {"type":"collection","id":"collection","label":"Colección de esta editorial"},
+    {"type":"text","id":"publisher_name","label":"Nombre de la editorial","info":"Si lo dejas vacío, se usa el nombre de la colección."},
+    {"type":"image_picker","id":"image","label":"Banner para escritorio"},
+    {"type":"image_picker","id":"mobile_image","label":"Banner para celular (opcional)","info":"Recomendado: 750 × 600 px. Si no lo seleccionas, se usa el banner de escritorio completo."},
+    {"type":"text","id":"caption","label":"Texto breve debajo del nombre (opcional)"}
+  ]}],
+  "presets":[{"name":"Banner de editorial"}]
+}
+{% endschema %}
