@@ -127,6 +127,7 @@
     "show_vendor": true,
     "show_cart_note": false,
     "cart_drawer_collection": "",
+    "lectopolis_free_shipping_threshold": 200000,
     "sections": {
       "main-password-header": {
         "type": "main-password-header",

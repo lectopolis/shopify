@@ -9,8 +9,27 @@
  */
 {
   "sections": {
+    "lectopolis_hero_book": {
+      "type": "lectopolis-hero-book",
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "link": "shopify://collections/all" } },
+        "slide_2": { "type": "slide", "settings": {} },
+        "slide_3": { "type": "slide", "settings": {} }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "label": "Banners de Lectópolis",
+        "autoplay": true,
+        "interval": 6,
+        "duration": 14,
+        "show_bar": true,
+        "caption": "Más de 15 años compartiendo historias.",
+        "button_label": "Explora nuestros libros"
+      }
+    },
     "lectopolis_banner": {
       "type": "lectopolis-banner",
+      "disabled": true,
       "settings": {}
     },
     "editorial_divider_1": {
@@ -140,6 +159,7 @@
     }
   },
   "order": [
+    "lectopolis_hero_book",
     "lectopolis_banner",
     "editorial_divider_1",
     "featured_collection",

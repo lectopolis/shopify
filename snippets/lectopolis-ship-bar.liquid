@@ -1,0 +1,26 @@
+{% comment %}
+  Barra de progreso hacia el envío gratis (carrito lateral y página del carrito).
+  El monto se define en Configuración del tema → Carrito → "Envío gratis desde (COP)". 0 la oculta.
+  Solo informa: el envío gratis real lo aplica la tarifa configurada en Shopify → Configuración → Envíos.
+{% endcomment %}
+{%- liquid
+  assign threshold = settings.lectopolis_free_shipping_threshold | default: 0 | times: 100
+  if threshold > 0 and cart != empty
+    assign remaining = threshold | minus: cart.total_price
+    assign pct = cart.total_price | times: 100 | divided_by: threshold | at_most: 100
+  endif
+-%}
+{%- if threshold > 0 and cart != empty -%}
+  <div class="lp-ship{% if remaining <= 0 %} lp-ship--done{% endif %}" style="--lp-ship:{{ pct }}%">
+    <p class="lp-ship__text" role="status">
+      <svg class="lp-ship__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7" cy="17" r="1.8" fill="#fff" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="17" r="1.8" fill="#fff" stroke="currentColor" stroke-width="1.6"/></svg>
+      {%- if remaining > 0 -%}
+        <span>Te faltan <strong>{{ remaining | money_without_trailing_zeros }}</strong> para el <strong>envío gratis</strong></span>
+      {%- else -%}
+        <span><strong>¡Tienes envío gratis!</strong> Tu pedido viaja sin costo.</span>
+      {%- endif -%}
+    </p>
+    <div class="lp-ship__track" role="progressbar" aria-label="Progreso hacia el envío gratis" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}"><span></span></div>
+    <p class="lp-ship__goal"><span>{{ cart.total_price | money_without_trailing_zeros }}</span><span>Envío gratis desde {{ threshold | money_without_trailing_zeros }}</span></p>
+  </div>
+{%- endif -%}

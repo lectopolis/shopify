@@ -81,25 +81,7 @@
           </span>
         </button>
       </div>
-      {%- liquid
-        assign lectopolis_threshold = settings.lectopolis_free_shipping_threshold | times: 100
-        if lectopolis_threshold > 0 and cart != empty
-          assign lectopolis_remaining = lectopolis_threshold | minus: cart.total_price
-          assign lectopolis_pct = cart.total_price | times: 100 | divided_by: lectopolis_threshold | at_most: 100
-        endif
-      -%}
-      {%- if lectopolis_threshold > 0 and cart != empty -%}
-        <lectopolis-ship-bar class="lectopolis-ship" style="--p:{{ lectopolis_pct }}%;">
-          <p class="lectopolis-ship__text" role="status">
-            {%- if lectopolis_remaining > 0 -%}
-              Te faltan <strong>{{ lectopolis_remaining | money_without_trailing_zeros }}</strong> para el <strong>envío gratis</strong>
-            {%- else -%}
-              <strong>¡Tienes envío gratis!</strong> Tu pedido viaja sin costo.
-            {%- endif -%}
-          </p>
-          <span class="lectopolis-ship__track" aria-hidden="true"><span></span></span>
-        </lectopolis-ship-bar>
-      {%- endif -%}
+      {%- render 'lectopolis-ship-bar' -%}
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"

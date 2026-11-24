@@ -9,11 +9,11 @@
 .lp-featured-books .card .card__media img{object-fit:contain!important;object-position:center;width:100%;height:100%;filter:drop-shadow(5px 7px 5px #0002);transform:none!important}
 .lp-featured-books .card__media~.card__content .card__information{display:none}
 .lp-featured-books .card__information{padding:18px 0 6px}
-.lp-featured-books .card__heading{font:700 16px/1.45 Arial,Helvetica,sans-serif;letter-spacing:-.015em;overflow-wrap:anywhere}
-.lp-featured-books .card-information .price{font:600 16px/1.5 Arial,Helvetica,sans-serif;letter-spacing:0;margin-top:10px}
-.lp-featured-books .card-information .caption-with-letter-spacing{font:11px/1.6 Arial,Helvetica,sans-serif;color:var(--lp-black);letter-spacing:.03em}
+.lp-featured-books .card__heading{font:700 16px/1.45 var(--font-body-family);letter-spacing:-.015em;overflow-wrap:anywhere}
+.lp-featured-books .card-information .price{font:600 16px/1.5 var(--font-body-family);letter-spacing:0;margin-top:10px}
+.lp-featured-books .card-information .caption-with-letter-spacing{font:11px/1.6 var(--font-body-family);color:var(--lp-black);letter-spacing:.03em}
 .lp-featured-books .card-information>*:not(.visually-hidden:first-child)+*:not(.rating):not(.card__information-volume-pricing-note){margin-top:10px}
 .lp-featured-books .card--card{background:transparent;border:0;box-shadow:none}.lp-featured-books .card--card:after{box-shadow:none}
-.lp-featured-books .collection__title .title{font:800 clamp(30px,4vw,46px)/1.15 Arial,Helvetica,sans-serif;letter-spacing:-.045em}
+.lp-featured-books .collection__title .title{font:800 clamp(30px,4vw,46px)/1.15 var(--font-heading-family);letter-spacing:-.045em}
 .lp-featured-books a:focus-visible,.lp-featured-books button:focus-visible{outline:3px solid var(--lp-black);outline-offset:4px}
 @media(max-width:749px){.lp-featured-books .product-grid{column-gap:16px;row-gap:28px}.lp-featured-books .card .card__media .media{inset:13px;width:calc(100% - 26px);height:calc(100% - 26px)}.lp-featured-books .card__heading{font-size:14px;line-height:1.45}.lp-featured-books .card-information .price{font-size:14px}.lp-featured-books .card__information{padding-top:14px}}

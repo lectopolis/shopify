@@ -51,3 +51,20 @@ El catálogo y la búsqueda muestran cuatro columnas en escritorio y dos en móv
 - Se retiraron del tema los PNG de banner sin uso (historias y logo v2) y el JPG original del logo; siguen en el historial Git.
 - Los estilos del carrito lateral y de la búsqueda predictiva se cargan sin bloquear el primer pintado. Una regla en línea mantiene oculto el carrito mientras tanto.
 - Las tarjetas de producto ya no cargan los estilos de pedido rápido por volumen ni de valoraciones cuando no se usan.
+
+## Hero libro (inicio)
+
+- `sections/lectopolis-hero-book.liquid`, `assets/lectopolis-flip.css` y `assets/lectopolis-flip.js`: los banners pasan como la hoja de un libro abierto. La mitad derecha gira sobre el lomo (6 tiras anidadas que curvan el papel), con sombra proyectada, sombreado de la curva, brillo, canto del papel y lomo; al aterrizar muestra la otra mitad del banner siguiente. "Anterior" gira la página izquierda hacia la derecha.
+- Pase automático (por defecto 6 s por banner y 1,4 s de giro), flechas, puntos con barra de progreso, botón de pausa, deslizar con el dedo y flechas del teclado. Se pausa al pasar el ratón, con el foco dentro, fuera de pantalla o con la pestaña oculta. Con movimiento reducido se usa un fundido.
+- Solo se descarga el primer banner al cargar; el siguiente se precarga después de la carga de la página.
+- En el editor: **Lectópolis · Hero libro → Banner**, una imagen por bloque (misma proporción en todos; recomendado 2172 × 724 px) y opcionalmente una imagen para móvil. Con menos de dos imágenes se muestra un banner fijo. La sección anterior (**Lectópolis · Banner**) queda desactivada en la plantilla por si hace falta volver.
+- Verificado en Edge sin interfaz con capturas a mitad de giro en escritorio (1200 px) y móvil (390 px), en ambos sentidos.
+
+## Envío gratis en el carrito
+
+- `snippets/lectopolis-ship-bar.liquid`: barra de progreso en el carrito lateral y en la página del carrito ("Te faltan $X para el envío gratis" y, al llegar, "¡Tienes envío gratis!").
+- Monto en **Configuración del tema → Carrito → Envío gratis desde (COP)**: 200.000 COP por indicación del propietario; 0 oculta la barra. La barra solo informa: el envío gratis se cobra según la tarifa de **Configuración → Envíos** de Shopify, que debe coincidir.
+
+## Tipografía
+
+Los estilos propios usan las fuentes elegidas en **Configuración del tema → Tipografía** (`--font-heading-family` en titulares y `--font-body-family` en el resto). Se carga también la variante negrita de la fuente de titulares. Las palabras destacadas en cursiva conservan Georgia.

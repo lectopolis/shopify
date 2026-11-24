@@ -1,0 +1,98 @@
+/* Lectópolis · Hero libro: banners que pasan como la hoja de un libro abierto. */
+.lp-flip{position:relative;background:var(--lp-black,#0a0a0a);color:#fff;isolation:isolate}
+.lp-flip__book{position:relative;width:100%;aspect-ratio:var(--lp-flip-ratio,3);overflow:hidden;background:#0a0a0a;perspective:2600px;perspective-origin:50% 45%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.lp-flip__slide{position:absolute;inset:0;visibility:hidden;opacity:0}
+.lp-flip__slide.is-active{visibility:visible;opacity:1}
+.lp-flip__link{display:block;width:100%;height:100%}
+.lp-flip__link:focus-visible{outline:3px solid var(--lp-cyan,#22b2db);outline-offset:-6px}
+.lp-flip__slide picture{display:contents}
+.lp-flip__img{display:block;width:100%;height:100%;object-fit:cover;object-position:left center;-webkit-user-drag:none}
+
+/* Escena temporal del paso de página (la crea lectopolis-flip.js) */
+.lp-flip__stage{position:absolute;inset:0;z-index:3;transform-style:preserve-3d;pointer-events:none}
+.lp-flip__half{position:absolute;top:0;bottom:0;width:50%;overflow:hidden}
+.lp-flip__half--left{left:0}.lp-flip__half--right{right:0}
+.lp-flip__stage img{position:absolute;top:0;height:100%;max-width:none;object-fit:cover;object-position:left center}
+.lp-flip__half img{width:200%}
+.lp-flip__half--left img{left:0}.lp-flip__half--right img{left:-100%}
+.lp-flip__half:after,.lp-flip__face:after,.lp-flip__face:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:0}
+
+/* Sombra que proyecta la hoja sobre la página que se descubre y la que se cubre */
+.lp-flip__half--reveal:after{background:linear-gradient(var(--lp-shadow-dir,90deg),rgba(0,0,0,.75) 0%,rgba(0,0,0,.35) 18%,rgba(0,0,0,.08) 55%,transparent 80%);animation:lp-flip-reveal var(--lp-flip-duration,1400ms) cubic-bezier(.45,.05,.3,1) both}
+.lp-flip__half--cover:after{background:linear-gradient(var(--lp-cover-dir,270deg),rgba(0,0,0,.55),rgba(0,0,0,.18) 45%,transparent 85%);animation:lp-flip-cover var(--lp-flip-duration,1400ms) cubic-bezier(.45,.05,.3,1) both}
+
+/* La hoja: tiras anidadas que se curvan como papel */
+.lp-flip__strip{position:absolute;top:0;height:100%;transform-style:preserve-3d;will-change:transform}
+.lp-flip__leaf{width:calc(50% / var(--lp-strips,6))}
+.lp-flip__strip .lp-flip__strip{width:100%;top:0}
+.lp-flip__face{position:absolute;inset:0 -.6px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#f6f3ec}
+.lp-flip__face img{width:calc(var(--lp-strips,6) * 200%)}
+.lp-flip__face--back{transform:rotateY(180deg)}
+/* Sombreado de la curva: más oscuro hacia el lomo al levantar la hoja */
+.lp-flip__face--front:after{background:rgba(0,0,0,calc(.16 + var(--k,0) * .045));animation:lp-flip-shade-front var(--lp-flip-duration,1400ms) cubic-bezier(.45,.05,.3,1) both}
+.lp-flip__face--back:after{background:rgba(0,0,0,calc(.34 - var(--k,0) * .045));animation:lp-flip-shade-back var(--lp-flip-duration,1400ms) cubic-bezier(.45,.05,.3,1) both}
+/* Brillo del papel que recorre la hoja */
+.lp-flip__face--front:before{z-index:1;background:rgba(255,255,255,calc(var(--k,0) * .05));animation:lp-flip-gloss var(--lp-flip-duration,1400ms) ease-in-out both}
+.lp-flip__face--back:before{z-index:1;opacity:.22;background:repeating-linear-gradient(0deg,rgba(120,100,70,.08) 0 1px,transparent 1px 3px),radial-gradient(circle at 30% 40%,rgba(255,255,255,.35),transparent 60%);mix-blend-mode:multiply;animation:lp-flip-paper var(--lp-flip-duration,1400ms) ease-in-out both}
+/* Canto de la hoja (grosor del papel) */
+.lp-flip__strip--tip>.lp-flip__face--front{box-shadow:inset var(--lp-edge,-2px) 0 0 rgba(255,255,255,.7)}
+.lp-flip__strip--tip>.lp-flip__face--back{box-shadow:inset calc(var(--lp-edge,-2px) * -1) 0 0 rgba(255,255,255,.7)}
+
+/* Lomo del libro */
+.lp-flip__spine{position:absolute;top:0;bottom:0;left:50%;width:70px;margin-left:-35px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.28) 42%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.28) 58%,transparent);opacity:0;animation:lp-flip-spine var(--lp-flip-duration,1400ms) ease-in-out both}
+
+/* Siguiente: la página derecha gira hacia la izquierda */
+.lp-flip__stage--next .lp-flip__leaf{left:50%;transform-origin:left center;animation:lp-flip-turn-next var(--lp-flip-duration,1400ms) cubic-bezier(.5,.05,.25,1) both}
+.lp-flip__stage--next .lp-flip__strip .lp-flip__strip{left:100%;transform-origin:left center;animation:lp-flip-curl-next var(--lp-flip-duration,1400ms) cubic-bezier(.45,.05,.3,1) both}
+.lp-flip__stage--next{--lp-shadow-dir:90deg;--lp-cover-dir:270deg;--lp-face-dir:90deg;--lp-back-dir:270deg;--lp-edge:-2px}
+/* Anterior: la página izquierda gira hacia la derecha */
+.lp-flip__stage--prev .lp-flip__leaf{right:50%;transform-origin:right center;animation:lp-flip-turn-prev var(--lp-flip-duration,1400ms) cubic-bezier(.5,.05,.25,1) both}
+.lp-flip__stage--prev .lp-flip__strip .lp-flip__strip{right:100%;transform-origin:right center;animation:lp-flip-curl-prev var(--lp-flip-duration,1400ms) cubic-bezier(.45,.05,.3,1) both}
+.lp-flip__stage--prev{--lp-shadow-dir:270deg;--lp-cover-dir:90deg;--lp-face-dir:270deg;--lp-back-dir:90deg;--lp-edge:2px}
+
+@keyframes lp-flip-turn-next{0%{transform:rotateY(0) translateZ(0)}45%{transform:rotateY(-80deg) translateZ(2px)}100%{transform:rotateY(-180deg) translateZ(0)}}
+@keyframes lp-flip-turn-prev{0%{transform:rotateY(0) translateZ(0)}45%{transform:rotateY(80deg) translateZ(2px)}100%{transform:rotateY(180deg) translateZ(0)}}
+@keyframes lp-flip-curl-next{0%{transform:rotateY(0)}30%{transform:rotateY(-7deg)}62%{transform:rotateY(-3deg)}82%{transform:rotateY(2.5deg)}100%{transform:rotateY(0)}}
+@keyframes lp-flip-curl-prev{0%{transform:rotateY(0)}30%{transform:rotateY(7deg)}62%{transform:rotateY(3deg)}82%{transform:rotateY(-2.5deg)}100%{transform:rotateY(0)}}
+@keyframes lp-flip-shade-front{0%{opacity:0}50%{opacity:.85}100%{opacity:1}}
+@keyframes lp-flip-shade-back{0%{opacity:1}50%{opacity:.7}100%{opacity:0}}
+@keyframes lp-flip-gloss{0%{opacity:0}30%{opacity:1}60%{opacity:.5}100%{opacity:0}}
+@keyframes lp-flip-paper{0%,100%{opacity:0}50%{opacity:.25}}
+@keyframes lp-flip-reveal{0%{opacity:1}35%{opacity:.75}100%{opacity:0}}
+@keyframes lp-flip-cover{0%{opacity:0}75%{opacity:.8}100%{opacity:0}}
+@keyframes lp-flip-spine{0%,100%{opacity:0}50%{opacity:1}}
+
+/* Movimiento reducido: fundido suave en lugar del paso de página */
+.lp-flip--fade .lp-flip__slide{transition:opacity .6s ease,visibility 0s linear .6s}
+.lp-flip--fade .lp-flip__slide.is-active{transition:opacity .6s ease}
+
+/* Controles */
+.lp-flip__controls{position:absolute;left:50%;bottom:14px;z-index:4;display:flex;align-items:center;gap:6px;transform:translateX(-50%);padding:6px 8px;border-radius:99px;background:rgba(10,10,10,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.lp-flip__arrow,.lp-flip__pause{display:grid;place-items:center;width:36px;height:36px;padding:0;border:0;border-radius:50%;background:transparent;color:#fff;cursor:pointer;transition:background .2s}
+.lp-flip__arrow:hover,.lp-flip__pause:hover{background:rgba(255,255,255,.16)}
+.lp-flip__arrow:focus-visible,.lp-flip__pause:focus-visible,.lp-flip__dot:focus-visible{outline:2px solid var(--lp-cyan,#22b2db);outline-offset:2px}
+.lp-flip__dots{display:flex;align-items:center;gap:4px}
+.lp-flip__dot{display:grid;place-items:center;width:30px;height:36px;padding:0;border:0;background:transparent;cursor:pointer}
+.lp-flip__dot span{position:relative;display:block;width:22px;height:4px;border-radius:99px;background:rgba(255,255,255,.35);overflow:hidden}
+.lp-flip__dot span:after{content:'';position:absolute;inset:0;background:var(--lp-cyan,#22b2db);transform:scaleX(0);transform-origin:left}
+.lp-flip__dot.is-active span:after{transform:scaleX(1)}
+.lp-flip--autoplay .lp-flip__dot.is-active span:after{animation:lp-flip-progress var(--lp-flip-interval,6000ms) linear both}
+.lp-flip--paused .lp-flip__dot.is-active span:after{animation-play-state:paused}
+.lp-flip__pause .lp-flip__icon-play,.lp-flip__pause[aria-pressed="true"] .lp-flip__icon-pause{display:none}
+.lp-flip__pause[aria-pressed="true"] .lp-flip__icon-play{display:block}
+@keyframes lp-flip-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Franja inferior */
+.lp-flip__bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px max(5vw,24px);border-top:1px solid #ffffff26;font:14px/1.5 var(--font-body-family)}
+.lp-flip__caption{margin:0;font-size:13px;font-weight:600}
+
+@media(max-width:749px){
+  .lp-flip__book{aspect-ratio:var(--lp-flip-ratio-mobile,var(--lp-flip-ratio,3));min-height:200px}
+  .lp-flip__controls{left:auto;right:8px;bottom:8px;transform:none;padding:2px 4px}
+  .lp-flip__arrow{display:none}
+  .lp-flip__bar{flex-direction:column;align-items:stretch;padding:18px 20px 22px;text-align:center}
+  .lp-flip__bar .lp-campaign-cta{white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){
+  .lp-flip--autoplay .lp-flip__dot.is-active span:after{animation:none;transform:scaleX(1)}
+}

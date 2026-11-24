@@ -4,6 +4,6 @@
 .lp-editorial-divider picture,.lp-editorial-divider img{display:block;width:100%;border-radius:3px}
 .lp-editorial-divider img{height:auto;max-height:520px;object-fit:contain;object-position:center}
 .lp-editorial-divider__surface:focus-visible{outline:3px solid var(--lp-black,#0a0a0a);outline-offset:6px}
-.lp-editorial-divider__placeholder{margin-block:20px;padding-block:20px;border:1px dashed #9aa3ab;font:13px/1.6 Arial,Helvetica,sans-serif;color:#4a4f55}
+.lp-editorial-divider__placeholder{margin-block:20px;padding-block:20px;border:1px dashed #9aa3ab;font:13px/1.6 var(--font-body-family);color:#4a4f55}
 @media(max-width:749px){.lp-editorial-divider{margin:15px 0;padding:12px}.lp-editorial-divider img{max-height:360px}}
 @media(prefers-reduced-motion:reduce){.lp-editorial-divider__surface{transform:none!important;transition:none;will-change:auto!important}}

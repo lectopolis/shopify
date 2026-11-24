@@ -1463,6 +1463,17 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "Envío gratis"
+      },
+      {
+        "type": "number",
+        "id": "lectopolis_free_shipping_threshold",
+        "label": "Envío gratis desde (COP)",
+        "info": "Muestra en el carrito cuánto falta para el envío gratis. Escribe 0 para ocultar la barra. Debe coincidir con la tarifa de envío gratis configurada en Configuración → Envíos.",
+        "default": 200000
       }
     ]
   }
