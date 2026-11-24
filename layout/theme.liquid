@@ -229,18 +229,17 @@
   {% if request.page_type == 'product' or request.page_type == 'collection' or request.page_type == 'search' %}
     {{ 'lectopolis-shopping.css' | asset_url | stylesheet_tag }}
   {% endif %}
-  {% if settings.cart_type == 'drawer' %}
-    {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-    {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-    {{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
-    {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-    {{ 'component-price.css' | asset_url | stylesheet_tag }}
-    {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
-  {% endif %}
-  {% if settings.predictive_search_enabled %}
-    {{ 'component-predictive-search.css' | asset_url | stylesheet_tag }}
-    {{ 'component-search.css' | asset_url | stylesheet_tag }}
-  {% endif %}
+  {%- comment -%}El carrito lateral y la búsqueda predictiva no se ven al cargar: sus estilos se cargan sin bloquear el primer pintado.{%- endcomment -%}
+  {%- capture deferred_css -%}
+    {%- if settings.cart_type == 'drawer' -%}component-cart-drawer.css,component-cart.css,component-cart-items.css,component-totals.css,component-price.css,component-discounts.css{%- endif -%}
+    {%- if settings.predictive_search_enabled -%},component-predictive-search.css,component-search.css{%- endif -%}
+  {%- endcapture -%}
+  {%- assign deferred_css = deferred_css | split: ',' -%}
+  {%- if settings.cart_type == 'drawer' -%}<style>cart-drawer.drawer:not(.active){position:fixed;visibility:hidden}</style>{%- endif -%}
+  {%- for file in deferred_css -%}
+    {%- if file != blank -%}<link rel="stylesheet" href="{{ file | asset_url }}" media="print" onload="this.media='all'">{%- endif -%}
+  {%- endfor -%}
+  <noscript>{%- for file in deferred_css -%}{%- if file != blank -%}{{ file | asset_url | stylesheet_tag }}{%- endif -%}{%- endfor -%}</noscript>
   <script src="{{ 'constants.js' | asset_url }}" defer></script>
   <script src="{{ 'pubsub.js' | asset_url }}" defer></script>
   <script src="{{ 'global.js' | asset_url }}" defer></script>

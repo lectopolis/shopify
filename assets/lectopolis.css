@@ -114,7 +114,7 @@ body.lp-store{background:var(--lp-paper);color:var(--lp-ink)}
 
 /* Preserve the supplied logo pixels; clip only the large JPEG margins. */
 .lp-logo-window{display:block!important;position:relative;flex-shrink:0;width:210px;aspect-ratio:1030/485;overflow:hidden;line-height:0!important;background:#fff}
-.lp-logo-window>img{display:block;position:absolute;width:134.563107%;max-width:none;height:auto;left:-15.145631%;top:-91.752577%}
+.lp-logo-window>img{display:block;width:100%;height:100%;object-fit:contain}
 .lp-brand .lp-logo-window{mix-blend-mode:multiply}
 .lp-footer-logo{display:inline-block;border-radius:3px;overflow:hidden;line-height:0}
 .lp-footer-logo .lp-logo-window{width:250px}

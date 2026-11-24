@@ -43,3 +43,11 @@ Se retiraron las plantillas y recursos de marca heredados que no se utilizan. Lo
 ## Catálogo y fichas de libros
 
 El catálogo y la búsqueda muestran cuatro columnas en escritorio y dos en móvil. Las fichas usan la paleta de Lectópolis, títulos legibles, disponibilidad de la variante seleccionada y consulta por WhatsApp con la edición. Autor, código y políticas solo aparecen cuando existen datos. No se asigna automáticamente el estado nuevo/leído a los productos. Verificado con render local en 320, 375, 768 y 1440 px y con estados disponible/agotado; la actualización de variantes y el checkout requieren verificación en Shopify.
+
+## Rendimiento
+
+- Banner principal: el PNG de 2,2 MB se reemplazó por WebP en cuatro tamaños (750, 1100, 1600 y 2172 px; de 34 KB a 170 KB) con `srcset`, de modo que cada pantalla descarga solo el tamaño que necesita.
+- Logo: el JPG cuadrado de 1386 px (60 KB) recortado por CSS se reemplazó por el área visible recortada en WebP (260 y 520 px; 5–10 KB).
+- Se retiraron del tema los PNG de banner sin uso (historias y logo v2) y el JPG original del logo; siguen en el historial Git.
+- Los estilos del carrito lateral y de la búsqueda predictiva se cargan sin bloquear el primer pintado. Una regla en línea mantiene oculto el carrito mientras tanto.
+- Las tarjetas de producto ya no cargan los estilos de pedido rápido por volumen ni de valoraciones cuando no se usan.

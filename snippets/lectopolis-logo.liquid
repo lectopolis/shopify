@@ -1,4 +1,4 @@
-{% comment %}Original artwork, unchanged. The CSS window trims only the surrounding white space.{% endcomment %}
+{% comment %}Logo original recortado a su área visible (sin el margen blanco) y comprimido en WebP.{% endcomment %}
 <span class="lp-logo-window{% if footer %} lp-logo-window--footer{% endif %}">
-  <img src="{{ 'lectopolis-logo-original-v1.jpg' | asset_url }}" width="1386" height="1386" alt="Librería Lectópolis — Amamos leer" loading="{% if footer %}lazy{% else %}eager{% endif %}" decoding="async">
+  <img src="{{ 'lectopolis-logo-520.webp' | asset_url }}" srcset="{{ 'lectopolis-logo-260.webp' | asset_url }} 260w, {{ 'lectopolis-logo-520.webp' | asset_url }} 520w" sizes="{% if footer %}250px{% else %}210px{% endif %}" width="520" height="245" alt="Librería Lectópolis — Amamos leer" loading="{% if footer %}lazy{% else %}eager{% endif %}" decoding="async">
 </span>

@@ -3,7 +3,7 @@
     {% if section.settings.image != blank %}
       {{ section.settings.image | image_url: width: 2400 | image_tag: widths: '750,1100,1600,2172,2400', sizes: '100vw', loading: 'eager', fetchpriority: 'high', alt: 'Lectópolis — Amamos leer. Cada libro tiene un lector. El próximo eres tú. Libros nuevos y leídos. Envíos nacionales.' }}
     {% else %}
-      <img src="{{ 'lectopolis-banner-logo-v2.png' | asset_url }}" width="2172" height="724" loading="eager" fetchpriority="high" alt="Lectópolis — Amamos leer. Cada libro tiene un lector. El próximo eres tú. Libros nuevos y leídos. Envíos nacionales.">
+      <img src="{{ 'lectopolis-banner-logo-1100.webp' | asset_url }}" srcset="{{ 'lectopolis-banner-logo-750.webp' | asset_url }} 750w, {{ 'lectopolis-banner-logo-1100.webp' | asset_url }} 1100w, {{ 'lectopolis-banner-logo-1600.webp' | asset_url }} 1600w, {{ 'lectopolis-banner-logo-2172.webp' | asset_url }} 2172w" sizes="100vw" width="2172" height="724" decoding="async" loading="eager" fetchpriority="high" alt="Lectópolis — Amamos leer. Cada libro tiene un lector. El próximo eres tú. Libros nuevos y leídos. Envíos nacionales.">
     {% endif %}
   </a>
   <div class="lp-campaign-bottom">

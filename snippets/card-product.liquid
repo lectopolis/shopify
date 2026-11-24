@@ -23,11 +23,13 @@
 {% endcomment %}
 {%- capture compact_card_markup -%}
 {%- unless skip_styles -%}
-  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
-  {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
-  {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
-  {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+  {%- if show_rating -%}{{ 'component-rating.css' | asset_url | stylesheet_tag }}{%- endif -%}
+  {%- if quick_add == 'bulk' -%}
+    {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+    {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
+    {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
 {%- endunless -%}
 
 {%- if card_product and card_product != empty -%}
