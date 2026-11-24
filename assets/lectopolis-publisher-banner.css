@@ -1,9 +1,9 @@
 .lp-publisher-banner{padding-top:24px;padding-bottom:0;margin-inline:auto}
 .lp-publisher-banner:not(.page-width){width:100%}
-.lp-publisher-banner__art{background:var(--lp-paper,#faf8f2);overflow:hidden}
+.lp-publisher-banner__art{background:var(--lp-paper,#ffffff);overflow:hidden}
 .lp-publisher-banner picture,.lp-publisher-banner img{display:block;width:100%}
 .lp-publisher-banner img{height:auto;max-height:520px;object-fit:contain;object-position:center}
-.lp-publisher-banner__caption{display:flex;align-items:baseline;justify-content:center;gap:12px 24px;flex-wrap:wrap;padding:18px 24px;text-align:center;border-bottom:1px solid var(--lp-border,#dedbd2);font-family:Arial,Helvetica,sans-serif}
-.lp-publisher-banner__caption p{font-size:20px;line-height:1.35;font-weight:700;color:var(--lp-purple,#5b23aa);margin:0;overflow-wrap:anywhere}
-.lp-publisher-banner__caption span{font-size:13px;line-height:1.6;color:var(--lp-ink,#242122);max-width:700px;overflow-wrap:anywhere}
+.lp-publisher-banner__caption{display:flex;align-items:baseline;justify-content:center;gap:12px 24px;flex-wrap:wrap;padding:18px 24px;text-align:center;border-bottom:1px solid var(--lp-border,#e2e5e8);font-family:Arial,Helvetica,sans-serif}
+.lp-publisher-banner__caption p{font-size:20px;line-height:1.35;font-weight:700;color:var(--lp-black,#0a0a0a);margin:0;overflow-wrap:anywhere}
+.lp-publisher-banner__caption span{font-size:13px;line-height:1.6;color:var(--lp-ink,#0a0a0a);max-width:700px;overflow-wrap:anywhere}
 @media(max-width:749px){.lp-publisher-banner{padding-top:14px}.lp-publisher-banner img{max-height:360px}.lp-publisher-banner__caption{padding:15px 20px;gap:6px}.lp-publisher-banner__caption p{font-size:18px}.lp-publisher-banner__caption span{font-size:12px}}

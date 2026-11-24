@@ -4,7 +4,7 @@ Rediseño sobre el tema exportado el 16 de noviembre de 2026. La referencia visu
 
 ## Análisis en cinco aspectos
 
-1. **Color:** violeta y amarillo para novedades; verde y azul eléctrico para contenidos participativos; coral y menta para autores y divulgación. Los tonos web son aproximaciones visuales de la captura, no un manual de marca oficial.
+1. **Color:** paleta tomada del logo: blanco de fondo, negro para texto, botones y franjas, y azul (cian del logo #22b2db para acentos y fondos; azul profundo #0b6e99 para enlaces y enfoque, con contraste legible sobre blanco).
 2. **Composición:** titulares grandes, contrastes intensos, collage, formas gráficas y portadas protagonistas. Se trasladan a una portada editorial, tarjetas de color y libros con perspectiva.
 3. **Contenido:** se ven novedades, Coraline, Bridgerton, Isabel Allende, curiosidades y selecciones temáticas. Son referencias al estilo de publicación; no se afirma que estén disponibles para comprar.
 4. **Conversación:** preguntas, descubrimiento y divulgación literaria. La navegación invita a descubrir lecturas, buscar libros y acercarse a la librería por Instagram.

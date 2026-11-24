@@ -1,45 +1,45 @@
 /* Shared catalog and book pages, using the Instagram palette. */
-.lp-store .lectopolis-eyebrow{font:700 11px/1.6 Arial,Helvetica,sans-serif;letter-spacing:.12em;color:var(--lp-purple)}
-.lp-store .lectopolis-collection-hero{background:var(--lp-mint);color:var(--lp-ink);border-bottom:1px solid #a9c7b1}
+.lp-store .lectopolis-eyebrow{font:700 11px/1.6 Arial,Helvetica,sans-serif;letter-spacing:.12em;color:var(--lp-black)}
+.lp-store .lectopolis-collection-hero{background:var(--lp-ice);color:var(--lp-ink);border-bottom:1px solid #b9e3f1}
 .lp-store .lectopolis-collection-hero .collection-hero__inner{padding-top:35px;padding-bottom:38px}
 .lp-store .lectopolis-collection-hero .collection-hero__title{font:800 clamp(36px,5vw,65px)/1.05 Arial,Helvetica,sans-serif;letter-spacing:-.055em;max-width:850px}
 .lp-store .lectopolis-collection-hero .breadcrumbs{font-size:12px}
-.lp-store .lectopolis-collection-hero__note{font:14px/1.7 Arial,Helvetica,sans-serif;color:#244735;max-width:650px}
+.lp-store .lectopolis-collection-hero__note{font:14px/1.7 Arial,Helvetica,sans-serif;color:#0b5a7d;max-width:650px}
 .lp-store .lectopolis-collection-grid{background:var(--lp-paper)}
-.lp-store .lectopolis-collection-grid__scope{font-size:12px;color:#535056}
-.lp-store .lectopolis-collection-grid__scope a{color:var(--lp-purple)}
+.lp-store .lectopolis-collection-grid__scope{font-size:12px;color:#4a4f55}
+.lp-store .lectopolis-collection-grid__scope a{color:var(--lp-black)}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card-wrapper{perspective:1000px}
-.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card__inner{background:#eee9f5;aspect-ratio:4/5!important}
-.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .grid__item:nth-child(4n+2) .card__inner{background:var(--lp-mint)}
-.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .grid__item:nth-child(4n+3) .card__inner{background:#ffe1e5}
-.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .grid__item:nth-child(4n+4) .card__inner{background:#fff2a6}
+.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card__inner{background:#f3f5f7;aspect-ratio:4/5!important}
+.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .grid__item:nth-child(4n+2) .card__inner{background:var(--lp-ice)}
+.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .grid__item:nth-child(4n+3) .card__inner{background:#f3f5f7}
+.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .grid__item:nth-child(4n+4) .card__inner{background:#eaf7fc}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card__media{padding:25px!important}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card__media .media{position:relative}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card__media img{filter:drop-shadow(6px 8px 5px #0002);transition:transform .35s}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card__heading{font:700 17px/1.35 Arial,Helvetica,sans-serif;letter-spacing:-.025em;overflow-wrap:anywhere}
-.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card-information .caption-with-letter-spacing{color:var(--lp-purple);font:11px/1.6 Arial,Helvetica,sans-serif}
+.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card-information .caption-with-letter-spacing{color:var(--lp-black);font:11px/1.6 Arial,Helvetica,sans-serif}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .price{font:700 16px/1.5 Arial,Helvetica,sans-serif}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .quick-add__submit{min-height:46px;font:600 13px/1.4 Arial,Helvetica,sans-serif}
-.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .quick-add__submit:after{box-shadow:0 0 0 1px var(--lp-purple)}
+.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .quick-add__submit:after{box-shadow:0 0 0 1px var(--lp-black)}
 .lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) :is(a,button,select):focus-visible{outline:3px solid var(--lp-blue);outline-offset:4px}
 .lp-store .lp-book-page .breadcrumbs{font:12px/1.6 Arial,Helvetica,sans-serif;margin-bottom:28px}
 .lp-store .lp-book-page .product__title h1{font:800 clamp(30px,3.1vw,45px)/1.12 Arial,Helvetica,sans-serif;letter-spacing:-.045em;overflow-wrap:anywhere}
-.lp-store .lp-book-page .product__vendor{font:13px/1.6 Arial,Helvetica,sans-serif;color:#62576b;margin-top:14px}
-.lp-store .lp-book-page .product__vendor a{color:var(--lp-purple);text-underline-offset:4px}
+.lp-store .lp-book-page .product__vendor{font:13px/1.6 Arial,Helvetica,sans-serif;color:#4a4f55;margin-top:14px}
+.lp-store .lp-book-page .product__vendor a{color:var(--lp-black);text-underline-offset:4px}
 .lp-store .lp-book-page .price--large{font:700 25px/1.4 Arial,Helvetica,sans-serif;margin-top:20px}
-.lp-store .lp-book-page .product__text.caption-with-letter-spacing{font:700 10px/1.7 Arial,Helvetica,sans-serif;color:var(--lp-purple);letter-spacing:.1em}
+.lp-store .lp-book-page .product__text.caption-with-letter-spacing{font:700 10px/1.7 Arial,Helvetica,sans-serif;color:var(--lp-black);letter-spacing:.1em}
 .lp-store .lp-book-page .product__description{font-size:16px;line-height:1.85}
-.lp-store .lp-book-page .product-form__submit{min-height:54px;font:700 14px/1.4 Arial,Helvetica,sans-serif;background:var(--lp-purple);color:#fff;letter-spacing:.015em}
-.lp-store .lp-book-page .product__media-wrapper{background:#eee9f5;padding:25px;border-radius:3px;align-self:start}
+.lp-store .lp-book-page .product-form__submit{min-height:54px;font:700 14px/1.4 Arial,Helvetica,sans-serif;background:var(--lp-black);color:#fff;letter-spacing:.015em}
+.lp-store .lp-book-page .product__media-wrapper{background:#f3f5f7;padding:25px;border-radius:3px;align-self:start}
 .lp-store .lp-book-page .product__media img{object-fit:contain}
 .lp-store .lp-book-page .product__media-list{margin-bottom:0}
 .lp-store .lectopolis-book-details{font:13px/1.7 Arial,Helvetica,sans-serif;padding:18px 0 8px}
-.lp-stock{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;background:var(--lp-mint);color:#164d32;font-weight:700;font-size:11px;border-radius:2px}
+.lp-stock{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;background:var(--lp-ice);color:#0b5a7d;font-weight:700;font-size:11px;border-radius:2px}
 .lp-stock:before{content:'';width:6px;height:6px;background:currentColor;border-radius:50%}
-.lp-stock--unavailable{background:#eee7f3;color:#5d4b68}
+.lp-stock--unavailable{background:#f3f5f7;color:#4a4f55}
 .lp-book-facts{display:grid;grid-template-columns:auto 1fr;gap:5px 15px;margin:17px 0}
 .lp-book-facts dt{font-weight:700}.lp-book-facts dd{margin:0;overflow-wrap:anywhere}
-.lp-store .lp-shipping-note{background:#fff6b8;padding:12px 14px;font-size:12px;margin:15px 0;max-width:500px}
+.lp-store .lp-shipping-note{background:#eaf7fc;padding:12px 14px;font-size:12px;margin:15px 0;max-width:500px}
 .lp-store .lp-book-whatsapp{display:inline-flex;align-items:center;gap:10px;min-height:46px;text-decoration:underline;text-underline-offset:4px;font-weight:700}
 .lp-book-policy-links{display:flex;gap:16px;flex-wrap:wrap;font-size:11px}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){.lp-store :is(.lectopolis-collection-grid,.lectopolis-search-grid) .card-wrapper:hover .card__media img{transform:rotateY(-10deg) rotateZ(-2deg) translateY(-4px)!important}}
