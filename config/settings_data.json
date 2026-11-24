@@ -12,9 +12,9 @@
     "logo": "",
     "logo_width": 120,
     "favicon": "",
-    "type_header_font": "barlow_semi_condensed_n6",
+    "type_header_font": "roboto_n4",
     "heading_scale": 105,
-    "type_body_font": "barlow_n4",
+    "type_body_font": "roboto_serif_n4",
     "body_scale": 110,
     "page_width": 1400,
     "spacing_sections": 0,
@@ -139,6 +139,14 @@
         "settings": {
           "color_scheme": "background-1"
         }
+      },
+      "lectopolis-header": {
+        "type": "lectopolis-header",
+        "settings": {}
+      },
+      "lectopolis-footer": {
+        "type": "lectopolis-footer",
+        "settings": {}
       }
     },
     "content_for_index": [],
