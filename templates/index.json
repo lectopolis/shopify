@@ -12,11 +12,33 @@
     "lectopolis_hero_book": {
       "type": "lectopolis-hero-book",
       "blocks": {
-        "slide_1": { "type": "slide", "settings": { "link": "shopify://collections/all" } },
-        "slide_2": { "type": "slide", "settings": {} },
-        "slide_3": { "type": "slide", "settings": {} }
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "link": "shopify://collections/all",
+            "alt": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "link": "",
+            "alt": ""
+          }
+        }
       },
-      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
       "settings": {
         "label": "Banners de Lectópolis",
         "autoplay": true,
@@ -24,21 +46,8 @@
         "duration": 14,
         "show_bar": true,
         "caption": "Más de 15 años compartiendo historias.",
-        "button_label": "Explora nuestros libros"
-      }
-    },
-    "lectopolis_banner": {
-      "type": "lectopolis-banner",
-      "disabled": true,
-      "settings": {}
-    },
-    "editorial_divider_1": {
-      "type": "lectopolis-editorial-divider",
-      "disabled": true,
-      "settings": {
-        "collection": "alianza",
-        "heading": "Editorial Alianza",
-        "enable_3d": true
+        "button_label": "Explora nuestros libros",
+        "button_link": ""
       }
     },
     "featured_collection": {
@@ -160,8 +169,6 @@
   },
   "order": [
     "lectopolis_hero_book",
-    "lectopolis_banner",
-    "editorial_divider_1",
     "featured_collection",
     "editorial_divider_2",
     "featured_collection_AFyeht",
