@@ -87,12 +87,12 @@
       ],
       "settings": {
         "label": "Banners de Lectópolis",
-        "autoplay": true,
+        "autoplay": false,
         "interval": 6,
         "duration": 14,
         "show_bar": true,
         "caption": "Más de 15 años compartiendo historias.",
-        "button_label": "Explora nuestros libros",
+        "button_label": "Ver todos los libros",
         "button_link": ""
       },
       "disabled": true

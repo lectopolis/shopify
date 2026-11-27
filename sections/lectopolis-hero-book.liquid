@@ -8,25 +8,25 @@
       assign slide_count = slide_count | plus: 1
     endif
   endfor
-  assign first_ratio = 3.0
+  assign first_ratio = 2.0
   for block in slides
     if block.settings.image != blank
       assign first_ratio = block.settings.image.aspect_ratio
       break
     endif
   endfor
-  assign mobile_ratio = first_ratio
+  assign mobile_ratio = 1.6
   for block in slides
-    if block.settings.image != blank and block.settings.mobile_image != blank
-      assign mobile_ratio = block.settings.mobile_image.aspect_ratio
+    if block.settings.image != blank
+      assign mobile_ratio = block.settings.mobile_image.aspect_ratio | default: first_ratio
       break
     endif
   endfor
-  assign default_alt = 'Lectópolis — Amamos leer. Cada libro tiene un lector. El próximo eres tú.'
+  assign default_alt = 'Selección de la librería Lectópolis'
 -%}
 <section
   class="lp-flip"
-  aria-roledescription="carrusel"
+  {% if slide_count > 1 %}aria-roledescription="carrusel"{% endif %}
   aria-label="{{ section.settings.label | default: 'Banners de Lectópolis' | escape }}"
   data-lp-flip
   data-autoplay="{{ section.settings.autoplay }}"
@@ -54,7 +54,7 @@
           role="group"
           aria-roledescription="diapositiva"
           aria-label="{{ index | plus: 1 }} de {{ slide_count }}"
-          {% unless is_first %}aria-hidden="true"{% endunless %}
+          {% unless is_first %}aria-hidden="true" inert{% endunless %}
           data-lp-flip-slide
           {{ block.shopify_attributes }}
         >
@@ -76,12 +76,17 @@
     {%- else -%}
       <div class="lp-flip__slide is-active" data-lp-flip-slide>
         <a href="{{ routes.all_products_collection_url }}" class="lp-flip__link">
-          <img class="lp-flip__img" src="{{ 'lectopolis-banner-logo-1100.webp' | asset_url }}" srcset="{{ 'lectopolis-banner-logo-750.webp' | asset_url }} 750w, {{ 'lectopolis-banner-logo-1100.webp' | asset_url }} 1100w, {{ 'lectopolis-banner-logo-1600.webp' | asset_url }} 1600w, {{ 'lectopolis-banner-logo-2172.webp' | asset_url }} 2172w" sizes="100vw" width="2172" height="724" loading="eager" fetchpriority="high" alt="{{ default_alt }}">
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ 'lectopolis-hero-book-mobile.webp' | asset_url }}">
+            <img class="lp-flip__img" src="{{ 'lectopolis-hero-book-desktop.webp' | asset_url }}" width="1440" height="720" loading="eager" fetchpriority="high" alt="Explorar todos los libros de Lectópolis">
+          </picture>
         </a>
       </div>
     {%- endif -%}
   </div>
 
+  {%- if slide_count > 1 or section.settings.show_bar -%}
+  <div class="lp-flip__footer">
   {%- if slide_count > 1 -%}
     <div class="lp-flip__controls">
       <button type="button" class="lp-flip__arrow lp-flip__arrow--prev" data-lp-flip-prev aria-label="Banner anterior">
@@ -108,9 +113,11 @@
     <div class="lp-flip__bar">
       {%- if section.settings.caption != blank -%}<p class="lp-flip__caption">{{ section.settings.caption | escape }}</p>{%- endif -%}
       {%- if section.settings.button_label != blank -%}
-        <a class="lp-campaign-cta" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'lectopolis-icon' %}</a>
+        <a class="lp-flip__cta" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} <span aria-hidden="true">→</span></a>
       {%- endif -%}
     </div>
+  {%- endif -%}
+  </div>
   {%- endif -%}
 </section>
 
@@ -125,13 +132,13 @@
       "content": "Los banners pasan como la hoja de un libro abierto. Agrega al menos dos banners con la misma proporción (recomendado 2172 × 724 px). Sin banners se muestra el banner de Lectópolis."
     },
     { "type": "text", "id": "label", "label": "Nombre para accesibilidad", "default": "Banners de Lectópolis" },
-    { "type": "checkbox", "id": "autoplay", "label": "Pasar banners automáticamente", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Pasar banners automáticamente", "default": false },
     { "type": "range", "id": "interval", "label": "Tiempo por banner", "min": 4, "max": 12, "step": 1, "unit": "s", "default": 6 },
     { "type": "range", "id": "duration", "label": "Duración del paso de página", "min": 8, "max": 22, "step": 1, "unit": "ds", "default": 14, "info": "En décimas de segundo (14 = 1,4 s)." },
     { "type": "header", "content": "Franja inferior" },
     { "type": "checkbox", "id": "show_bar", "label": "Mostrar franja con botón", "default": true },
     { "type": "text", "id": "caption", "label": "Texto", "default": "Más de 15 años compartiendo historias." },
-    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Explora nuestros libros" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver todos los libros" },
     { "type": "url", "id": "button_link", "label": "Enlace del botón" }
   ],
   "blocks": [

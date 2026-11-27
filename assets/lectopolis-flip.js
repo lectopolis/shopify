@@ -77,7 +77,9 @@
       slides.forEach((slide, i) => {
         const on = i === index;
         slide.classList.toggle('is-active', on);
-        slide.toggleAttribute('aria-hidden', !on);
+        if (on) slide.removeAttribute('aria-hidden');
+        else slide.setAttribute('aria-hidden', 'true');
+        slide.inert = !on;
         slide.querySelectorAll('a').forEach(a => on ? a.removeAttribute('tabindex') : a.setAttribute('tabindex', '-1'));
       });
       dots.forEach((dot, i) => {
