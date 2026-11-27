@@ -217,6 +217,10 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "lectopolis_book_request": {
+      "type": "lectopolis-book-request",
+      "settings": {}
     }
   },
   "order": [
@@ -228,6 +232,7 @@
     "featured_collection_rzPdAr",
     "cf041c51-04b0-4692-a755-688469da084e",
     "1766420446d652ec64",
-    "1773159858be925cff"
+    "1773159858be925cff",
+    "lectopolis_book_request"
   ]
 }

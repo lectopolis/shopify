@@ -1,0 +1,17 @@
+<section class="lpe" aria-labelledby="BookRequest-{{ section.id }}">
+  <div class="lpe-note">
+    <p class="lpe-label">Más de 15 años entre libros</p>
+    <h2 id="BookRequest-{{ section.id }}">¿Buscas un libro especial?</h2>
+    <p>Cuéntanos qué título o edición estás buscando. Te ayudamos a encontrarlo.</p>
+    <a class="lpe-button" href="https://wa.me/573136118658">Escríbenos por WhatsApp <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Consulta por un libro",
+  "enabled_on": { "templates": ["index"] },
+  "settings": [],
+  "presets": [{ "name": "Consulta por un libro" }]
+}
+{% endschema %}
