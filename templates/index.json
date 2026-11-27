@@ -70,22 +70,28 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/black-friday-lectopolis-escritorio.webp",
+            "mobile_image": "shopify://shop_images/black-friday-lectopolis-movil.webp",
             "link": "shopify://collections/all",
-            "alt": ""
+            "alt": "Black Friday en Lectópolis. Explora el catálogo."
           }
         },
         "slide_2": {
           "type": "slide",
           "settings": {
-            "link": "",
-            "alt": ""
+            "image": "shopify://shop_images/black-friday-libros-nuevos-escritorio.webp",
+            "mobile_image": "shopify://shop_images/black-friday-libros-nuevos-movil.webp",
+            "link": "/collections/all?sort_by=created-descending",
+            "alt": "Black Friday. Libros nuevos en Lectópolis."
           }
         },
         "slide_3": {
           "type": "slide",
           "settings": {
-            "link": "",
-            "alt": ""
+            "image": "shopify://shop_images/black-friday-libros-leidos-escritorio.webp",
+            "mobile_image": "shopify://shop_images/black-friday-libros-leidos-movil.webp",
+            "link": "https://wa.me/573136118658?text=Hola%2C%20quisiera%20consultar%20por%20los%20libros%20le%C3%ADdos.",
+            "alt": "Black Friday. Consulta por WhatsApp la disponibilidad de libros leídos."
           }
         }
       },
@@ -95,7 +101,7 @@
         "slide_3"
       ],
       "settings": {
-        "label": "Banners de Lectópolis",
+        "label": "Black Friday en Lectópolis",
         "autoplay": false,
         "interval": 6,
         "duration": 14,
