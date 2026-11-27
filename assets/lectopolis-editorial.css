@@ -1,0 +1,127 @@
+body.lp-store {
+  --lp-black: #101820;
+  --lp-ink: #101820;
+  --lp-ice: #e5f3fb;
+  --lp-sky: #c9e8f8;
+  --lp-display: Baskerville, 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  --lp-paper: #fff;
+  --lp-border: #d6e3ea;
+  --lp-cyan: #d8b174;
+  --lp-blue: #174c6b;
+  background: #fff;
+}
+
+.lp-store .lp-navigation a:hover { background: #e5f2fa; }
+.lp-store .lp-footer { background: #101820; }
+
+.lpe {
+  --ink: #101820;
+  --blue: #174c6b;
+  --paper: #fff;
+  --gold: #b48846;
+  --display: var(--lp-display);
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 var(--font-body-family, system-ui);
+  letter-spacing: 0;
+}
+
+.lpe *, .lpe *::before, .lpe *::after { box-sizing: border-box; }
+.lpe h1, .lpe h2, .lpe h3 { color: inherit; font-family: var(--display); font-weight: 400; margin: 0; }
+.lpe p { margin: 0; }
+.lpe a { color: inherit; }
+.lpe a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+
+.lpe-opening { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 24px; padding-block: clamp(27px, 4vw, 55px); border-bottom: 1px solid var(--lp-border); }
+.lpe-label { font-size: 11px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
+.lpe h1 { margin-bottom: 12px; font-size: clamp(38px, 5.5vw, 79px); line-height: 1; letter-spacing: -.05em; text-wrap: balance; }
+.lpe-intro { max-width: 60ch; }
+
+.lpe-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 49px; padding: 12px 17px; background: var(--ink); color: #fff !important; font-size: 13px; font-weight: 700; text-decoration: none; transition: background-color .2s; }
+.lpe-button span { color: #e6c88d; }
+.lpe-button:hover { background: var(--blue); }
+.lpe-link { font-size: 13px; font-weight: 700; text-underline-offset: 4px; }
+
+.lpe-wrap { max-width: 1480px; margin-inline: auto; padding-inline: clamp(20px, 6vw, 95px); }
+.lpe-shelves { padding-block: clamp(42px, 5vw, 75px); scroll-margin-top: 24px; }
+.lpe-heading { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
+.lpe h2 { font-size: clamp(36px, 4.6vw, 68px); line-height: 1.04; letter-spacing: -.045em; }
+.lpe-shelf-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.lpe-shelf { position: relative; display: flex; flex-direction: column; justify-content: end; min-height: 175px; padding: clamp(20px, 3vw, 43px); background: #e4f3fb; text-decoration: none; transition: box-shadow .2s; }
+.lpe-shelf:hover { box-shadow: inset 0 0 0 2px currentColor; }
+.lpe-shelf--sand { background: #f5f1e8; }
+.lpe-shelf--plum { background: #142330; color: #fff !important; }
+.lpe-shelf--plum .lpe-shelf-arrow { color: #e6c88d; }
+.lpe-shelf h3 { font-size: clamp(28px, 3vw, 46px); letter-spacing: -.035em; line-height: 1; }
+.lpe-shelf p { margin-top: 12px; max-width: 26ch; font-size: 14px; }
+.lpe-shelf-arrow { position: absolute; inset: 12px 17px auto auto; font-size: 23px; }
+
+.lpe-featured { padding-top: clamp(38px, 5vw, 70px); scroll-margin-top: 24px; }
+.lpe-books { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(24px, 3vw, 44px) clamp(14px, 2vw, 30px); }
+.lpe-book a { display: flex; flex-direction: column; align-items: flex-start; height: 100%; text-decoration: none; }
+.lpe-book a:hover h3 { color: var(--blue); text-decoration: underline; text-underline-offset: 4px; }
+.lpe-cover { position: relative; display: grid; place-items: center; flex: none; width: 100%; aspect-ratio: 4/5; padding: 12%; background: #edf5fa; }
+.lpe-cover img { position: absolute; inset: 12%; width: 76%; height: 76%; object-fit: contain; }
+.lpe-cover-placeholder { width: 100%; padding: 16%; background: var(--blue); color: #fff; overflow-wrap: anywhere; font-family: var(--display); }
+.lpe-book h3 { margin-top: 13px; font-size: clamp(18px, 2.1vw, 29px); line-height: 1.15; overflow-wrap: anywhere; }
+.lpe-book p { margin: 7px 0 10px; color: var(--ink); font-size: 15px; font-weight: 700; }
+.lpe-book-action { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; min-height: 36px; padding-inline: 10px; border: 1px solid #b9d1df; color: var(--blue); font-size: 13px; font-weight: 700; }
+.lpe-book a:hover .lpe-book-action { background: #e4f3fb; }
+
+.lpe-note { padding: clamp(42px, 6vw, 84px) 20px; background: #edf6fc; text-align: center; }
+.lpe-note h2 { margin-block: 13px; }
+.lpe-note .lpe-button { margin-top: 23px; }
+
+@media (max-width: 850px) {
+  .lpe-books { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+}
+
+@media (max-width: 590px) {
+  .lpe-shelf-grid { grid-template-columns: 1fr; }
+  .lpe-shelf { min-height: 122px; padding-right: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lpe-button, .lpe-shelf { transition: none; }
+}
+
+.lp-store .lectopolis-collection-hero { border-color: var(--lp-border); }
+.lp-store .lectopolis-collection-hero .collection-hero__title,
+.lp-store .lp-book-page .product__title h1,
+.lp-store .template-search__header h1,
+.lp-store .title-wrapper-with-link .title,
+.lp-store .cart__empty-text,
+.lp-store .cart__login-title {
+  font-family: var(--lp-display);
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+.lp-store :is(.lectopolis-collection-grid, .lectopolis-search-grid) .product-card-wrapper .card__inner,
+.lp-store .lp-book-page .product__media-wrapper {
+  background: #edf5fa;
+}
+.lp-store :is(.lectopolis-collection-grid, .lectopolis-search-grid) .product-card-wrapper .card__media img {
+  transform: none !important;
+}
+.lp-store :is(.lectopolis-collection-grid, .lectopolis-search-grid) .card__heading {
+  font: 400 clamp(16px, 1.7vw, 23px)/1.2 var(--lp-display);
+  letter-spacing: 0;
+}
+.lp-store :is(.product-form__submit, .quick-add__submit, .cart__checkout-button):not([disabled]) {
+  --color-button: 16, 24, 32;
+  --color-button-text: 255, 255, 255;
+  --alpha-button-background: 1;
+  background-color: #101820;
+  color: #fff;
+}
+.lp-store :is(.product-form__submit, .quick-add__submit, .cart__checkout-button):not([disabled]):hover {
+  background-color: #174c6b;
+}
+.lp-store :is(.product-form__submit, .quick-add__submit, .cart__checkout-button):focus-visible {
+  outline: 2px solid var(--lp-blue);
+  outline-offset: 4px;
+}
+.lp-store .lp-shipping-note,
+.lp-store .cart__warnings {
+  background: #edf5fa;
+}

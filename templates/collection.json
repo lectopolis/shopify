@@ -39,6 +39,7 @@
     },
     "publisher_banner": {
       "type": "lectopolis-publisher-banner",
+      "disabled": true,
       "settings": {
         "use_collection_image": false,
         "full_width": true,

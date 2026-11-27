@@ -1,0 +1,112 @@
+{%- liquid
+  assign featured = section.settings.featured_collection
+  if featured == blank
+    assign featured = collections.all
+  endif
+  assign books = section.settings.editorial_picks
+  if books == blank
+    assign books = featured.products
+  endif
+-%}
+
+<div class="lpe">
+  <section class="lpe-wrap lpe-opening" aria-labelledby="EditorialTitle-{{ section.id }}">
+    <div>
+      <h1 id="EditorialTitle-{{ section.id }}">{{ section.settings.title | escape }}</h1>
+      <p class="lpe-intro">{{ section.settings.intro | escape }}</p>
+    </div>
+    <a class="lpe-button" href="{{ routes.all_products_collection_url }}">Ver todos los libros <span aria-hidden="true">→</span></a>
+  </section>
+
+  {% if books.size > 0 %}
+    <section class="lpe-wrap lpe-featured" aria-labelledby="EditorialFeatured-{{ section.id }}">
+      <div class="lpe-heading">
+        <h2 id="EditorialFeatured-{{ section.id }}">{{ section.settings.featured_title | escape }}</h2>
+        {% if section.settings.editorial_picks == blank %}
+          <a class="lpe-link" href="{{ featured.url | default: routes.all_products_collection_url }}">Ver colección <span aria-hidden="true">↗</span></a>
+        {% endif %}
+      </div>
+      <div class="lpe-books">
+        {% for book in books limit: 8 %}
+          <article class="lpe-book">
+            <a href="{{ book.url }}" aria-labelledby="EditorialBook-{{ section.id }}-{{ book.id }}" aria-describedby="EditorialPrice-{{ section.id }}-{{ book.id }}">
+              <div class="lpe-cover">
+                {% if book.featured_image != blank %}
+                  {{ book.featured_image | image_url: width: 640 | image_tag: widths: '180, 280, 440, 640', sizes: '(min-width: 851px) 21vw, 44vw', loading: 'lazy' }}
+                {% else %}
+                  <span class="lpe-cover-placeholder" aria-hidden="true">{{ book.title | escape }}</span>
+                {% endif %}
+              </div>
+              <h3 id="EditorialBook-{{ section.id }}-{{ book.id }}">{{ book.title | escape }}</h3>
+              <p id="EditorialPrice-{{ section.id }}-{{ book.id }}">{% if book.price_varies %}Desde {% endif %}{{ book.price_min | money }}{% unless book.available %} · Agotado{% endunless %}</p>
+              <span class="lpe-book-action" aria-hidden="true">Ver libro <span>→</span></span>
+            </a>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="lpe-wrap lpe-shelves" id="EditorialShelves-{{ section.id }}" aria-labelledby="EditorialShelvesTitle-{{ section.id }}">
+    <div class="lpe-heading"><h2 id="EditorialShelvesTitle-{{ section.id }}">¿Qué quieres leer hoy?</h2></div>
+    <div class="lpe-shelf-grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign shelf_url = block.settings.collection.url
+          if shelf_url == blank
+            assign shelf_url = block.settings.fallback_link
+          endif
+          if shelf_url == blank
+            assign search_term = block.settings.search_term | url_encode
+            assign shelf_url = routes.search_url | append: '?type=product&q=' | append: search_term
+            if block.settings.search_term == blank
+              assign shelf_url = routes.all_products_collection_url | append: '?sort_by=created-descending'
+            endif
+          endif
+        -%}
+        <a class="lpe-shelf lpe-shelf--{{ block.settings.tone }}" href="{{ shelf_url | escape }}" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.description | escape }}</p>
+          <span class="lpe-shelf-arrow" aria-hidden="true">↗</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="lpe-note" aria-labelledby="EditorialNote-{{ section.id }}">
+    <p class="lpe-label">Más de 15 años entre libros</p>
+    <h2 id="EditorialNote-{{ section.id }}">¿Buscas un libro especial?</h2>
+    <p>Cuéntanos qué título o edición estás buscando. Te ayudamos a encontrarlo.</p>
+    <a class="lpe-button" href="https://wa.me/573136118658">Escríbenos por WhatsApp <span aria-hidden="true">↗</span></a>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Lectópolis · Editorial",
+  "max_blocks": 3,
+  "enabled_on": { "templates": ["index"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Título", "default": "Encuentra tu próxima lectura" },
+    { "type": "textarea", "id": "intro", "label": "Introducción", "default": "Libros nuevos y de segunda mano para ti o para regalar. Envíos a toda Colombia." },
+    { "type": "product_list", "id": "editorial_picks", "label": "Libros elegidos", "limit": 8 },
+    { "type": "collection", "id": "featured_collection", "label": "Colección si no hay libros elegidos" },
+    { "type": "text", "id": "featured_title", "label": "Título de la selección", "default": "Libros destacados" }
+  ],
+  "blocks": [
+    {
+      "type": "shelf",
+      "name": "Selección de libros",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Libros nuevos" },
+        { "type": "textarea", "id": "description", "label": "Descripción" },
+        { "type": "collection", "id": "collection", "label": "Colección" },
+        { "type": "url", "id": "fallback_link", "label": "Enlace si falta la colección" },
+        { "type": "text", "id": "search_term", "label": "Búsqueda alternativa", "info": "Con la colección y el enlace vacíos, busca este término o muestra el catálogo por fecha." },
+        { "type": "select", "id": "tone", "label": "Tono", "default": "pink", "options": [{ "value": "pink", "label": "Azul cielo" }, { "value": "sand", "label": "Marfil" }, { "value": "plum", "label": "Negro azulado" }] }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Lectópolis · Editorial" }]
+}
+{% endschema %}
