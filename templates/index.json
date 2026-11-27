@@ -9,6 +9,53 @@
  */
 {
   "sections": {
+    "lectopolis_hero_book": {
+      "type": "lectopolis-hero-book",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/black-friday-lectopolis-escritorio.webp",
+            "mobile_image": "shopify://shop_images/black-friday-lectopolis-movil.webp",
+            "link": "shopify://collections/all",
+            "alt": "Black Friday en Lectópolis. Explora el catálogo."
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/black-friday-libros-nuevos-escritorio.webp",
+            "mobile_image": "shopify://shop_images/black-friday-libros-nuevos-movil.webp",
+            "link": "/collections/all?sort_by=created-descending",
+            "alt": "Black Friday. Libros nuevos en Lectópolis."
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/black-friday-libros-leidos-escritorio.webp",
+            "mobile_image": "shopify://shop_images/black-friday-libros-leidos-movil.webp",
+            "link": "https://wa.me/573136118658?text=Hola%2C%20quisiera%20consultar%20por%20los%20libros%20le%C3%ADdos.",
+            "alt": "Black Friday. Consulta por WhatsApp la disponibilidad de libros leídos."
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "label": "Black Friday en Lectópolis",
+        "autoplay": false,
+        "interval": 6,
+        "duration": 14,
+        "show_bar": true,
+        "caption": "Más de 15 años compartiendo historias.",
+        "button_label": "Ver todos los libros",
+        "button_link": ""
+      }
+    },
     "lectopolis_editorial": {
       "type": "lectopolis-editorial",
       "blocks": {
@@ -62,53 +109,6 @@
         ],
         "featured_collection": "alianza",
         "featured_title": "Autoras para descubrir"
-      }
-    },
-    "lectopolis_hero_book": {
-      "type": "lectopolis-hero-book",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/black-friday-lectopolis-escritorio.webp",
-            "mobile_image": "shopify://shop_images/black-friday-lectopolis-movil.webp",
-            "link": "shopify://collections/all",
-            "alt": "Black Friday en Lectópolis. Explora el catálogo."
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/black-friday-libros-nuevos-escritorio.webp",
-            "mobile_image": "shopify://shop_images/black-friday-libros-nuevos-movil.webp",
-            "link": "/collections/all?sort_by=created-descending",
-            "alt": "Black Friday. Libros nuevos en Lectópolis."
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/black-friday-libros-leidos-escritorio.webp",
-            "mobile_image": "shopify://shop_images/black-friday-libros-leidos-movil.webp",
-            "link": "https://wa.me/573136118658?text=Hola%2C%20quisiera%20consultar%20por%20los%20libros%20le%C3%ADdos.",
-            "alt": "Black Friday. Consulta por WhatsApp la disponibilidad de libros leídos."
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "label": "Black Friday en Lectópolis",
-        "autoplay": false,
-        "interval": 6,
-        "duration": 14,
-        "show_bar": true,
-        "caption": "Más de 15 años compartiendo historias.",
-        "button_label": "Ver todos los libros",
-        "button_link": ""
       }
     },
     "featured_collection": {
@@ -233,8 +233,8 @@
     }
   },
   "order": [
-    "lectopolis_editorial",
     "lectopolis_hero_book",
+    "lectopolis_editorial",
     "featured_collection",
     "editorial_divider_2",
     "featured_collection_AFyeht",
