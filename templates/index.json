@@ -17,6 +17,9 @@
           "settings": {
             "title": "Libros nuevos",
             "description": "Estrena una edición y encuentra tu próxima lectura.",
+            "collection": "",
+            "fallback_link": "",
+            "search_term": "",
             "tone": "pink"
           }
         },
@@ -25,7 +28,9 @@
           "settings": {
             "title": "Libros leídos",
             "description": "Pregúntanos qué ejemplares de segunda mano tenemos disponibles.",
+            "collection": "",
             "fallback_link": "https://wa.me/573136118658?text=Hola%2C%20quisiera%20consultar%20por%20los%20libros%20le%C3%ADdos.",
+            "search_term": "",
             "tone": "sand"
           }
         },
@@ -34,7 +39,9 @@
           "settings": {
             "title": "Por editorial",
             "description": "Explora las colecciones de Alianza, Alba, Cátedra y más.",
+            "collection": "",
             "fallback_link": "/collections",
+            "search_term": "",
             "tone": "plum"
           }
         }
@@ -45,14 +52,16 @@
         "browse_publishers"
       ],
       "settings": {
-        "featured_title": "Autoras para descubrir",
-        "featured_collection": "alianza",
+        "title": "Encuentra tu próxima lectura",
+        "intro": "Libros nuevos y de segunda mano para ti o para regalar. Envíos a toda Colombia.",
         "editorial_picks": [
           "orgullo-y-prejuicio-austen-jane-alianza-9788411483018",
           "el-jardin-secreto-hodgson-burnett-frances-alianza-9788411483759",
           "arqueologa-de-los-cuidados-mercedes-lopez-mateo-lectopolis-9791370090401",
           "a-traves-de-una-ventana-treinta-anos-estudiando-a-los-chimpances-9788411485609"
-        ]
+        ],
+        "featured_collection": "alianza",
+        "featured_title": "Autoras para descubrir"
       }
     },
     "lectopolis_hero_book": {
@@ -94,8 +103,7 @@
         "caption": "Más de 15 años compartiendo historias.",
         "button_label": "Ver todos los libros",
         "button_link": ""
-      },
-      "disabled": true
+      }
     },
     "featured_collection": {
       "type": "featured-collection",
@@ -121,8 +129,7 @@
         "swipe_on_mobile": false,
         "padding_top": 80,
         "padding_bottom": 60
-      },
-      "disabled": true
+      }
     },
     "editorial_divider_2": {
       "type": "lectopolis-editorial-divider",
@@ -131,8 +138,7 @@
         "heading": "Editorial Planeta",
         "image": "shopify://shop_images/1920X350_4x-8.png",
         "enable_3d": true
-      },
-      "disabled": true
+      }
     },
     "featured_collection_AFyeht": {
       "type": "featured-collection",
@@ -158,8 +164,7 @@
         "swipe_on_mobile": false,
         "padding_top": 72,
         "padding_bottom": 60
-      },
-      "disabled": true
+      }
     },
     "featured_collection_rzPdAr": {
       "type": "featured-collection",
@@ -185,8 +190,7 @@
         "swipe_on_mobile": false,
         "padding_top": 72,
         "padding_bottom": 60
-      },
-      "disabled": true
+      }
     },
     "cf041c51-04b0-4692-a755-688469da084e": {
       "type": "featured-blog",
@@ -203,8 +207,7 @@
         "show_view_all": true,
         "padding_top": 36,
         "padding_bottom": 36
-      },
-      "disabled": true
+      }
     },
     "1766420446d652ec64": {
       "type": "apps",
